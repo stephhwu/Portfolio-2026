@@ -1,0 +1,332 @@
+// Generates one static project page per portfolio piece from a single
+// template + data array. Re-run with `node generate-projects.mjs` after
+// editing the data below or the markup in renderProject().
+//
+// Layout (applies to every project): hero (video or image) -> type-stack
+// meta block (title, then Industry/Year/Tagline and Services/Brief/Finding
+// rows) -> image gallery -> a second editorial text block -> a 3-column
+// captioned feature grid -> credits -> next-project link. Projects that
+// don't specify a field yet fall back to generic placeholder copy/slots
+// (see withDefaults) so every page stays structurally complete while real
+// content gets filled in project by project.
+import { writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const YEAR = 2026;
+
+const projects = [
+  {
+    slug: "human-form-study",
+    name: "Human Form Study",
+    image: "/img1.jpg",
+    tags: ["Photography", "Art Direction"],
+  },
+  {
+    slug: "interior-light",
+    name: "Interior Light",
+    image: "/img2.jpg",
+    tags: ["Photography", "Visual Design"],
+  },
+  {
+    slug: "project-21",
+    name: "Project 21",
+    image: "/img3.jpg",
+    tags: ["Photography"],
+  },
+  {
+    slug: "dogs-with-jobs",
+    name: "Dogs with Jobs",
+    image: "/previews/dogs-with-jobs.jpg",
+    heroVideo: "/videos/dogs-with-jobs.mp4",
+    heroPoster: "/videos/dogs-with-jobs-poster.jpg",
+    tags: ["Web Design", "Motion Design", "Illustration"],
+    intro: {
+      heading: "A playful case for taking creators seriously.",
+      // TODO: replace with the real thesis narrative — process, goals,
+      // and outcome.
+      paragraphs: [
+        "Dogs with Jobs is an interactive brand and web experience built around a simple premise: every dog has a job. Illustration, motion, and a bit of humor make the case for playful, creator-first design.",
+        "Built with Vue, GSAP, and Locomotive Scroll, the site leans on scroll-driven storytelling and a hand-illustrated collage style — playful in tone, but a fully considered interaction design case study underneath.",
+      ],
+    },
+  },
+  {
+    slug: "everyday-objects",
+    name: "Everyday Objects",
+    image: "/img5.jpg",
+    tags: ["Photography", "Still Life"],
+  },
+  {
+    slug: "unit-07-care",
+    name: "Unit 07 Care",
+    image: "/img6.jpg",
+    tags: ["Photography", "Product"],
+  },
+  {
+    slug: "motion-practice",
+    name: "Motion Practice",
+    image: "/img7.jpg",
+    tags: ["Photography", "Motion"],
+  },
+  {
+    slug: "noonlight-series",
+    name: "Noonlight Series",
+    image: "/img8.jpg",
+    tags: ["Photography"],
+  },
+  {
+    slug: "material-stillness",
+    name: "Material Stillness",
+    image: "/img9.jpg",
+    tags: ["Photography", "Still Life"],
+  },
+  {
+    slug: "quiet-walk",
+    name: "Quiet Walk",
+    image: "/img10.jpg",
+    tags: ["Photography"],
+  },
+];
+
+function withDefaults(p) {
+  return {
+    ...p,
+    // TODO: replace with the real industry categories for this project.
+    industry: p.industry || ["Design"],
+    intro: p.intro || {
+      heading: "About this project.",
+      // TODO: replace with the real story behind this project — process,
+      // goals, and outcome.
+      paragraphs: [
+        `A closer look at ${p.name.toLowerCase()}, part of an ongoing body of work exploring form, light, and quiet detail.`,
+        "Every frame is considered on its own, then edited together to build a single, cohesive mood across the set.",
+      ],
+    },
+    gallery: p.gallery || [null, null, null],
+    section2: p.section2 || {
+      eyebrow: "Process",
+      heading: "Built frame by frame.",
+      paragraphs: [
+        "The set was developed over several passes, refining framing, light, and composition each time.",
+      ],
+    },
+    featureGrid: p.featureGrid || [
+      {
+        heading: "Process",
+        body: "How the work came together, from first pass to final edit.",
+        image: null,
+      },
+      {
+        heading: "Detail",
+        body: "A closer look at the texture and material of the piece.",
+        image: null,
+      },
+      {
+        heading: "Outcome",
+        body: "The finished set, sequenced as a single body of work.",
+        image: null,
+      },
+    ],
+    credits: p.credits || [
+      { role: "Photography", name: "Steph Wu" },
+      { role: "Creative Direction", name: "Steph Wu" },
+    ],
+  };
+}
+
+const nav = `    <nav class="site-nav">
+      <a href="/" class="nav-logo">Steph Wu</a>
+      <div class="nav-links">
+        <a href="/#work" class="nav-link work-link">Work</a>
+        <a href="/play.html" class="nav-link">Play</a>
+        <a href="/about.html" class="nav-link">About</a>
+      </div>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" inert>
+      <a href="/#work" class="mobile-menu-link work-link">Work</a>
+      <a href="/play.html" class="mobile-menu-link">Play</a>
+      <a href="/about.html" class="mobile-menu-link">About</a>
+    </div>`;
+
+const footer = `    <footer class="site-footer">
+      <h2 class="footer-heading">Let's create<br />something great.</h2>
+
+      <a href="mailto:wu.h.stephanie@gmail.com" class="footer-contact"
+        >Contact Me</a
+      >
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© ${YEAR} Steph Wu</p>
+        <!-- TODO: swap in your real LinkedIn profile URL -->
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+          >LinkedIn</a
+        >
+      </div>
+    </footer>`;
+
+function renderHero(p) {
+  if (p.heroVideo) {
+    return `      <div class="project-hero">
+        <video autoplay muted loop playsinline poster="${p.heroPoster || ""}">
+          <source src="${p.heroVideo}" type="video/mp4" />
+        </video>
+      </div>`;
+  }
+  return `      <div class="project-hero">
+        <img src="${p.image}" alt="${p.name}" />
+      </div>`;
+}
+
+function renderMeta(p) {
+  const list = (items) =>
+    items.map((item) => `<li>${item}</li>`).join("\n            ");
+
+  return `      <section class="project-meta">
+        <h1 class="project-title">${p.name}</h1>
+
+        <div class="project-meta-row project-meta-row--top">
+          <div class="project-meta-col">
+            <p class="eyebrow">Industry</p>
+            <ul class="project-meta-list">
+            ${list(p.industry)}
+            </ul>
+          </div>
+          <div class="project-meta-col">
+            <p class="eyebrow">Year</p>
+            <p class="project-meta-value">${YEAR}</p>
+          </div>
+          <p class="project-tagline">${p.intro.heading}</p>
+        </div>
+
+        <div class="project-meta-row project-meta-row--bottom">
+          <div class="project-meta-col">
+            <p class="eyebrow">Services</p>
+            <ul class="project-meta-list">
+            ${list(p.tags)}
+            </ul>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Brief</p>
+            <p>${p.intro.paragraphs[0]}</p>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Finding</p>
+            <p>${p.intro.paragraphs[1] || ""}</p>
+          </div>
+        </div>
+      </section>`;
+}
+
+function renderGallery(images) {
+  const items = images
+    .map((src) =>
+      src
+        ? `        <div class="project-gallery-item"><img src="${src}" alt="" /></div>`
+        : `        <!-- TODO: drop a real photo into this gallery slot -->\n        <div class="project-gallery-item"></div>`
+    )
+    .join("\n");
+  return `      <div class="project-gallery">\n${items}\n      </div>`;
+}
+
+function renderFeatureGrid(features) {
+  const items = features
+    .map(
+      (f) => `        <article class="project-feature">
+          ${
+            f.image
+              ? `<div class="project-feature-image"><img src="${f.image}" alt="" /></div>`
+              : `<!-- TODO: drop a real photo in here -->\n          <div class="project-feature-image"></div>`
+          }
+          <h3>${f.heading}</h3>
+          <p>${f.body}</p>
+        </article>`
+    )
+    .join("\n");
+  return `      <div class="project-feature-grid">\n${items}\n      </div>`;
+}
+
+function renderProject(rawProject, index, all) {
+  const project = withDefaults(rawProject);
+  const next = withDefaults(all[(index + 1) % all.length]);
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${project.name} | Steph Wu</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+${nav}
+
+    <main class="project">
+${renderHero(project)}
+
+${renderMeta(project)}
+
+${renderGallery(project.gallery)}
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">${project.section2.eyebrow}</p>
+          <h2 class="project-section-title">${project.section2.heading}</h2>
+        </div>
+        <div class="project-section-body">
+          ${project.section2.paragraphs
+            .map((p) => `<p>${p}</p>`)
+            .join("\n          ")}
+        </div>
+      </section>
+
+${renderFeatureGrid(project.featureGrid)}
+
+      <dl class="project-credits">
+        ${project.credits
+          .map(
+            (c) => `<div class="project-credit">
+          <dt class="mono">${c.role}</dt>
+          <dd>${c.name}</dd>
+        </div>`
+          )
+          .join("\n        ")}
+      </dl>
+
+      <a class="project-next" href="/${next.slug}.html">
+        <span class="eyebrow">Next Project</span>
+        <span class="project-next-title">${next.name}</span>
+      </a>
+    </main>
+
+${footer}
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
+`;
+}
+
+for (const [index, project] of projects.entries()) {
+  const html = renderProject(project, index, projects);
+  writeFileSync(join(__dirname, `${project.slug}.html`), html, "utf8");
+}
+
+console.log(`Generated ${projects.length} project pages.`);

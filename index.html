@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrototypeStudio Scroll Animation | Codegrid</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/" class="nav-logo">Steph Wu</a>
+      <div class="nav-links">
+        <a href="/#work" class="nav-link work-link">Work</a>
+        <a href="/play.html" class="nav-link">Play</a>
+        <a href="/about.html" class="nav-link">About</a>
+      </div>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" inert>
+      <a href="/#work" class="mobile-menu-link work-link">Work</a>
+      <a href="/play.html" class="mobile-menu-link">Play</a>
+      <a href="/about.html" class="mobile-menu-link">About</a>
+    </div>
+
+    <section class="landing">
+      <div class="landing-video-placeholder">
+        <!-- TODO: replace with <video autoplay muted loop playsinline> showreel of portfolio pieces -->
+      </div>
+      <h1 class="landing-name">Steph Wu</h1>
+    </section>
+
+    <div id="work">
+      <section class="spotlight">
+        <div class="project-index">
+          <p class="project-blurb">
+            Steph is an interdisciplinary designer based in New York City,
+            working across digital design, product design, and information
+            design.
+          </p>
+          <h1>01/10</h1>
+        </div>
+
+        <div class="project-images">
+          <a
+            class="project-img"
+            href="/human-form-study.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Human Form Study project"
+            ><img src="/img1.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/interior-light.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Interior Light project"
+            ><img src="/img2.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/project-21.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Project 21 project"
+            ><img src="/img3.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/dogs-with-jobs.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Dogs with Jobs project"
+            ><img src="/previews/dogs-with-jobs.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/everyday-objects.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Everyday Objects project"
+            ><img src="/img5.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/unit-07-care.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Unit 07 Care project"
+            ><img src="/img6.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/motion-practice.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Motion Practice project"
+            ><img src="/img7.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/noonlight-series.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Noonlight Series project"
+            ><img src="/img8.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/material-stillness.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Material Stillness project"
+            ><img src="/img9.jpg" alt=""
+          /></a>
+          <a
+            class="project-img"
+            href="/quiet-walk.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Quiet Walk project"
+            ><img src="/img10.jpg" alt=""
+          /></a>
+        </div>
+
+        <div class="project-names">
+          <p>Human Form Study</p>
+          <p>Interior Light</p>
+          <p>Project 21</p>
+          <p>Dogs with Jobs</p>
+          <p>Everyday Objects</p>
+          <p>Unit 07 Care</p>
+          <p>Motion Practice</p>
+          <p>Noonlight Series</p>
+          <p>Material Stillness</p>
+          <p>Quiet Walk</p>
+        </div>
+      </section>
+
+      <section class="spotlight-mobile">
+        <p class="project-blurb">
+          Steph is an interdisciplinary designer based in New York City,
+          working across digital design, product design, and information
+          design.
+        </p>
+
+        <div class="mobile-project-list">
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/human-form-study.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Human Form Study project"
+              ><img src="/img1.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">01</span>
+              <p class="mobile-project-name">Human Form Study</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/interior-light.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Interior Light project"
+              ><img src="/img2.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">02</span>
+              <p class="mobile-project-name">Interior Light</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/project-21.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Project 21 project"
+              ><img src="/img3.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">03</span>
+              <p class="mobile-project-name">Project 21</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/dogs-with-jobs.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Dogs with Jobs project"
+              ><img src="/previews/dogs-with-jobs.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">04</span>
+              <p class="mobile-project-name">Dogs with Jobs</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/everyday-objects.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Everyday Objects project"
+              ><img src="/img5.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">05</span>
+              <p class="mobile-project-name">Everyday Objects</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/unit-07-care.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Unit 07 Care project"
+              ><img src="/img6.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">06</span>
+              <p class="mobile-project-name">Unit 07 Care</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/motion-practice.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Motion Practice project"
+              ><img src="/img7.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">07</span>
+              <p class="mobile-project-name">Motion Practice</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/noonlight-series.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Noonlight Series project"
+              ><img src="/img8.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">08</span>
+              <p class="mobile-project-name">Noonlight Series</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/material-stillness.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Material Stillness project"
+              ><img src="/img9.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">09</span>
+              <p class="mobile-project-name">Material Stillness</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/quiet-walk.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Quiet Walk project"
+              ><img src="/img10.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">10</span>
+              <p class="mobile-project-name">Quiet Walk</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <footer class="site-footer">
+      <h2 class="footer-heading">Let's create<br />something great.</h2>
+
+      <a href="mailto:wu.h.stephanie@gmail.com" class="footer-contact"
+        >Contact Me</a
+      >
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Steph Wu</p>
+        <!-- TODO: swap in your real LinkedIn profile URL -->
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+          >LinkedIn</a
+        >
+      </div>
+    </footer>
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
