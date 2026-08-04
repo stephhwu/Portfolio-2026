@@ -4,6 +4,27 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Splits an element's text into word spans wrapped in an overflow-hidden
+// mask, so each word can slide/fade in independently without ever
+// revealing from nothing (see splitWords usage below).
+function splitWords(el) {
+  const words = el.textContent.trim().split(/\s+/);
+  el.textContent = "";
+  const inners = [];
+  words.forEach((word, i) => {
+    const wrap = document.createElement("span");
+    wrap.className = "split-word";
+    const inner = document.createElement("span");
+    inner.className = "split-word-inner";
+    inner.textContent = word;
+    wrap.appendChild(inner);
+    el.appendChild(wrap);
+    inners.push(inner);
+    if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
+  });
+  return inners;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const lenis = new Lenis();
   lenis.on("scroll", ScrollTrigger.update);
@@ -85,6 +106,104 @@ document.addEventListener("DOMContentLoaded", () => {
         lenis.scrollTo(hashTarget, { immediate: true }),
       );
     }
+  }
+
+  // --- Page-load entrance: nav, hero media, and headline type-in ------
+  // Runs on every page (index, about, play, and every project detail
+  // page) since each is a full page load, not a client-side route.
+  if (!prefersReducedMotion) {
+    const siteNav = document.querySelector(".site-nav");
+    const heroMedia = document.querySelector(".landing-video-placeholder");
+    const landingName = document.querySelector(".landing-name");
+    const placeholderCopy = document.querySelector(".placeholder-page p");
+
+    const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    if (siteNav) {
+      gsap.set(siteNav, { y: -16, opacity: 0 });
+      intro.to(siteNav, { y: 0, opacity: 1, duration: 0.5 }, 0);
+    }
+
+    if (heroMedia) {
+      gsap.set(heroMedia, { opacity: 0, scale: 0.97 });
+      intro.to(heroMedia, { opacity: 1, scale: 1, duration: 0.8 }, 0.1);
+    }
+
+    if (landingName) {
+      const words = splitWords(landingName);
+      gsap.set(words, { yPercent: 110, opacity: 0 });
+      intro.to(
+        words,
+        { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.08 },
+        0.25,
+      );
+    }
+
+    if (placeholderCopy) {
+      gsap.set(placeholderCopy, { y: 16, opacity: 0 });
+      intro.to(placeholderCopy, { y: 0, opacity: 1, duration: 0.6 }, 0.1);
+    }
+  }
+
+  // --- Project title type-in on scroll ---------------------------------
+  const projectTitle = document.querySelector(".project-title");
+  if (projectTitle && !prefersReducedMotion) {
+    const words = splitWords(projectTitle);
+    gsap.set(words, { yPercent: 110, opacity: 0 });
+    ScrollTrigger.create({
+      trigger: projectTitle,
+      start: "top 85%",
+      once: true,
+      onEnter: () =>
+        gsap.to(words, {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.06,
+          ease: "power3.out",
+        }),
+    });
+  }
+
+  // --- Generic scroll-triggered content reveals ------------------------
+  // Shared classes from the project template + footer, so this applies
+  // across every page without needing per-page markup changes. The
+  // desktop pinned "spotlight" section manages its own scrubbed motion
+  // and is intentionally left out of this pass.
+  if (!prefersReducedMotion) {
+    const fadeUpSelectors = [
+      ".project-tagline",
+      ".eyebrow",
+      ".project-meta-list",
+      ".project-meta-value",
+      ".project-section-title",
+      ".project-section-body p",
+      ".project-gallery-item",
+      ".bento-item",
+      ".project-feature",
+      ".project-credit",
+      ".footer-heading",
+      ".footer-contact",
+      ".spotlight-mobile .project-blurb",
+    ];
+
+    fadeUpSelectors.forEach((selector) => {
+      const els = gsap.utils.toArray(selector);
+      if (!els.length) return;
+      gsap.set(els, { opacity: 0, y: 20 });
+      ScrollTrigger.batch(els, {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.06,
+          }),
+      });
+    });
   }
 
   // --- Spotlight / work section ---------------------------------------

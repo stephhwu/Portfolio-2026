@@ -6,6 +6,22 @@
   box-sizing: border-box;
 }
 
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.split-word-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
 body {
   font-family: "Google Sans", sans-serif;
   background-color: #141414;
@@ -84,11 +100,13 @@ section {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--ease-out);
 }
 
-.nav-link:hover {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: #fff;
+  }
 }
 
 .nav-toggle {
@@ -111,13 +129,21 @@ section {
   outline-offset: 2px;
 }
 
+.nav-toggle {
+  transition: transform 0.15s var(--ease-out);
+}
+
+.nav-toggle:active {
+  transform: scale(0.93);
+}
+
 .nav-toggle-bar {
   display: block;
   width: 20px;
   height: 2px;
   border-radius: 2px;
   background: #fff;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.25s var(--ease-in-out), opacity 0.25s var(--ease-out);
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
@@ -146,12 +172,16 @@ section {
   -webkit-backdrop-filter: blur(16px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transform: scale(0.98);
+  transform-origin: center;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out),
+    visibility 0.3s;
 }
 
 .mobile-menu.is-open {
   opacity: 1;
   visibility: visible;
+  transform: scale(1);
 }
 
 .mobile-menu-link {
@@ -162,6 +192,30 @@ section {
   letter-spacing: 0.02em;
   color: #fff;
   text-decoration: none;
+  opacity: 0;
+  transform: translateY(8px) scale(1);
+  transition: opacity 0.3s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.mobile-menu-link:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.mobile-menu.is-open .mobile-menu-link {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.mobile-menu.is-open .mobile-menu-link:nth-child(3) {
+  transition-delay: 0.15s;
 }
 
 .mobile-menu-link:focus-visible {
@@ -171,7 +225,8 @@ section {
 
 @media (prefers-reduced-motion: reduce) {
   .nav-toggle-bar,
-  .mobile-menu {
+  .mobile-menu,
+  .mobile-menu-link {
     transition: none;
   }
 }
@@ -232,8 +287,12 @@ section {
   width: 100%;
   aspect-ratio: 16/9;
   opacity: 0.5;
-  transition: all 0.3s ease;
+  transition: opacity 0.2s var(--ease-out), transform 0.15s var(--ease-out);
   overflow: hidden;
+}
+
+.project-img:active {
+  transform: scale(0.98);
 }
 
 .project-img:focus-visible {
@@ -252,7 +311,7 @@ section {
 
 .project-names p {
   color: #4a4a4a;
-  transition: color 0.3s ease;
+  transition: color 0.25s var(--ease-out);
 }
 
 .project-index h1,
@@ -285,6 +344,11 @@ section {
   border-radius: 16px;
   overflow: hidden;
   background: #1c1c1c;
+  transition: transform 0.15s var(--ease-out);
+}
+
+.mobile-project-media:active {
+  transform: scale(0.98);
 }
 
 .mobile-project-media:focus-visible {
@@ -411,6 +475,33 @@ section {
   overflow: hidden;
 }
 
+.bento-gallery {
+  columns: 3;
+  column-gap: 6px;
+}
+
+.bento-item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 6px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #efebe8;
+}
+
+.bento-item img,
+.bento-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .bento-gallery {
+    columns: 1;
+  }
+}
+
 .project-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -464,7 +555,7 @@ section {
 
 .project-feature-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--feature-cols, 3), 1fr);
   gap: 2rem;
   padding: 5rem 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -483,11 +574,25 @@ section {
   background: #1c1c1c;
 }
 
-.project-feature-image img {
+.project-feature-image img,
+.project-feature-image video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.project-walkthrough {
+  width: 100%;
+  padding: 0 2rem 5rem;
+}
+
+.project-walkthrough video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  background: #1c1c1c;
 }
 
 .project-feature h3 {
@@ -540,11 +645,13 @@ section {
   text-align: center;
   text-decoration: none;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s var(--ease-out);
 }
 
-.project-next:hover {
-  background: rgba(255, 255, 255, 0.03);
+@media (hover: hover) and (pointer: fine) {
+  .project-next:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
 }
 
 .project-next:focus-visible {
@@ -559,22 +666,24 @@ section {
   color: #fff;
 }
 
-/* Keep every section of the project template aligned to one comfortably
-   readable column instead of stretching edge-to-edge on wide screens.
-   Fluid side padding (clamp) grows smoothly with viewport width rather
-   than jumping at a breakpoint; max-width caps the column on very wide
-   displays. Mobile keeps its own tighter padding, set separately below. */
+/* Matches the side padding/max-width used on the Squarespace site
+   (stephdesigns.net): fluid 3vw inset, capped at a 1800px column so it
+   stops growing on very wide displays. Mobile keeps its own tighter
+   padding, set separately below. */
 @media (min-width: 769px) {
+  .landing,
   .project-meta,
   .project-hero,
+  .bento-gallery,
   .project-gallery,
   .project-section,
+  .project-walkthrough,
   .project-feature-grid,
   .project-credits,
   .project-next {
-    max-width: 1440px;
+    max-width: 1800px;
     margin-inline: auto;
-    padding-inline: clamp(2rem, 6vw, 7rem);
+    padding-inline: 3vw;
   }
 }
 
@@ -611,12 +720,18 @@ section {
   text-transform: uppercase;
   letter-spacing: 0.02em;
   text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
 }
 
-.footer-contact:hover {
-  background: rgba(255, 255, 255, 0.85);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .footer-contact:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-2px);
+  }
+}
+
+.footer-contact:active {
+  transform: scale(0.96);
 }
 
 .footer-contact:focus-visible {
@@ -648,11 +763,13 @@ section {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--ease-out);
 }
 
-.footer-link:hover {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .footer-link:hover {
+    color: #fff;
+  }
 }
 
 .footer-link:focus-visible {
@@ -709,6 +826,10 @@ section {
     padding: 2rem 1.5rem 0;
   }
 
+  .bento-gallery {
+    padding-inline: 1.5rem;
+  }
+
   .project-hero {
     padding: 6.5rem 1.5rem 0;
   }
@@ -737,6 +858,10 @@ section {
 
   .project-gallery-item {
     aspect-ratio: 4 / 5;
+  }
+
+  .project-walkthrough {
+    padding: 0 1.5rem 3rem;
   }
 
   .project-feature-grid {

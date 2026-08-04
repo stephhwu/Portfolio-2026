@@ -52,6 +52,82 @@ const projects = [
         "Built with Vue, GSAP, and Locomotive Scroll, the site leans on scroll-driven storytelling and a hand-illustrated collage style — playful in tone, but a fully considered interaction design case study underneath.",
       ],
     },
+    gallery: [],
+    bento: [
+      { src: "/dogs-with-jobs/shorter-intro", alt: "Dogs with Jobs site intro animation" },
+      { src: "/dogs-with-jobs/government", alt: "Working dog policy compliance matrix" },
+      { src: "/dogs-with-jobs/fame", alt: "Sniffer dog profile scroll section" },
+      { src: "/dogs-with-jobs/sniffers", alt: "Why so many sniffers, olfactory receptor chart" },
+      { src: "/dogs-with-jobs/matrices", alt: "Some Cool Dog Jobs intro and job-category matrix" },
+      { src: "/dogs-with-jobs/breeds", alt: "Popular dog breed role explorer, Police/Military" },
+      { src: "/dogs-with-jobs/wildlife", alt: "Wildlife detection effectiveness chart" },
+      { src: "/dogs-with-jobs/guide", alt: "Fetching some guidance interaction prompt" },
+    ],
+  },
+  {
+    slug: "coral-bleaching",
+    name: "Coral Bleaching Map",
+    image: "/coral-bleaching/coral-title-poster.jpg",
+    heroVideo: "/coral-bleaching/coral-title.mp4",
+    heroPoster: "/coral-bleaching/coral-title-poster.jpg",
+    industry: ["Data Visualization"],
+    tags: ["D3.js", "HTML", "CSS", "Photoshop"],
+    intro: {
+      heading:
+        "An interactive look at the vulnerability — and resilience — of Pacific coral reefs.",
+      paragraphs: [
+        "The National Coral Reef Monitoring Program tracks key indicators of U.S. coral reef health, including bleaching prevalence. We used a black-and-white aesthetic to highlight coral reefs' fragile beauty and the risk of losing them if we don't reduce our carbon footprint.",
+        "As more reefs become bleached, their natural ability to buffer storm energy weakens, increasing flood risk for nearby communities — in Florida alone, projected reef loss could put over 7,300 people at greater risk and cost an estimated $823.6 million annually in flood damage.",
+      ],
+    },
+    gallery: [],
+    bento: [
+      { src: "/coral-bleaching/coral-intro", alt: "Pacific Ocean Bleaching Map intro" },
+      { src: "/coral-bleaching/temp-animation", alt: "Daily sea surface temperature chart" },
+      { src: "/coral-bleaching/slider", alt: "Coral bleaching color-to-monochrome slider" },
+      { src: "/coral-bleaching/hover", alt: "Additional bleached corals hover grid" },
+      { src: "/coral-bleaching/image-click", alt: "Coral genus detail cards" },
+    ],
+    section2: {
+      eyebrow: "Full Project Walkthrough",
+      heading: "Why corals bleach — and why it matters.",
+      paragraphs: [
+        "Corals become bleached when environmental stressors like changes in temperature, light, or nutrient levels cause them to expel the algae that live within their tissues. This loss of algae, which help provide color and energy, leaves the corals white. Elevated water temperatures are a common trigger for this process.",
+      ],
+    },
+    walkthroughVideo: "/coral-bleaching/bleach-increase.mp4",
+    walkthroughPoster: "/coral-bleaching/bleach-increase-poster.jpg",
+    featureColumns: 2,
+    featureGrid: [
+      {
+        heading: "What is Coral Bleaching?",
+        body: "If users are unfamiliar with coral bleaching, we have a page that introduces the topic. The leading cause is climate change — a warming ocean, and a change in water temperature of as little as 2°F, can cause coral to drive out algae.",
+        video: "/coral-bleaching/coral-graph.mp4",
+        poster: "/coral-bleaching/coral-graph-poster.jpg",
+      },
+      {
+        heading: "The Map",
+        body: "The map artistically clusters images of the most bleached corals, positioned to represent their respective Pacific Ocean jurisdictions. Hovering over an image reveals the year of peak bleaching and the genus of the affected coral.",
+        video: "/coral-bleaching/coral-hover.mp4",
+        poster: "/coral-bleaching/coral-hover-poster.jpg",
+      },
+      {
+        heading: "Coral Modal Functionality",
+        body: "Clicking an image allows for deeper exploration of that coral genus. An interactive slider lets users transition between colored and monochrome images, creating a dramatic visual impact intended to inspire environmental action.",
+        video: "/coral-bleaching/color-clickhover.mp4",
+        poster: "/coral-bleaching/color-clickhover-poster.jpg",
+      },
+      {
+        heading: "There is hope for corals!",
+        body: "American Samoa, part of NOAA's National Marine Sanctuary system, is seeing coral bleaching decline — a promising sign of resilience being studied by the Smithsonian Tropical Research Institute.",
+        video: "/coral-bleaching/blue-slide.mp4",
+        poster: "/coral-bleaching/blue-slide-poster.jpg",
+      },
+    ],
+    credits: [
+      { role: "Design, Dev & Research", name: "Steph Wu" },
+      { role: "Team", name: "Ian Yu" },
+    ],
   },
   {
     slug: "everyday-objects",
@@ -106,6 +182,7 @@ function withDefaults(p) {
       ],
     },
     gallery: p.gallery || [null, null, null],
+    bento: p.bento || [],
     section2: p.section2 || {
       eyebrow: "Process",
       heading: "Built frame by frame.",
@@ -134,6 +211,7 @@ function withDefaults(p) {
       { role: "Photography", name: "Steph Wu" },
       { role: "Creative Direction", name: "Steph Wu" },
     ],
+    featureColumns: p.featureColumns || 3,
   };
 }
 
@@ -237,6 +315,7 @@ function renderMeta(p) {
 }
 
 function renderGallery(images) {
+  if (!images.length) return "";
   const items = images
     .map((src) =>
       src
@@ -247,21 +326,42 @@ function renderGallery(images) {
   return `      <div class="project-gallery">\n${items}\n      </div>`;
 }
 
-function renderFeatureGrid(features) {
-  const items = features
+function renderBento(items) {
+  if (!items.length) return "";
+  const tiles = items
     .map(
-      (f) => `        <article class="project-feature">
-          ${
-            f.image
-              ? `<div class="project-feature-image"><img src="${f.image}" alt="" /></div>`
-              : `<!-- TODO: drop a real photo in here -->\n          <div class="project-feature-image"></div>`
-          }
-          <h3>${f.heading}</h3>
-          <p>${f.body}</p>
-        </article>`
+      ({ src, alt }) =>
+        `        <div class="bento-item"><video autoplay muted loop playsinline poster="${src}-poster.jpg" aria-label="${alt}"><source src="${src}.mp4" type="video/mp4" /></video></div>`
     )
     .join("\n");
-  return `      <div class="project-feature-grid">\n${items}\n      </div>`;
+  return `      <div class="bento-gallery">\n${tiles}\n      </div>`;
+}
+
+function renderFeatureGrid(features, columns) {
+  const items = features
+    .map((f) => {
+      const media = f.video
+        ? `<div class="project-feature-image"><video autoplay muted loop playsinline poster="${f.poster || ""}"><source src="${f.video}" type="video/mp4" /></video></div>`
+        : f.image
+        ? `<div class="project-feature-image"><img src="${f.image}" alt="" /></div>`
+        : `<!-- TODO: drop a real photo in here -->\n          <div class="project-feature-image"></div>`;
+      return `        <article class="project-feature">
+          ${media}
+          <h3>${f.heading}</h3>
+          <p>${f.body}</p>
+        </article>`;
+    })
+    .join("\n");
+  return `      <div class="project-feature-grid" style="--feature-cols: ${columns};">\n${items}\n      </div>`;
+}
+
+function renderWalkthroughVideo(p) {
+  if (!p.walkthroughVideo) return "";
+  return `      <div class="project-walkthrough">
+        <video controls poster="${p.walkthroughPoster || ""}">
+          <source src="${p.walkthroughVideo}" type="video/mp4" />
+        </video>
+      </div>`;
 }
 
 function renderProject(rawProject, index, all) {
@@ -284,6 +384,8 @@ ${renderHero(project)}
 
 ${renderMeta(project)}
 
+${renderBento(project.bento)}
+
 ${renderGallery(project.gallery)}
 
       <section class="project-section">
@@ -298,7 +400,9 @@ ${renderGallery(project.gallery)}
         </div>
       </section>
 
-${renderFeatureGrid(project.featureGrid)}
+${renderWalkthroughVideo(project)}
+
+${renderFeatureGrid(project.featureGrid, project.featureColumns)}
 
       <dl class="project-credits">
         ${project.credits
