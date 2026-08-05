@@ -23,6 +23,16 @@ const projects = [
     name: "Sixth Street Rebrand",
     image: "/previews/sixth-street.jpg",
     tags: ["Branding", "Visual Identity"],
+    galleryVideos: [
+      {
+        src: "/previews/sixth-street-gallery.mp4",
+        poster: "/previews/sixth-street-gallery-poster.jpg",
+      },
+      {
+        src: "/previews/sixth-street-quick-links.mp4",
+        poster: "/previews/sixth-street-quick-links-poster.jpg",
+      },
+    ],
   },
   {
     slug: "airwaves",
@@ -320,6 +330,19 @@ ${renderMuteToggle()}
       </div>`;
 }
 
+function renderGalleryVideos(videos) {
+  const items = videos
+    .map(
+      (v) => `        <div class="project-gallery-video-item">
+          <video autoplay muted loop playsinline poster="${v.poster || ""}">
+            <source src="${v.src}" type="video/mp4" />
+          </video>
+        </div>`,
+    )
+    .join("\n");
+  return `      <div class="project-gallery project-gallery--videos">\n${items}\n      </div>`;
+}
+
 function renderGallery(images) {
   if (!images.length) return "";
   const items = images
@@ -393,7 +416,13 @@ ${renderMeta(project)}
 
 ${renderBento(project.bento)}
 
-${project.galleryVideo ? renderGalleryVideo(project.galleryVideo) : renderGallery(project.gallery)}
+${
+  project.galleryVideo
+    ? renderGalleryVideo(project.galleryVideo)
+    : project.galleryVideos
+      ? renderGalleryVideos(project.galleryVideos)
+      : renderGallery(project.gallery)
+}
 
       <section class="project-section">
         <div class="project-section-head">

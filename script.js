@@ -254,6 +254,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const imageStep =
         projectImgs[1].getBoundingClientRect().top -
         projectImgs[0].getBoundingClientRect().top;
+      // Height doesn't change once the layout settles, so this is safe
+      // to measure once — unlike top, which shifts the moment GSAP's pin
+      // engages (see the single getBoundingClientRect read in onUpdate
+      // below, kept for exactly that reason).
+      const imgHeight = projectImgs[0].getBoundingClientRect().height;
       const projectNamesContainer = document.querySelector(".project-names");
       const projectNamesReel = document.querySelector(".project-names-reel");
       const projectNames = document.querySelectorAll(".project-names-reel p");
@@ -266,11 +271,24 @@ document.addEventListener("DOMContentLoaded", () => {
         "0",
       )}`;
 
-      const imagesHeight = projectImagesContainer.offsetHeight;
-      const moveDistanceImages = window.innerHeight - imagesHeight;
-
       const imgActivationThreshold = window.innerHeight / 2;
-      const imgActiveScale = 0.13;
+      const imgActiveScale = 0.15;
+
+      // How far the column needs to travel so the *last* thumbnail's
+      // center lands exactly on the activation line by the end of the
+      // scroll — not just "the container's bottom edge reaches the
+      // viewport's bottom edge" (the previous formula), which left
+      // slack that grew or shrank with .project-images' padding and
+      // didn't actually guarantee the last project ever reached center.
+      // paddingTop mirrors where the first thumbnail sits the instant
+      // the pin engages (GSAP pins .spotlight's top to the viewport
+      // top, and .project-images itself sits at top:0 within it).
+      const paddingTop = parseFloat(
+        getComputedStyle(projectImagesContainer).paddingTop,
+      );
+      const lastImgInitialCenter =
+        paddingTop + (totalProjectCount - 1) * imageStep + imgHeight / 2;
+      const moveDistanceImages = imgActivationThreshold - lastImgInitialCenter;
 
       // Covers with looping media only animate while active in the
       // spotlight: <video> covers (e.g. Adobe CIS) play/pause, and <img>
@@ -281,22 +299,58 @@ document.addEventListener("DOMContentLoaded", () => {
       const trigger = ScrollTrigger.create({
         trigger: ".spotlight",
         start: "top top",
+        // How much real scroll input the whole sequence takes — this is
+        // purely pacing (a bigger number = slower, more deliberate
+        // scroll per project). It's independent of whether the images
+        // actually finish moving by the end: progress always reaches 1,
+        // and therefore imagesTranslateY always reaches exactly
+        // moveDistanceImages, right as this distance runs out — that
+        // correctness lives in the moveDistanceImages formula itself,
+        // not here. (A previous version tied this directly to
+        // moveDistanceImages' magnitude thinking that was required for
+        // the last thumbnail to land correctly — it wasn't, and doing
+        // that also deleted all the scroll-per-project pacing, making
+        // the whole sequence blow past in a few hundred pixels.)
         end: `+=${window.innerHeight * 5}px`,
         pin: true,
         pinSpacing: true,
         scrub: 1,
         onUpdate: (self) => {
+          // Skip all of this while the section isn't actually pinned in
+          // view. GSAP can fire onUpdate before the trigger reaches its
+          // start point (e.g. during initial setup/refresh, before the
+          // user has scrolled anywhere near the spotlight); without this
+          // guard, that fires the loop-media activation logic below on
+          // page load — which is what was eagerly fetching the Coral
+          // Bleaching gif and the Adobe CIS/COS cover videos before
+          // anyone had scrolled a pixel.
+          if (!self.isActive) return;
+
           const progress = self.progress;
+          const imagesTranslateY = progress * moveDistanceImages;
+
+          gsap.set(projectImagesContainer, {
+            y: imagesTranslateY,
+          });
+
+          // One real read per frame — the only one left in this loop.
+          // GSAP's pin engages by transforming .spotlight itself, which
+          // shifts the coordinate space in a way a purely analytical
+          // "initial position + offset" formula can't account for (there
+          // was a version of this that tried exactly that and it drifted
+          // once the pin kicked in). Every other image's position is
+          // still derived by arithmetic from this one real measurement —
+          // they move rigidly together, so that relationship holds
+          // regardless of what the pin is doing underneath.
+          const firstImgTop = projectImgs[0].getBoundingClientRect().top;
 
           // A continuous (unfloored) project position, derived from the
-          // first thumbnail's actual measured distance from the
-          // activation line rather than an assumed even split of
-          // progress. Both the digit reel and the name reel scrub off
-          // this single value, so they land on the next number/name at
-          // the exact moment its thumbnail reaches center — not before,
-          // not after.
-          const firstImgRect = projectImgs[0].getBoundingClientRect();
-          const firstImgCenter = firstImgRect.top + firstImgRect.height / 2;
+          // first thumbnail's actual position relative to the activation
+          // line rather than an assumed even split of progress. Both the
+          // digit reel and the name reel scrub off this single value, so
+          // they land on the next number/name at the exact moment its
+          // thumbnail reaches center — not before, not after.
+          const firstImgCenter = firstImgTop + imgHeight / 2;
           const continuousIndex = Math.min(
             totalProjectCount,
             Math.max(
@@ -309,14 +363,9 @@ document.addEventListener("DOMContentLoaded", () => {
             y: -continuousIndex * digitRowHeight,
           });
 
-          gsap.set(projectImagesContainer, {
-            y: progress * moveDistanceImages,
-          });
-
-          projectImgs.forEach((img) => {
-            const imgRect = img.getBoundingClientRect();
-            const imgTop = imgRect.top;
-            const imgBottom = imgRect.bottom;
+          projectImgs.forEach((img, index) => {
+            const imgTop = firstImgTop + index * imageStep;
+            const imgBottom = imgTop + imgHeight;
             const isActive =
               imgTop <= imgActivationThreshold &&
               imgBottom >= imgActivationThreshold;
@@ -351,9 +400,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // range matches the image's own height so the peak lines up
             // with isActive and the effect fully resolves by the time
             // the neighboring image takes over.
-            const imgCenter = imgTop + imgRect.height / 2;
+            const imgCenter = imgTop + imgHeight / 2;
             const distance = Math.abs(imgCenter - imgActivationThreshold);
-            const proximity = Math.max(0, 1 - distance / imgRect.height);
+            const proximity = Math.max(0, 1 - distance / imgHeight);
             const eased = proximity * proximity * (3 - 2 * proximity);
 
             gsap.set(img, {
