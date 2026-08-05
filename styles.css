@@ -15,6 +15,15 @@
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
+  /* Extra slack on the trailing edge so italic fonts (e.g.
+     ivypresto-display), whose slanted strokes render past the glyph's
+     logical advance width, don't get clipped by the mask below. The
+     matching negative margin keeps word spacing visually unchanged.
+     (Splitting overflow-x/-y instead of this was tried first, but that
+     behaves inconsistently across browsers — Safari in particular still
+     clips both axes despite the spec.) */
+  padding-right: 0.15em;
+  margin-right: -0.15em;
 }
 
 .split-word-inner {
@@ -80,10 +89,11 @@ section {
 }
 
 .nav-logo {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: "ivypresto-display", serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.15rem;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
   color: #fff;
   text-decoration: none;
 }
@@ -252,17 +262,89 @@ section {
   flex-shrink: 0;
   text-align: center;
   text-transform: none;
-  font-weight: 800;
+  font-family: "ivypresto-display", serif;
+  font-weight: 300;
+  font-style: italic;
   font-size: clamp(2.5rem, 6vw, 5rem);
+  /* The global h1 rule sets line-height: 1, which left no room for this
+     italic serif's descenders (the tail on "p") — they were being
+     clipped by .split-word's overflow: hidden (used to mask the
+     slide-up entrance animation). Extra line-height gives the glyph
+     room without affecting the mask. */
+  line-height: 1.3;
 }
 
 .project-index {
-  margin-top: 6rem;
+  /* Clears the fixed nav pill (bottom edge ~78px) with a little
+     breathing room, while sitting as close to the top of the section
+     as that constraint allows. */
+  margin-top: 4.5rem;
+}
+
+/* The counter is pinned to the section's vertical center — the same
+   screen position the active thumbnail always occupies (see
+   imgActivationThreshold in script.js) — instead of scroll-translating
+   on its own timeline. That guarantees it stays level with whatever
+   thumbnail is active, since both are now anchored to the same fixed
+   point rather than moving independently. It positions against
+   .spotlight itself (global `section` rule sets position: relative,
+   and .project-index has no position of its own), the same containing
+   block .project-names already uses — left:2rem mirrors .project-names'
+   right:2rem so both sit at the same inset as the section's own
+   padding. */
+.project-index h1 {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.project-index-current {
+  display: flex;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 5rem;
+  line-height: 1;
+}
+
+/* The leading digit never changes (project count stays single-digit),
+   so it's plain static text. Only the units digit rolls. */
+.digit-static {
+  display: block;
+}
+
+.digit-reel-window {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.digit-reel {
+  display: flex;
+  flex-direction: column;
+}
+
+.digit-reel span {
+  height: 1em;
+  line-height: 1;
+}
+
+.project-index-total {
+  font-family: "aktiv-grotesk", sans-serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1;
+  padding-bottom: 0.3rem;
 }
 
 .project-blurb {
-  max-width: 320px;
+  max-width: 380px;
   margin-bottom: 1.5rem;
+  font-family: "aktiv-grotesk", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
@@ -274,7 +356,11 @@ section {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 35%;
+  /* Narrower than before (was 35%) to leave enough gutter for the name
+     reel on the right — the longest names ("Adobe Creative Intelligence
+     System") were overlapping the thumbnail below ~1060px viewport
+     width at the old size. */
+  width: 28%;
   padding: 50svh 0;
   display: flex;
   flex-direction: column;
@@ -285,13 +371,25 @@ section {
 .project-img {
   display: block;
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 4/3;
   opacity: 0.5;
-  transition: opacity 0.2s var(--ease-out), transform 0.15s var(--ease-out);
+  transition: opacity 0.2s var(--ease-out);
   overflow: hidden;
 }
 
+.project-img video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Scale is driven by scroll proximity (see script.js) and stays
+   untransitioned at the base state so it tracks the scrub 1:1 instead of
+   lagging behind it. Press feedback gets its own short-lived transition,
+   scoped to :active only, so a real click still feels tactile. */
 .project-img:active {
+  transition: transform 120ms var(--ease-out);
   transform: scale(0.98);
 }
 
@@ -300,23 +398,62 @@ section {
   outline-offset: 4px;
 }
 
+/* A fixed-height "window" pinned to the same vertical center as the
+   counter and the active thumbnail. The name list scrolls through it
+   (see .project-names-reel) rather than the whole block translating on
+   its own timeline, so the highlighted name always lands in the same
+   spot instead of drifting. The mask fades names out near the top/
+   bottom edges, reinforcing the "flipping through a wheel" feel. */
 .project-names {
   position: absolute;
   right: 2rem;
-  bottom: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 11rem;
+  /* Safety net for narrower desktop widths: caps how far the reel can
+     extend left, independent of viewport width, so the longest names
+     truncate (see text-overflow on .project-names p below) instead of
+     reaching into the thumbnail column. */
+  max-width: 26vw;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 30%,
+    #000 70%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 30%,
+    #000 70%,
+    transparent
+  );
+}
+
+.project-names-reel {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
 .project-names p {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #4a4a4a;
   transition: color 0.25s var(--ease-out);
 }
 
 .project-index h1,
 .project-images,
-.project-names p {
+.project-names-reel {
   will-change: transform;
 }
 
@@ -371,8 +508,10 @@ section {
 }
 
 .mobile-project-name {
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.35rem;
   color: #fff;
 }
 
@@ -399,9 +538,14 @@ section {
 
 .project-title {
   text-transform: none;
-  font-weight: 400;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.05;
+  /* Bumped from the default h1 line-height: 1 for the same reason as
+     .landing-name — this italic serif's descenders need room inside
+     the .split-word reveal mask (see script.js splitWords). */
+  line-height: 1.3;
   color: rgba(255, 255, 255, 0.92);
   margin-bottom: 2.5rem;
 }
@@ -519,6 +663,66 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Replaces .project-gallery entirely when a project sets galleryVideo.
+   Reuses .project-hero's card treatment (rounded, padded) rather than
+   the plain edge-to-edge grid the placeholder items use — the 8rem top
+   padding on .project-hero is meant for clearing the fixed nav at the
+   very top of the page, so it's reset here since this sits mid-page. */
+.project-gallery-video {
+  padding: 3rem 2rem 0;
+}
+
+.project-hero,
+.project-gallery-video {
+  position: relative;
+}
+
+.video-mute-toggle {
+  position: absolute;
+  right: calc(2rem + 16px);
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out);
+}
+
+.video-mute-toggle:active {
+  transform: scale(0.94);
+}
+
+.video-mute-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.video-mute-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.video-mute-toggle .icon-unmuted {
+  display: none;
+}
+
+.video-mute-toggle[aria-pressed="true"] .icon-muted {
+  display: none;
+}
+
+.video-mute-toggle[aria-pressed="true"] .icon-unmuted {
+  display: block;
 }
 
 .project-section {

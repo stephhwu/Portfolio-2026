@@ -37,6 +37,24 @@ document.addEventListener("DOMContentLoaded", () => {
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
+  // --- Video mute toggles ----------------------------------------------
+  // Applies to any .video-mute-toggle button on the page (hero and/or
+  // gallery videos that carry real audio). Autoplay still requires the
+  // video to start muted, so this only flips `muted` after a user
+  // gesture rather than controlling playback itself.
+  document.querySelectorAll(".video-mute-toggle").forEach((button) => {
+    const video = button.parentElement.querySelector("video");
+    if (!video) return;
+    button.addEventListener("click", () => {
+      video.muted = !video.muted;
+      button.setAttribute("aria-pressed", String(!video.muted));
+      button.setAttribute(
+        "aria-label",
+        video.muted ? "Unmute video" : "Mute video",
+      );
+    });
+  });
+
   // --- Mobile menu ---------------------------------------------------
   const navToggle = document.querySelector(".nav-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -213,36 +231,52 @@ document.addEventListener("DOMContentLoaded", () => {
   ScrollTrigger.matchMedia({
     // Desktop: pinned, scrubbed scroll-jacking sequence.
     "(min-width: 769px)": () => {
-      const projectIndexContainer = document.querySelector(".project-index");
       const projectIndex = document.querySelector(".project-index h1");
+      const projectIndexTotal = projectIndex.querySelector(
+        ".project-index-total",
+      );
+      const digitReel = projectIndex.querySelector(".digit-reel");
+      const digitReelWindow = projectIndex.querySelector(
+        ".digit-reel-window",
+      );
+      const digitRowHeight = digitReelWindow.offsetHeight;
+
       const projectImgs = document.querySelectorAll(".project-img");
       const projectImagesContainer =
         document.querySelector(".project-images");
-      const projectNames = document.querySelectorAll(".project-names p");
+      // Constant pixel distance between consecutive thumbnails' tops
+      // (image height + gap). Since the whole column translates as one
+      // rigid block, this step never changes once measured — it's what
+      // lets continuousIndex below track the *real* crossing geometry
+      // instead of an assumed 1/totalProjectCount-per-project rate,
+      // which drifted out of sync with when each thumbnail actually
+      // reached center.
+      const imageStep =
+        projectImgs[1].getBoundingClientRect().top -
+        projectImgs[0].getBoundingClientRect().top;
       const projectNamesContainer = document.querySelector(".project-names");
+      const projectNamesReel = document.querySelector(".project-names-reel");
+      const projectNames = document.querySelectorAll(".project-names-reel p");
       const totalProjectCount = projectNames.length;
+      const namesWindowHeight = projectNamesContainer.offsetHeight;
+      const namesRowHeight = projectNames[0].offsetHeight;
 
-      const spotlightSectionHeight = spotlightSection.offsetHeight;
-      const spotlightSectionPadding = parseFloat(
-        getComputedStyle(spotlightSection).padding,
-      );
-      const projectIndexMarginTop = parseFloat(
-        getComputedStyle(projectIndexContainer).marginTop,
-      );
-      const projectIndexHeight =
-        projectIndexContainer.offsetHeight + projectIndexMarginTop;
-      const containerHeight = projectNamesContainer.offsetHeight;
+      projectIndexTotal.textContent = `/${String(totalProjectCount).padStart(
+        2,
+        "0",
+      )}`;
+
       const imagesHeight = projectImagesContainer.offsetHeight;
-
-      const moveDistanceIndex =
-        spotlightSectionHeight -
-        spotlightSectionPadding * 2 -
-        projectIndexHeight;
-      const moveDistanceNames =
-        spotlightSectionHeight - spotlightSectionPadding * 2 - containerHeight;
       const moveDistanceImages = window.innerHeight - imagesHeight;
 
       const imgActivationThreshold = window.innerHeight / 2;
+      const imgActiveScale = 0.13;
+
+      // Covers with looping media only animate while active in the
+      // spotlight: <video> covers (e.g. Adobe CIS) play/pause, and <img>
+      // covers that opt in via data-loop-src (e.g. Coral Bleaching Map)
+      // swap to their looping asset — both revert once scrolled past.
+      const loopActiveStates = new WeakMap();
 
       const trigger = ScrollTrigger.create({
         trigger: ".spotlight",
@@ -253,18 +287,26 @@ document.addEventListener("DOMContentLoaded", () => {
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-          const currentIndex = Math.min(
-            Math.floor(progress * totalProjectCount) + 1,
+
+          // A continuous (unfloored) project position, derived from the
+          // first thumbnail's actual measured distance from the
+          // activation line rather than an assumed even split of
+          // progress. Both the digit reel and the name reel scrub off
+          // this single value, so they land on the next number/name at
+          // the exact moment its thumbnail reaches center — not before,
+          // not after.
+          const firstImgRect = projectImgs[0].getBoundingClientRect();
+          const firstImgCenter = firstImgRect.top + firstImgRect.height / 2;
+          const continuousIndex = Math.min(
             totalProjectCount,
+            Math.max(
+              1,
+              1 + (imgActivationThreshold - firstImgCenter) / imageStep,
+            ),
           );
 
-          projectIndex.textContent = `${String(currentIndex).padStart(
-            2,
-            "0",
-          )}/${String(totalProjectCount).padStart(2, "0")}`;
-
-          gsap.set(projectIndex, {
-            y: progress * moveDistanceIndex,
+          gsap.set(digitReel, {
+            y: -continuousIndex * digitRowHeight,
           });
 
           gsap.set(projectImagesContainer, {
@@ -275,45 +317,73 @@ document.addEventListener("DOMContentLoaded", () => {
             const imgRect = img.getBoundingClientRect();
             const imgTop = imgRect.top;
             const imgBottom = imgRect.bottom;
-
-            if (
+            const isActive =
               imgTop <= imgActivationThreshold &&
-              imgBottom >= imgActivationThreshold
-            ) {
-              gsap.set(img, {
-                opacity: 1,
-              });
-            } else {
-              gsap.set(img, {
-                opacity: 0.5,
-              });
+              imgBottom >= imgActivationThreshold;
+
+            const media = img.querySelector("img, video");
+            if (media && media.tagName === "VIDEO") {
+              // Video covers (e.g. Adobe CIS) play only while active,
+              // instead of running continuously off-screen.
+              const wasActive = loopActiveStates.get(media);
+              if (isActive !== wasActive) {
+                if (isActive) {
+                  media.currentTime = 0;
+                  media.play().catch(() => {});
+                } else {
+                  media.pause();
+                }
+                loopActiveStates.set(media, isActive);
+              }
+            } else if (media && media.dataset.loopSrc) {
+              const wasActive = loopActiveStates.get(media);
+              if (isActive !== wasActive) {
+                media.src = isActive
+                  ? media.dataset.loopSrc
+                  : media.dataset.stillSrc;
+                loopActiveStates.set(media, isActive);
+              }
             }
+
+            // Scale grows the closer the image sits to the activation
+            // line and eases back out as it drifts away, rather than
+            // snapping between two states like opacity does. Falloff
+            // range matches the image's own height so the peak lines up
+            // with isActive and the effect fully resolves by the time
+            // the neighboring image takes over.
+            const imgCenter = imgTop + imgRect.height / 2;
+            const distance = Math.abs(imgCenter - imgActivationThreshold);
+            const proximity = Math.max(0, 1 - distance / imgRect.height);
+            const eased = proximity * proximity * (3 - 2 * proximity);
+
+            gsap.set(img, {
+              opacity: isActive ? 1 : 0.5,
+              scale: 1 + eased * imgActiveScale,
+              // The scaled-up image overlaps its neighbors' boxes since
+              // transform doesn't affect layout. Without this, whichever
+              // image is later in the DOM paints on top regardless of
+              // size, so a dim neighbor could sit over the grown, bright
+              // one. Keying z-index to how grown each image currently is
+              // keeps the biggest one on top.
+              zIndex: Math.round(eased * 10),
+            });
+          });
+
+          // Centers whichever name sits at continuousIndex in the
+          // window, same idea as the digit reel above — the reel moves,
+          // the highlighted slot doesn't. Neighbors dim and fade with
+          // distance from center; the CSS mask on .project-names
+          // handles the soft cutoff at the window's top/bottom edges.
+          gsap.set(projectNamesReel, {
+            y: namesWindowHeight / 2 - (continuousIndex - 0.5) * namesRowHeight,
           });
 
           projectNames.forEach((p, index) => {
-            const startProgress = index / totalProjectCount;
-            const endProgress = (index + 1) / totalProjectCount;
-            const projectProgress = Math.max(
-              0,
-              Math.min(
-                1,
-                (progress - startProgress) / (endProgress - startProgress),
-              ),
-            );
-
+            const distance = Math.abs(continuousIndex - (index + 1));
             gsap.set(p, {
-              y: -projectProgress * moveDistanceNames,
+              color: distance < 0.5 ? "#fff" : "#4a4a4a",
+              opacity: Math.max(0.25, 1 - distance * 0.35),
             });
-
-            if (projectProgress > 0 && projectProgress < 1) {
-              gsap.set(p, {
-                color: "#fff",
-              });
-            } else {
-              gsap.set(p, {
-                color: "#4a4a4a",
-              });
-            }
           });
         },
       });

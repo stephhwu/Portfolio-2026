@@ -19,22 +19,39 @@ const YEAR = 2026;
 
 const projects = [
   {
-    slug: "human-form-study",
-    name: "Human Form Study",
-    image: "/img1.jpg",
-    tags: ["Photography", "Art Direction"],
+    slug: "sixth-street-rebrand",
+    name: "Sixth Street Rebrand",
+    image: "/previews/sixth-street.jpg",
+    tags: ["Branding", "Visual Identity"],
   },
   {
-    slug: "interior-light",
-    name: "Interior Light",
-    image: "/img2.jpg",
-    tags: ["Photography", "Visual Design"],
+    slug: "airwaves",
+    name: "ai.rwaves Cannes Radio",
+    image: "/previews/airwaves.jpg",
+    heroVideo: "/videos/airwaves-hero.mp4",
+    heroPoster: "/videos/airwaves-hero-poster.jpg",
+    heroAudio: true,
+    galleryVideo: {
+      src: "/videos/airwaves-audio.mp4",
+      poster: "/videos/airwaves-audio-poster.jpg",
+    },
+    tags: ["Motion Design", "Web Design"],
   },
   {
-    slug: "project-21",
-    name: "Project 21",
-    image: "/img3.jpg",
-    tags: ["Photography"],
+    slug: "adobe-cis",
+    name: "Adobe Creative Intelligence System",
+    image: "/videos/adobe-cis-hero-poster.jpg",
+    heroVideo: "/videos/adobe-cis-hero.mp4",
+    heroPoster: "/videos/adobe-cis-hero-poster.jpg",
+    tags: ["Product Design", "AI/ML"],
+  },
+  {
+    slug: "adobe-cos",
+    name: "Adobe Content Operating System",
+    image: "/videos/adobe-cos-hero-poster.jpg",
+    heroVideo: "/videos/adobe-cos-hero.mp4",
+    heroPoster: "/videos/adobe-cos-hero-poster.jpg",
+    tags: ["Product Design", "AI/ML"],
   },
   {
     slug: "dogs-with-jobs",
@@ -129,42 +146,6 @@ const projects = [
       { role: "Team", name: "Ian Yu" },
     ],
   },
-  {
-    slug: "everyday-objects",
-    name: "Everyday Objects",
-    image: "/img5.jpg",
-    tags: ["Photography", "Still Life"],
-  },
-  {
-    slug: "unit-07-care",
-    name: "Unit 07 Care",
-    image: "/img6.jpg",
-    tags: ["Photography", "Product"],
-  },
-  {
-    slug: "motion-practice",
-    name: "Motion Practice",
-    image: "/img7.jpg",
-    tags: ["Photography", "Motion"],
-  },
-  {
-    slug: "noonlight-series",
-    name: "Noonlight Series",
-    image: "/img8.jpg",
-    tags: ["Photography"],
-  },
-  {
-    slug: "material-stillness",
-    name: "Material Stillness",
-    image: "/img9.jpg",
-    tags: ["Photography", "Still Life"],
-  },
-  {
-    slug: "quiet-walk",
-    name: "Quiet Walk",
-    image: "/img10.jpg",
-    tags: ["Photography"],
-  },
 ];
 
 function withDefaults(p) {
@@ -216,7 +197,7 @@ function withDefaults(p) {
 }
 
 const nav = `    <nav class="site-nav">
-      <a href="/" class="nav-logo">Steph Wu</a>
+      <a href="/" class="nav-logo">stephanie wu</a>
       <div class="nav-links">
         <a href="/#work" class="nav-link work-link">Work</a>
         <a href="/play.html" class="nav-link">Play</a>
@@ -249,7 +230,7 @@ const footer = `    <footer class="site-footer">
       >
 
       <div class="footer-bottom">
-        <p class="footer-copy">© ${YEAR} Steph Wu</p>
+        <p class="footer-copy">© ${YEAR} stephanie wu</p>
         <!-- TODO: swap in your real LinkedIn profile URL -->
         <a
           href="#"
@@ -261,12 +242,28 @@ const footer = `    <footer class="site-footer">
       </div>
     </footer>`;
 
+// Videos that carry meaningful audio still autoplay muted (required for
+// autoplay to work at all), but get this toggle so the audio isn't just
+// silently unreachable. Shared by the hero and the gallery video below.
+function renderMuteToggle() {
+  return `        <button
+          type="button"
+          class="video-mute-toggle"
+          aria-pressed="false"
+          aria-label="Unmute video"
+        >
+          <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        </button>`;
+}
+
 function renderHero(p) {
   if (p.heroVideo) {
     return `      <div class="project-hero">
         <video autoplay muted loop playsinline poster="${p.heroPoster || ""}">
           <source src="${p.heroVideo}" type="video/mp4" />
         </video>
+${p.heroAudio ? renderMuteToggle() : ""}
       </div>`;
   }
   return `      <div class="project-hero">
@@ -312,6 +309,15 @@ function renderMeta(p) {
           </div>
         </div>
       </section>`;
+}
+
+function renderGalleryVideo(galleryVideo) {
+  return `      <div class="project-hero project-gallery-video">
+        <video autoplay muted loop playsinline poster="${galleryVideo.poster || ""}">
+          <source src="${galleryVideo.src}" type="video/mp4" />
+        </video>
+${renderMuteToggle()}
+      </div>`;
 }
 
 function renderGallery(images) {
@@ -373,7 +379,8 @@ function renderProject(rawProject, index, all) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${project.name} | Steph Wu</title>
+    <title>${project.name} | stephanie wu</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -386,7 +393,7 @@ ${renderMeta(project)}
 
 ${renderBento(project.bento)}
 
-${renderGallery(project.gallery)}
+${project.galleryVideo ? renderGalleryVideo(project.galleryVideo) : renderGallery(project.gallery)}
 
       <section class="project-section">
         <div class="project-section-head">

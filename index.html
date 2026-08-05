@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PrototypeStudio Scroll Animation | Codegrid</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <nav class="site-nav">
-      <a href="/" class="nav-logo">Steph Wu</a>
+      <a href="/" class="nav-logo">stephanie wu</a>
       <div class="nav-links">
         <a href="/#work" class="nav-link work-link">Work</a>
         <a href="/play.html" class="nav-link">Play</a>
@@ -37,7 +38,7 @@
       <div class="landing-video-placeholder">
         <!-- TODO: replace with <video autoplay muted loop playsinline> showreel of portfolio pieces -->
       </div>
-      <h1 class="landing-name">Steph Wu</h1>
+      <h1 class="landing-name">stephanie wu</h1>
     </section>
 
     <div id="work">
@@ -48,34 +49,67 @@
             working across digital design, product design, and information
             design.
           </p>
-          <h1>01/10</h1>
+          <h1>
+            <span class="project-index-current"
+              ><span class="digit-static">0</span
+              ><span class="digit-reel-window"
+                ><span class="digit-reel"
+                  ><span>0</span><span>1</span><span>2</span><span>3</span
+                  ><span>4</span><span>5</span><span>6</span><span>7</span
+                  ><span>8</span><span>9</span></span
+                ></span
+              ></span
+            ><span class="project-index-total">/06</span>
+          </h1>
         </div>
 
         <div class="project-images">
           <a
             class="project-img"
-            href="/human-form-study.html"
+            href="/sixth-street-rebrand.html"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View Human Form Study project"
-            ><img src="/img1.jpg" alt=""
+            aria-label="View Sixth Street Rebrand project"
+            ><img src="/previews/sixth-street.jpg" alt=""
           /></a>
           <a
             class="project-img"
-            href="/interior-light.html"
+            href="/airwaves.html"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View Interior Light project"
-            ><img src="/img2.jpg" alt=""
+            aria-label="View ai.rwaves Cannes Radio project"
+            ><img src="/previews/airwaves.jpg" alt=""
           /></a>
           <a
             class="project-img"
-            href="/project-21.html"
+            href="/adobe-cis.html"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View Project 21 project"
-            ><img src="/img3.jpg" alt=""
-          /></a>
+            aria-label="View Adobe Creative Intelligence System project"
+            ><video
+              src="/previews/adobe-cis-loop.mp4"
+              poster="/previews/adobe-cis-poster.jpg"
+              muted
+              loop
+              playsinline
+              preload="none"
+            ></video
+          ></a>
+          <a
+            class="project-img"
+            href="/adobe-cos.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Adobe Content Operating System project"
+            ><video
+              src="/previews/adobe-cos-loop.mp4"
+              poster="/previews/adobe-cos-poster.jpg"
+              muted
+              loop
+              playsinline
+              preload="none"
+            ></video
+          ></a>
           <a
             class="project-img"
             href="/dogs-with-jobs.html"
@@ -90,70 +124,23 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View Coral Bleaching Map project"
-            ><img src="/coral-bleaching/coral-title-poster.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/everyday-objects.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Everyday Objects project"
-            ><img src="/img5.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/unit-07-care.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Unit 07 Care project"
-            ><img src="/img6.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/motion-practice.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Motion Practice project"
-            ><img src="/img7.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/noonlight-series.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Noonlight Series project"
-            ><img src="/img8.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/material-stillness.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Material Stillness project"
-            ><img src="/img9.jpg" alt=""
-          /></a>
-          <a
-            class="project-img"
-            href="/quiet-walk.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Quiet Walk project"
-            ><img src="/img10.jpg" alt=""
+            ><img
+              src="/previews/coral-bleaching-frame24.png"
+              data-still-src="/previews/coral-bleaching-frame24.png"
+              data-loop-src="/previews/coral-bleaching-loop.gif"
+              alt=""
           /></a>
         </div>
 
         <div class="project-names">
-          <p>Human Form Study</p>
-          <p>Interior Light</p>
-          <p>Project 21</p>
-          <p>Dogs with Jobs</p>
-          <p>Coral Bleaching Map</p>
-          <p>Everyday Objects</p>
-          <p>Unit 07 Care</p>
-          <p>Motion Practice</p>
-          <p>Noonlight Series</p>
-          <p>Material Stillness</p>
-          <p>Quiet Walk</p>
+          <div class="project-names-reel">
+            <p>Sixth Street Rebrand</p>
+            <p>ai.rwaves Cannes Radio</p>
+            <p>Adobe Creative Intelligence System</p>
+            <p>Adobe Content Operating System</p>
+            <p>Dogs with Jobs</p>
+            <p>Coral Bleaching Map</p>
+          </div>
         </div>
       </section>
 
@@ -168,43 +155,57 @@
           <article class="mobile-project">
             <a
               class="mobile-project-media"
-              href="/human-form-study.html"
+              href="/sixth-street-rebrand.html"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View Human Form Study project"
-              ><img src="/img1.jpg" alt=""
+              aria-label="View Sixth Street Rebrand project"
+              ><img src="/previews/sixth-street.jpg" alt=""
             /></a>
             <div class="mobile-project-meta">
               <span class="mobile-project-index">01</span>
-              <p class="mobile-project-name">Human Form Study</p>
+              <p class="mobile-project-name">Sixth Street Rebrand</p>
             </div>
           </article>
           <article class="mobile-project">
             <a
               class="mobile-project-media"
-              href="/interior-light.html"
+              href="/airwaves.html"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View Interior Light project"
-              ><img src="/img2.jpg" alt=""
+              aria-label="View ai.rwaves Cannes Radio project"
+              ><img src="/previews/airwaves.jpg" alt=""
             /></a>
             <div class="mobile-project-meta">
               <span class="mobile-project-index">02</span>
-              <p class="mobile-project-name">Interior Light</p>
+              <p class="mobile-project-name">ai.rwaves Cannes Radio</p>
             </div>
           </article>
           <article class="mobile-project">
             <a
               class="mobile-project-media"
-              href="/project-21.html"
+              href="/adobe-cis.html"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View Project 21 project"
-              ><img src="/img3.jpg" alt=""
+              aria-label="View Adobe Creative Intelligence System project"
+              ><img src="/previews/adobe-cis-poster.jpg" alt=""
             /></a>
             <div class="mobile-project-meta">
               <span class="mobile-project-index">03</span>
-              <p class="mobile-project-name">Project 21</p>
+              <p class="mobile-project-name">Adobe Creative Intelligence System</p>
+            </div>
+          </article>
+          <article class="mobile-project">
+            <a
+              class="mobile-project-media"
+              href="/adobe-cos.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Adobe Content Operating System project"
+              ><img src="/previews/adobe-cos-poster.jpg" alt=""
+            /></a>
+            <div class="mobile-project-meta">
+              <span class="mobile-project-index">04</span>
+              <p class="mobile-project-name">Adobe Content Operating System</p>
             </div>
           </article>
           <article class="mobile-project">
@@ -217,7 +218,7 @@
               ><img src="/previews/dogs-with-jobs.jpg" alt=""
             /></a>
             <div class="mobile-project-meta">
-              <span class="mobile-project-index">04</span>
+              <span class="mobile-project-index">05</span>
               <p class="mobile-project-name">Dogs with Jobs</p>
             </div>
           </article>
@@ -231,92 +232,8 @@
               ><img src="/coral-bleaching/coral-title-poster.jpg" alt=""
             /></a>
             <div class="mobile-project-meta">
-              <span class="mobile-project-index">05</span>
-              <p class="mobile-project-name">Coral Bleaching Map</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/everyday-objects.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Everyday Objects project"
-              ><img src="/img5.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
               <span class="mobile-project-index">06</span>
-              <p class="mobile-project-name">Everyday Objects</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/unit-07-care.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Unit 07 Care project"
-              ><img src="/img6.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">07</span>
-              <p class="mobile-project-name">Unit 07 Care</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/motion-practice.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Motion Practice project"
-              ><img src="/img7.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">08</span>
-              <p class="mobile-project-name">Motion Practice</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/noonlight-series.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Noonlight Series project"
-              ><img src="/img8.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">09</span>
-              <p class="mobile-project-name">Noonlight Series</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/material-stillness.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Material Stillness project"
-              ><img src="/img9.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">10</span>
-              <p class="mobile-project-name">Material Stillness</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/quiet-walk.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Quiet Walk project"
-              ><img src="/img10.jpg" alt=""
-            /></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">11</span>
-              <p class="mobile-project-name">Quiet Walk</p>
+              <p class="mobile-project-name">Coral Bleaching Map</p>
             </div>
           </article>
         </div>
@@ -331,7 +248,7 @@
       >
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Steph Wu</p>
+        <p class="footer-copy">© 2026 stephanie wu</p>
         <!-- TODO: swap in your real LinkedIn profile URL -->
         <a
           href="#"
