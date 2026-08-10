@@ -36,7 +36,7 @@
 
     <main class="project">
       <div class="project-hero">
-        <video autoplay muted loop playsinline poster="/videos/airwaves-hero-poster.jpg">
+        <video autoplay muted loop playsinline poster="/videos/airwaves-hero-poster.avif">
           <source src="/videos/airwaves-hero.mp4" type="video/mp4" />
         </video>
         <button
@@ -89,7 +89,7 @@
 
 
       <div class="project-hero project-gallery-video">
-        <video autoplay muted loop playsinline poster="/videos/airwaves-audio-poster.jpg">
+        <video autoplay muted loop playsinline poster="/videos/airwaves-audio-poster.avif">
           <source src="/videos/airwaves-audio.mp4" type="video/mp4" />
         </video>
         <button
@@ -115,25 +115,45 @@
 
 
 
-      <div class="project-feature-grid" style="--feature-cols: 3;">
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Process</h3>
-          <p>How the work came together, from first pass to final edit.</p>
-        </article>
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Detail</h3>
-          <p>A closer look at the texture and material of the piece.</p>
-        </article>
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Outcome</h3>
-          <p>The finished set, sequenced as a single body of work.</p>
-        </article>
+      <div class="project-bento">
+        <div class="project-bento-col">
+          <div class="project-bento-row">
+            <div class="project-bento-item project-bento-item--fill">
+              <picture>
+                <source srcset="/airwaves/airwaves-laptop.avif" type="image/avif" />
+                <img src="/airwaves/airwaves-laptop.jpg" alt="Laptop showing the ai.rwaves site, resting on a desert rock" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item" style="--bento-ar: 2000 / 1493">
+              <picture>
+                <source srcset="/previews/airwaves.avif" type="image/avif" />
+                <img src="/previews/airwaves.jpg" alt="ai.rwaves Cannes Radio preview" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+          <div class="project-bento-item" style="--bento-ar: 2970 / 744">
+            <video autoplay muted loop playsinline poster="/videos/airwaves-visualize-loop-poster.avif">
+              <source src="/videos/airwaves-visualize-loop.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-bento">
+        <div class="project-bento-row">
+          <div class="project-bento-item" style="--bento-ar: 3306 / 1856; flex: 1.7">
+            <picture>
+              <source srcset="/airwaves/airwaves-sticker-mock.avif" type="image/avif" />
+              <img src="/airwaves/airwaves-sticker-mock.jpg" alt="Collage of ai.rwaves sticker designs" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item project-bento-item--fill">
+            <picture>
+              <source srcset="/airwaves/airwaves-waterbottle.avif" type="image/avif" />
+              <img src="/airwaves/airwaves-waterbottle.jpg" alt="Water bottle mockup with an ai.rwaves sticker applied" loading="lazy" />
+            </picture>
+          </div>
+        </div>
       </div>
 
       <dl class="project-credits">

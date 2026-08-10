@@ -36,7 +36,7 @@
 
     <main class="project">
       <div class="project-hero">
-        <video autoplay muted loop playsinline poster="/videos/adobe-cos-hero-poster.jpg">
+        <video autoplay muted loop playsinline poster="/videos/adobe-cos-hero-poster.avif">
           <source src="/videos/adobe-cos-hero.mp4" type="video/mp4" />
         </video>
 
@@ -80,13 +80,10 @@
 
 
 
-      <div class="project-gallery">
-        <!-- TODO: drop a real photo into this gallery slot -->
-        <div class="project-gallery-item"></div>
-        <!-- TODO: drop a real photo into this gallery slot -->
-        <div class="project-gallery-item"></div>
-        <!-- TODO: drop a real photo into this gallery slot -->
-        <div class="project-gallery-item"></div>
+      <div class="project-walkthrough">
+        <video controls poster="/videos/adobe-cos-landing-walkthrough-poster.avif" style="aspect-ratio: 2222 / 1662">
+          <source src="/videos/adobe-cos-landing-walkthrough.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <section class="project-section">
@@ -101,25 +98,147 @@
 
 
 
-      <div class="project-feature-grid" style="--feature-cols: 3;">
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Process</h3>
-          <p>How the work came together, from first pass to final edit.</p>
-        </article>
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Detail</h3>
-          <p>A closer look at the texture and material of the piece.</p>
-        </article>
-        <article class="project-feature">
-          <!-- TODO: drop a real photo in here -->
-          <div class="project-feature-image"></div>
-          <h3>Outcome</h3>
-          <p>The finished set, sequenced as a single body of work.</p>
-        </article>
+      <div class="project-bento">
+        <div class="project-bento-row">
+          <div class="project-bento-col">
+            <div class="project-bento-item" style="--bento-ar: 4688 / 2616">
+              <picture>
+                <source srcset="/adobe-cos/jersey-bridge.avif" type="image/avif" />
+                <img src="/adobe-cos/jersey-bridge.jpg" alt="Player wearing the A. Silva jersey, back turned, overlooking the East River" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item" style="--bento-ar: 2506 / 1696">
+              <picture>
+                <source srcset="/adobe-cos/jersey-box.avif" type="image/avif" />
+                <img src="/adobe-cos/jersey-box.jpg" alt="Code and Theory x Adobe TeamPlayer jersey packaged in branded boxes" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+          <div class="project-bento-item project-bento-item--fill">
+            <picture>
+              <source srcset="/adobe-cos/jersey-portrait.avif" type="image/avif" />
+              <img src="/adobe-cos/jersey-portrait.jpg" alt="Player wearing the TeamPlayer jersey, holding a soccer ball" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-video-triptych">
+        <div class="project-video-triptych-item">
+          <video autoplay muted loop playsinline poster="/adobe-cos/jersey-ipad-1-poster.avif">
+            <source src="/adobe-cos/jersey-ipad-1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="project-video-triptych-item">
+          <video autoplay muted loop playsinline poster="/adobe-cos/jersey-ipad-2-poster.avif">
+            <source src="/adobe-cos/jersey-ipad-2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="project-video-triptych-item">
+          <video autoplay muted loop playsinline poster="/adobe-cos/jersey-ipad-3-poster.avif">
+            <source src="/adobe-cos/jersey-ipad-3.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <div class="project-bento">
+        <div class="project-bento-row">
+          <div class="project-bento-item project-bento-item--fill">
+            <picture>
+              <source srcset="/adobe-cos/gtm/gtm-basketball.avif" type="image/avif" />
+              <img src="/adobe-cos/gtm/gtm-basketball.jpg" alt="Into Overtime Happy Hour 2026 invite, basketball player dunking" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-col">
+            <div class="project-bento-item" style="--bento-ar: 4800 / 2508">
+              <picture>
+                <source srcset="/adobe-cos/gtm/gtm-football.avif" type="image/avif" />
+                <img src="/adobe-cos/gtm/gtm-football.jpg" alt="Into Overtime Happy Hour invite, football player running with the ball" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item" style="--bento-ar: 4800 / 2400">
+              <picture>
+                <source srcset="/adobe-cos/gtm/gtm-tennis.avif" type="image/avif" />
+                <img src="/adobe-cos/gtm/gtm-tennis.jpg" alt="Thank you for joining us at Into Overtime Happy Hour, tennis player mid-swing" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-guideline-grid">
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-01.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-01.jpg" alt="The Content Operating System for Sports deck — slide 1 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-02.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-02.jpg" alt="The Content Operating System for Sports deck — slide 2 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-03.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-03.jpg" alt="The Content Operating System for Sports deck — slide 3 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-04.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-04.jpg" alt="The Content Operating System for Sports deck — slide 4 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-05.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-05.jpg" alt="The Content Operating System for Sports deck — slide 5 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-06.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-06.jpg" alt="The Content Operating System for Sports deck — slide 6 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-07.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-07.jpg" alt="The Content Operating System for Sports deck — slide 7 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-08.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-08.jpg" alt="The Content Operating System for Sports deck — slide 8 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-09.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-09.jpg" alt="The Content Operating System for Sports deck — slide 9 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-10.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-10.jpg" alt="The Content Operating System for Sports deck — slide 10 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-11.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-11.jpg" alt="The Content Operating System for Sports deck — slide 11 of 12" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/adobe-cos/slides/slide-12.avif" type="image/avif" />
+            <img src="/adobe-cos/slides/slide-12.jpg" alt="The Content Operating System for Sports deck — slide 12 of 12" loading="lazy" />
+          </picture>
+        </div>
       </div>
 
       <dl class="project-credits">

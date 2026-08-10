@@ -55,6 +55,118 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Landing hero: portfolio highlight reel --------------------------
+  // Seven scenes cross-dissolve in a loop, each with its own entrance
+  // move (pan, staggered grid, fast pop, directional slide) so the reel
+  // reads like an edited sizzle cut. Videos only play while their scene
+  // is the active one — otherwise six clips would be decoding in the
+  // background simultaneously for no visible benefit.
+  const reel = document.querySelector(".landing-reel");
+  if (reel) {
+    const scenes = gsap.utils.toArray(".landing-reel-scene", reel);
+    const HOLD = {
+      "sixth-street": 2.6,
+      airwaves: 2.1,
+      synth: 2.3,
+      "dog-data": 1.8,
+      "jersey-triptych": 1.5,
+      "jersey-bento": 2.1,
+      coral: 2,
+    };
+    const XFADE = 0.4;
+
+    const playSceneVideos = (scene) => {
+      scene.querySelectorAll("video").forEach((v) => {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      });
+    };
+    const stopSceneVideos = (scene) => {
+      scene.querySelectorAll("video").forEach((v) => v.pause());
+    };
+
+    if (prefersReducedMotion) {
+      gsap.set(scenes, { opacity: 0 });
+      gsap.set(scenes[0], { opacity: 1 });
+      playSceneVideos(scenes[0]);
+    } else {
+      gsap.set(scenes.slice(1), { opacity: 0 });
+
+      const master = gsap.timeline({ repeat: -1 });
+
+      scenes.forEach((scene, i) => {
+        const name = scene.dataset.scene;
+        const hold = HOLD[name] ?? 2;
+        const isFirst = i === 0;
+        const sceneTl = gsap.timeline();
+
+        sceneTl.call(() => playSceneVideos(scene));
+
+        if (!isFirst) {
+          sceneTl.to(scene, { opacity: 1, duration: XFADE, ease: "power1.out" }, 0);
+        }
+
+        // Per-scene entrance choreography, layered on top of the crossfade.
+        if (name === "sixth-street") {
+          const img = scene.querySelector(".landing-reel-pan img");
+          gsap.set(img, { scale: 1.22, xPercent: -6 });
+          sceneTl.to(
+            img,
+            { xPercent: 6, duration: hold + XFADE, ease: "none" },
+            0,
+          );
+        } else if (name === "airwaves") {
+          const items = scene.querySelectorAll(".landing-reel-airwaves-item");
+          gsap.set(items, { opacity: 0, scale: 0.92 });
+          sceneTl.to(
+            items,
+            { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out", stagger: 0.08 },
+            0.1,
+          );
+        } else if (name === "synth") {
+          const items = scene.querySelectorAll(".landing-reel-synth-item");
+          gsap.set(items, { opacity: 0, scale: 0.7 });
+          sceneTl.to(
+            items,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.45,
+              ease: "back.out(1.7)",
+              stagger: 0.045,
+            },
+            0.1,
+          );
+        } else if (name === "jersey-triptych") {
+          const items = scene.querySelectorAll(".landing-reel-triptych-item");
+          gsap.set(items, { opacity: 0, scale: 0.85 });
+          sceneTl.to(
+            items,
+            { opacity: 1, scale: 1, duration: 0.18, ease: "power2.out", stagger: 0.07 },
+            0.05,
+          );
+        } else if (name === "jersey-bento") {
+          const bridge = scene.querySelector(".landing-reel-jersey-item--bridge");
+          const box = scene.querySelector(".landing-reel-jersey-item--box");
+          const portrait = scene.querySelector(".landing-reel-jersey-item--portrait");
+          gsap.set(bridge, { opacity: 0, x: -24 });
+          gsap.set(box, { opacity: 0, y: 24 });
+          gsap.set(portrait, { opacity: 0, x: 24 });
+          sceneTl
+            .to(bridge, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.1)
+            .to(box, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.22)
+            .to(portrait, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.16);
+        }
+
+        sceneTl.to({}, { duration: hold });
+        sceneTl.to(scene, { opacity: 0, duration: XFADE, ease: "power1.in" });
+        sceneTl.call(() => stopSceneVideos(scene));
+
+        master.add(sceneTl);
+      });
+    }
+  }
+
   // --- Mobile menu ---------------------------------------------------
   const navToggle = document.querySelector(".nav-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -197,9 +309,15 @@ document.addEventListener("DOMContentLoaded", () => {
       ".project-section-title",
       ".project-section-body p",
       ".project-gallery-item",
+      ".project-guideline-item",
       ".bento-item",
       ".project-feature",
       ".project-credit",
+      ".about-hero-title",
+      ".about-bio p",
+      ".about-role",
+      ".about-award",
+      ".about-clients-item",
       ".footer-heading",
       ".footer-contact",
       ".spotlight-mobile .project-blurb",
@@ -222,6 +340,52 @@ document.addEventListener("DOMContentLoaded", () => {
           }),
       });
     });
+  }
+
+  // --- Dogs with Jobs: brand bento type reveal -------------------------
+  // Opens on the font name itself ("Ivypresto Headline") as a beat before
+  // the marquee starts, rather than cutting straight to the looping text.
+  // The marquee stays paused (and at opacity 0) via CSS until this timeline
+  // hands off to it, so there's one continuous motion instead of two
+  // independent animations racing each other.
+  const dwjTypeFrame = document.querySelector(".dwj-type-frame");
+  if (dwjTypeFrame) {
+    const intro = dwjTypeFrame.querySelector(".dwj-type-intro");
+    const track = dwjTypeFrame.querySelector(".dwj-type-track");
+
+    if (prefersReducedMotion) {
+      intro.style.display = "none";
+      track.style.opacity = "1";
+    } else {
+      gsap.set(intro, { opacity: 0, y: 14, scale: 0.94 });
+
+      ScrollTrigger.create({
+        trigger: dwjTypeFrame,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap
+            .timeline()
+            .to(intro, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.7,
+              ease: "power3.out",
+            })
+            .to(intro, {
+              opacity: 0,
+              filter: "blur(6px)",
+              duration: 0.35,
+              ease: "power2.in",
+            }, "+=1.1")
+            .to(track, { opacity: 1, duration: 0.4, ease: "power1.out" }, "-=0.15")
+            .call(() => {
+              track.style.animationPlayState = "running";
+            });
+        },
+      });
+    }
   }
 
   // --- Spotlight / work section ---------------------------------------

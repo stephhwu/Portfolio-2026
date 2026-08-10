@@ -1,3 +1,12 @@
 node_modules/
 .DS_Store
 dist/
+
+# Raw/unoptimized source files kept locally for re-exporting assets —
+# the AVIF+JPG pairs actually referenced by the site are tracked instead.
+public/adobe-cis/synth-branding/AdobeStock_*.png
+public/adobe-cis/synth-branding/Clip path group.png
+public/adobe-cis/synth-branding/Group *.png
+public/adobe-cos/slides/Frame.png
+public/adobe-cos/slides/Frame-*.png
+public/videos/*.mov

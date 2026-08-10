@@ -36,7 +36,10 @@
 
     <main class="project">
       <div class="project-hero">
-        <img src="/previews/sixth-street.jpg" alt="Sixth Street Rebrand" />
+        <picture>
+          <source srcset="/previews/sixth-street.avif" type="image/avif" />
+          <img src="/previews/sixth-street.jpg" alt="Sixth Street Rebrand" />
+        </picture>
       </div>
 
       <section class="project-meta">
@@ -77,16 +80,100 @@
 
 
 
-      <div class="project-gallery project-gallery--videos">
-        <div class="project-gallery-video-item">
-          <video autoplay muted loop playsinline poster="/previews/sixth-street-gallery-poster.jpg">
-            <source src="/previews/sixth-street-gallery.mp4" type="video/mp4" />
-          </video>
+      <div class="project-video-row">
+        <div class="project-video-row-media">
+          <div class="project-gallery-video-item">
+            <video autoplay muted loop playsinline poster="/previews/sixth-street-gallery-poster.avif">
+              <source src="/previews/sixth-street-gallery.mp4" type="video/mp4" />
+            </video>
+          </div>
         </div>
-        <div class="project-gallery-video-item">
-          <video autoplay muted loop playsinline poster="/previews/sixth-street-quick-links-poster.jpg">
-            <source src="/previews/sixth-street-quick-links.mp4" type="video/mp4" />
-          </video>
+        <div class="project-video-row-text">
+          <p class="eyebrow">Overview</p>
+          <h3>Placeholder heading</h3>
+          <p>Placeholder text — swap in real copy about this video.</p>
+        </div>
+      </div>
+
+      <div class="project-video-row project-video-row--reverse">
+        <div class="project-video-row-text">
+          <p class="eyebrow">Detail</p>
+          <h3>Placeholder heading</h3>
+          <p>Placeholder text — swap in real copy about this video.</p>
+        </div>
+        <div class="project-video-row-media">
+          <div class="project-gallery-video-item">
+            <video autoplay muted loop playsinline poster="/previews/sixth-street-quick-links-poster.avif">
+              <source src="/previews/sixth-street-quick-links.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-bento">
+        <div class="project-bento-col">
+          <div class="project-bento-item" style="--bento-ar: 3468 / 2940">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-01.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-01.jpg" alt="Sixth Street logo mark" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item" style="--bento-ar: 3468 / 5400">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-06.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-06.jpg" alt="Golden Gate Bridge in fog" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+        <div class="project-bento-col">
+          <div class="project-bento-item" style="--bento-ar: 3480 / 2132">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-02.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-02.jpg" alt="Sixth Street typography specimen" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item" style="--bento-ar: 3480 / 2940">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-07.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-07.jpg" alt="Photo of a Sixth Street team member in conversation" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item" style="--bento-ar: 3480 / 3138">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-08.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-08.jpg" alt="Sixth Street brand — agility is our edge" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+        <div class="project-bento-col project-bento-col--wide">
+          <div class="project-bento-row">
+            <div class="project-bento-item" style="--bento-ar: 3361 / 4756">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-03.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-03.jpg" alt="Sixth Street brand — an investor-first mentality" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item" style="--bento-ar: 3361 / 4756">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-04.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-04.jpg" alt="Sixth Street brand — 98% of employees stat" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item project-bento-item--fill">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-05.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-05.jpg" alt="Aerial photo of a surfer and wave with the Sixth Street logo" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+          <div class="project-bento-item" style="--bento-ar: 10236 / 3686">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-09.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-09.jpg" alt="Sixth Street primary brand color palette" loading="lazy" />
+            </picture>
+          </div>
         </div>
       </div>
 
@@ -101,6 +188,81 @@
       </section>
 
 
+
+      <div class="project-guideline-grid">
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-01.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-01.jpg" alt="Sixth Street brand guidelines — brand identity section cover" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-02.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-02.jpg" alt="Sixth Street brand guidelines — table of contents" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-03.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-03.jpg" alt="Sixth Street brand guidelines — logo size usage" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-04.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-04.jpg" alt="Sixth Street brand guidelines — acceptable color pairings" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-05.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-05.jpg" alt="Sixth Street brand guidelines — primary brand colors" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-06.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-06.jpg" alt="Sixth Street brand guidelines — logo usage in context" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-07.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-07.jpg" alt="Sixth Street brand guidelines — photography and art direction" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-08.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-08.jpg" alt="Sixth Street brand guidelines — typography hierarchy" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-09.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-09.jpg" alt="Sixth Street brand guidelines — data visualization examples" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-10.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-10.jpg" alt="Sixth Street brand guidelines — brand hierarchy example" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-11.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-11.jpg" alt="Sixth Street brand guidelines — core photography principles" loading="lazy" />
+          </picture>
+        </div>
+        <div class="project-guideline-item">
+          <picture>
+            <source srcset="/sixth-street-guidelines/guideline-12.avif" type="image/avif" />
+            <img src="/sixth-street-guidelines/guideline-12.jpg" alt="Sixth Street brand guidelines — swag applications" loading="lazy" />
+          </picture>
+        </div>
+      </div>
 
       <div class="project-feature-grid" style="--feature-cols: 3;">
         <article class="project-feature">
