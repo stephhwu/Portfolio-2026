@@ -1,8 +1,24 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { CustomEase } from "gsap/CustomEase";
 import Lenis from "lenis";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
+CustomEase.create("hop", "0.8, 0, 0.2, 1");
+CustomEase.create("hop2", "0.9, 0, 0.1, 1");
+
+// Splits an element into chars/words via GSAP SplitText, optionally
+// wrapping each unit in its own overflow-hidden mask (SplitText's
+// `mask` option) so it can slide up from nothing without ever
+// revealing past its own baseline. Used by the preloader/hero reveal.
+function splitText(selector, type, className, mask = true) {
+  return SplitText.create(selector, {
+    type,
+    [`${type}Class`]: className,
+    ...(mask && { mask: type }),
+  });
+}
 
 // Splits an element's text into word spans wrapped in an overflow-hidden
 // mask, so each word can slide/fade in independently without ever
@@ -55,115 +71,137 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Landing hero: portfolio highlight reel --------------------------
-  // Seven scenes cross-dissolve in a loop, each with its own entrance
-  // move (pan, staggered grid, fast pop, directional slide) so the reel
-  // reads like an edited sizzle cut. Videos only play while their scene
-  // is the active one — otherwise six clips would be decoding in the
-  // background simultaneously for no visible benefit.
-  const reel = document.querySelector(".landing-reel");
-  if (reel) {
-    const scenes = gsap.utils.toArray(".landing-reel-scene", reel);
-    const HOLD = {
-      "sixth-street": 2.6,
-      airwaves: 2.1,
-      synth: 2.3,
-      "dog-data": 1.8,
-      "jersey-triptych": 1.5,
-      "jersey-bento": 2.1,
-      coral: 2,
-    };
-    const XFADE = 0.4;
-
-    const playSceneVideos = (scene) => {
-      scene.querySelectorAll("video").forEach((v) => {
-        v.currentTime = 0;
-        v.play().catch(() => {});
-      });
-    };
-    const stopSceneVideos = (scene) => {
-      scene.querySelectorAll("video").forEach((v) => v.pause());
-    };
-
+  // --- Landing entrance: preloader + hero reveal ------------------------
+  // A fixed full-screen preloader (fanned project thumbnails, wordmark,
+  // and a counter) plays once on the homepage, then wipes away via
+  // clip-path to reveal the hero beneath. Scroll is locked for the
+  // duration so the page can't be scrolled out from under the still-
+  // animating overlay; the nav stays hidden until the wipe reaches it
+  // and reveals in the same beat as the hero name, so the whole thing
+  // reads as one choreographed cut rather than the preloader just
+  // disappearing.
+  const preloader = document.querySelector(".preloader");
+  if (preloader) {
     if (prefersReducedMotion) {
-      gsap.set(scenes, { opacity: 0 });
-      gsap.set(scenes[0], { opacity: 1 });
-      playSceneVideos(scenes[0]);
+      preloader.style.display = "none";
     } else {
-      gsap.set(scenes.slice(1), { opacity: 0 });
+      document.body.style.overflow = "hidden";
+      lenis.stop();
 
-      const master = gsap.timeline({ repeat: -1 });
+      splitText(".preloader-header h1", "chars", "char");
+      splitText(".site-nav a", "words", "word");
+      splitText(".hero-header h1", "chars", "char", false);
 
-      scenes.forEach((scene, i) => {
-        const name = scene.dataset.scene;
-        const hold = HOLD[name] ?? 2;
-        const isFirst = i === 0;
-        const sceneTl = gsap.timeline();
-
-        sceneTl.call(() => playSceneVideos(scene));
-
-        if (!isFirst) {
-          sceneTl.to(scene, { opacity: 1, duration: XFADE, ease: "power1.out" }, 0);
-        }
-
-        // Per-scene entrance choreography, layered on top of the crossfade.
-        if (name === "sixth-street") {
-          const img = scene.querySelector(".landing-reel-pan img");
-          gsap.set(img, { scale: 1.22, xPercent: -6 });
-          sceneTl.to(
-            img,
-            { xPercent: 6, duration: hold + XFADE, ease: "none" },
-            0,
-          );
-        } else if (name === "airwaves") {
-          const items = scene.querySelectorAll(".landing-reel-airwaves-item");
-          gsap.set(items, { opacity: 0, scale: 0.92 });
-          sceneTl.to(
-            items,
-            { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out", stagger: 0.08 },
-            0.1,
-          );
-        } else if (name === "synth") {
-          const items = scene.querySelectorAll(".landing-reel-synth-item");
-          gsap.set(items, { opacity: 0, scale: 0.7 });
-          sceneTl.to(
-            items,
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.45,
-              ease: "back.out(1.7)",
-              stagger: 0.045,
-            },
-            0.1,
-          );
-        } else if (name === "jersey-triptych") {
-          const items = scene.querySelectorAll(".landing-reel-triptych-item");
-          gsap.set(items, { opacity: 0, scale: 0.85 });
-          sceneTl.to(
-            items,
-            { opacity: 1, scale: 1, duration: 0.18, ease: "power2.out", stagger: 0.07 },
-            0.05,
-          );
-        } else if (name === "jersey-bento") {
-          const bridge = scene.querySelector(".landing-reel-jersey-item--bridge");
-          const box = scene.querySelector(".landing-reel-jersey-item--box");
-          const portrait = scene.querySelector(".landing-reel-jersey-item--portrait");
-          gsap.set(bridge, { opacity: 0, x: -24 });
-          gsap.set(box, { opacity: 0, y: 24 });
-          gsap.set(portrait, { opacity: 0, x: 24 });
-          sceneTl
-            .to(bridge, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.1)
-            .to(box, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.22)
-            .to(portrait, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.16);
-        }
-
-        sceneTl.to({}, { duration: hold });
-        sceneTl.to(scene, { opacity: 0, duration: XFADE, ease: "power1.in" });
-        sceneTl.call(() => stopSceneVideos(scene));
-
-        master.add(sceneTl);
+      const preloaderImgInitRotations = [7.5, -2.5, -10, 12.5, -5, 5];
+      gsap.set(".preloader-img", {
+        rotate: (i) => preloaderImgInitRotations[i],
       });
+      gsap.set(".hero-bio", { opacity: 0, y: 20 });
+
+      const tl = gsap.timeline({
+        delay: 0.5,
+        onComplete: () => {
+          document.body.style.overflow = "";
+          lenis.start();
+        },
+      });
+
+      tl.to(".preloader-img", {
+        scale: 1,
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        duration: 1,
+        ease: "hop",
+        stagger: 0.2,
+      });
+
+      tl.to(
+        ".preloader-header h1 .char",
+        {
+          y: "0%",
+          duration: 1,
+          ease: "hop2",
+          stagger: { each: 0.125, from: "random" },
+        },
+        "0.35",
+      );
+
+      tl.to(
+        ".preloader-counter p",
+        {
+          y: "0%",
+          duration: 1,
+          ease: "hop2",
+          onStart: () => {
+            const counterEl = document.querySelector(".preloader-counter p");
+            const counter = { value: 0 };
+            gsap.to(counter, {
+              value: 100,
+              duration: 2,
+              delay: 0.5,
+              ease: "power2.inOut",
+              onUpdate: () => {
+                counterEl.textContent = String(
+                  Math.round(counter.value),
+                ).padStart(3, "0");
+              },
+            });
+          },
+        },
+        "<",
+      );
+
+      tl.to(
+        ".preloader-counter p",
+        { y: "-100%", duration: 0.75, ease: "hop2" },
+        3.25,
+      );
+
+      tl.to(
+        ".preloader-header h1 .char",
+        {
+          y: "-100%",
+          duration: 0.75,
+          ease: "hop2",
+          stagger: { each: 0.125, from: "random" },
+        },
+        3.25,
+      );
+
+      tl.to(
+        ".preloader-images .preloader-img",
+        {
+          scale: 0,
+          clipPath: "polygon(20% 20%, 80% 20%, 80% 80%, 20% 80%)",
+          duration: 1,
+          ease: "hop2",
+          stagger: -0.075,
+        },
+        3.5,
+      );
+
+      tl.to(
+        preloader,
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "hop2" },
+        4.35,
+      );
+
+      tl.to(
+        ".hero-header h1 .char",
+        { y: "0%", duration: 1, ease: "hop", stagger: { each: 0.075, from: "random" } },
+        4.65,
+      );
+
+      tl.to(
+        ".site-nav a .word",
+        { y: "0%", duration: 1, ease: "hop", stagger: 0.075 },
+        4.65,
+      );
+
+      tl.to(
+        ".hero-bio",
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        4.85,
+      );
     }
   }
 
@@ -238,35 +276,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- Page-load entrance: nav, hero media, and headline type-in ------
-  // Runs on every page (index, about, play, and every project detail
-  // page) since each is a full page load, not a client-side route.
+  // --- Page-load entrance: nav and headline type-in ---------------------
+  // Runs on every page (about, play, and every project detail page)
+  // since each is a full page load, not a client-side route. Skipped
+  // for .site-nav on the homepage, where the preloader/hero timeline
+  // above owns the nav's reveal instead so it doesn't fade in twice.
   if (!prefersReducedMotion) {
     const siteNav = document.querySelector(".site-nav");
-    const heroMedia = document.querySelector(".landing-video-placeholder");
-    const landingName = document.querySelector(".landing-name");
     const placeholderCopy = document.querySelector(".placeholder-page p");
 
     const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    if (siteNav) {
+    if (siteNav && !preloader) {
       gsap.set(siteNav, { y: -16, opacity: 0 });
       intro.to(siteNav, { y: 0, opacity: 1, duration: 0.5 }, 0);
-    }
-
-    if (heroMedia) {
-      gsap.set(heroMedia, { opacity: 0, scale: 0.97 });
-      intro.to(heroMedia, { opacity: 1, scale: 1, duration: 0.8 }, 0.1);
-    }
-
-    if (landingName) {
-      const words = splitWords(landingName);
-      gsap.set(words, { yPercent: 110, opacity: 0 });
-      intro.to(
-        words,
-        { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.08 },
-        0.25,
-      );
     }
 
     if (placeholderCopy) {
@@ -318,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ".about-role",
       ".about-award",
       ".about-clients-item",
-      ".footer-heading",
       ".footer-contact",
       ".spotlight-mobile .project-blurb",
     ];
@@ -384,6 +406,238 @@ document.addEventListener("DOMContentLoaded", () => {
               track.style.animationPlayState = "running";
             });
         },
+      });
+    }
+  }
+
+  // --- Airwaves: shader prototype demo ----------------------------------
+  // The actual proof-of-concept shader from the project, running live —
+  // same WebGL warp code as the standalone tool, wired up to the
+  // approved sizzle-video stills instead of a file upload. Only runs on
+  // the airwaves page, where the [data-shader-demo] markup exists.
+  const shaderDemo = document.querySelector("[data-shader-demo]");
+  if (shaderDemo) {
+    const canvas = shaderDemo.querySelector("[data-shader-canvas]");
+    const thumbs = Array.from(shaderDemo.querySelectorAll("[data-shader-thumb]"));
+    const modeButtons = Array.from(shaderDemo.querySelectorAll("[data-shader-mode]"));
+    const sliders = {
+      amp: shaderDemo.querySelector('[data-shader-input="amp"]'),
+      freq: shaderDemo.querySelector('[data-shader-input="freq"]'),
+      speed: shaderDemo.querySelector('[data-shader-input="speed"]'),
+    };
+    const sliderLabels = {
+      amp: shaderDemo.querySelector('[data-shader-val="amp"]'),
+      freq: shaderDemo.querySelector('[data-shader-val="freq"]'),
+      speed: shaderDemo.querySelector('[data-shader-val="speed"]'),
+    };
+
+    const VS = `
+      attribute vec2 a_pos;
+      varying vec2 v_uv;
+      void main() {
+        v_uv = a_pos * 0.5 + 0.5;
+        gl_Position = vec4(a_pos, 0.0, 1.0);
+      }`;
+
+    // Same four warp modes as the standalone prototype, plus a
+    // u_coverRatio uniform (computed in JS below) so any source image,
+    // regardless of its own aspect ratio, fills the fixed-ratio stage
+    // like CSS object-fit: cover instead of stretching.
+    const FS = `
+      precision highp float;
+      uniform sampler2D u_tex;
+      uniform float u_time;
+      uniform float u_amp;
+      uniform float u_freq;
+      uniform int   u_mode;
+      uniform vec2  u_coverRatio;
+      varying vec2  v_uv;
+
+      vec2 hash2(vec2 p) {
+        p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+        return fract(sin(p) * 43758.5453);
+      }
+
+      float vnoise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        float a = fract(sin(dot(i + vec2(0,0), vec2(127.1,311.7))) * 43758.5453);
+        float b = fract(sin(dot(i + vec2(1,0), vec2(127.1,311.7))) * 43758.5453);
+        float c = fract(sin(dot(i + vec2(0,1), vec2(127.1,311.7))) * 43758.5453);
+        float d = fract(sin(dot(i + vec2(1,1), vec2(127.1,311.7))) * 43758.5453);
+        return mix(mix(a,b,u.x), mix(c,d,u.x), u.y) * 2.0 - 1.0;
+      }
+
+      float fbm(vec2 p) {
+        return vnoise(p) + 0.5*vnoise(p*2.1+vec2(1.7,9.2)) + 0.25*vnoise(p*4.3+vec2(8.3,2.8));
+      }
+
+      void main() {
+        vec2 uv = v_uv * u_coverRatio + (1.0 - u_coverRatio) * 0.5;
+        float pad = 0.06;
+        vec2 suv = uv * (1.0 - 2.0*pad) + pad;
+
+        float amp  = u_amp  * 0.001;
+        float freq = u_freq;
+        float t    = u_time;
+        vec2 warp  = vec2(0.0);
+
+        if (u_mode == 0) {
+          vec2 d = uv - 0.5;
+          float r = length(d);
+          float angle = atan(d.y, d.x);
+          float wave = amp * sin(freq * r * 6.2832 - t);
+          float nr = r + wave;
+          warp = vec2(cos(angle), sin(angle)) * (nr - r);
+
+        } else if (u_mode == 1) {
+          float scale = freq * 0.8;
+          float nx = vnoise(suv * scale + vec2(0.0, t * 0.25));
+          float ny = vnoise(suv * scale + vec2(31.7, t * 0.25));
+          warp = vec2(nx, ny) * amp * 2.5;
+
+        } else if (u_mode == 2) {
+          float wave  = amp * sin(uv.y * freq * 6.2832 + t);
+          float wave2 = amp * 0.4 * sin(uv.y * freq * 3.7 * 6.2832 + t * 1.3);
+          warp = vec2(wave + wave2, 0.0);
+
+        } else {
+          float scale = freq * 0.5;
+          float nx = fbm(suv * scale + vec2(t * 0.12, 0.0));
+          float ny = fbm(suv * scale + vec2(0.0, t * 0.12 + 5.2));
+          warp = vec2(nx, ny) * amp * 3.0;
+        }
+
+        vec2 finalUV = clamp(suv + warp, 0.0, 1.0);
+        gl_FragColor = texture2D(u_tex, finalUV);
+      }`;
+
+    let gl, program, texture, uniforms, animId, startTime;
+    let currentMode = 0;
+    let coverRatio = [1, 1];
+
+    const compile = (type, src) => {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(s));
+        return null;
+      }
+      return s;
+    };
+
+    const initGL = () => {
+      gl = canvas.getContext("webgl", { antialias: true });
+      if (!gl) return false;
+
+      program = gl.createProgram();
+      gl.attachShader(program, compile(gl.VERTEX_SHADER, VS));
+      gl.attachShader(program, compile(gl.FRAGMENT_SHADER, FS));
+      gl.linkProgram(program);
+      gl.useProgram(program);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(program, "a_pos");
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      texture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+      uniforms = {
+        time: gl.getUniformLocation(program, "u_time"),
+        amp: gl.getUniformLocation(program, "u_amp"),
+        freq: gl.getUniformLocation(program, "u_freq"),
+        mode: gl.getUniformLocation(program, "u_mode"),
+        coverRatio: gl.getUniformLocation(program, "u_coverRatio"),
+      };
+
+      return true;
+    };
+
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+
+    const loadTexture = (src) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvasAspect = canvas.clientWidth / canvas.clientHeight;
+        const imageAspect = img.naturalWidth / img.naturalHeight;
+        coverRatio = [
+          Math.min(canvasAspect / imageAspect, 1),
+          Math.min(imageAspect / canvasAspect, 1),
+        ];
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      };
+      img.src = src;
+    };
+
+    const render = (timestamp) => {
+      if (!gl) return;
+      if (!startTime) startTime = timestamp;
+      const speed = parseFloat(sliders.speed.value);
+      const t = ((timestamp - startTime) / 1000) * (speed * 0.4);
+      gl.uniform1f(uniforms.time, t);
+      gl.uniform1f(uniforms.amp, parseFloat(sliders.amp.value));
+      gl.uniform1f(uniforms.freq, parseFloat(sliders.freq.value));
+      gl.uniform1i(uniforms.mode, currentMode);
+      gl.uniform2f(uniforms.coverRatio, coverRatio[0], coverRatio[1]);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      animId = requestAnimationFrame(render);
+    };
+
+    if (initGL()) {
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      const defaultThumb = thumbs.find((t) => t.classList.contains("is-active")) || thumbs[0];
+      if (defaultThumb) loadTexture(defaultThumb.dataset.src);
+
+      animId = requestAnimationFrame(render);
+
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+          if (thumb.classList.contains("is-active")) return;
+          thumbs.forEach((t) => {
+            t.classList.remove("is-active");
+            t.setAttribute("aria-checked", "false");
+          });
+          thumb.classList.add("is-active");
+          thumb.setAttribute("aria-checked", "true");
+          loadTexture(thumb.dataset.src);
+        });
+      });
+
+      modeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modeButtons.forEach((b) => {
+            b.classList.remove("is-active");
+            b.setAttribute("aria-checked", "false");
+          });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-checked", "true");
+          currentMode = parseInt(btn.dataset.shaderMode, 10);
+        });
+      });
+
+      Object.entries(sliders).forEach(([key, input]) => {
+        input.addEventListener("input", () => {
+          sliderLabels[key].textContent = input.value;
+        });
       });
     }
   }

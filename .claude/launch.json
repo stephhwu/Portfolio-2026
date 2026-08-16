@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "prototypestudio-dev",
-      "runtimeExecutable": "/Users/ellawu/.local/node-v24.18.1/bin/node",
+      "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["node_modules/vite/bin/vite.js"],
       "port": 5173
     }

@@ -244,229 +244,122 @@ section {
   }
 }
 
-.landing {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 1.5rem;
-  padding-top: 6rem;
-  padding-left: var(--content-inset);
-  padding-right: var(--content-inset);
-}
+/* --- Landing entrance: preloader + hero reveal -----------------------
+   A fixed full-screen cream preloader (fanned project thumbnails +
+   wordmark + loading counter) wipes away via clip-path once its intro
+   timeline finishes (see script.js), revealing the site's usual dark
+   hero beneath — cream to dark, the reverse of the reference's dark
+   to cream. Scroll stays locked via Lenis until the reveal completes
+   so the page can't be scrolled out from under the still-animating
+   overlay. */
 
-.landing-video-placeholder {
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-  border-radius: 28px;
-  background: #1c1c1c;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* --- Landing hero: portfolio highlight reel -------------------------
-   Seven scenes stacked with position: absolute, each one wiping in over
-   the last via clip-path (see script.js) rather than cross-dissolving.
-   One consistent hard-edged transition, reused for every cut, is what
-   makes this read as an edited reel instead of seven separate widgets —
-   the per-scene internal motion (pan, staggered grid, fast pop,
-   directional slide) is the only thing that varies. */
-
-.landing-reel {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: inherit;
-}
-
-.landing-reel-scene {
-  position: absolute;
+.preloader {
+  position: fixed;
   inset: 0;
+  z-index: 300;
   overflow: hidden;
-  clip-path: inset(0 0 0 100%);
+  clip-path: inset(0 0 0 0);
+  background: #e0e2db;
+  color: #141414;
   will-change: clip-path;
 }
 
-.landing-reel-scene:first-child {
-  clip-path: inset(0 0 0 0%);
+.preloader-images {
+  position: absolute;
+  inset: 0;
 }
 
-.landing-reel-fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Scene 1: Sixth Street — slow zoomed pan */
-
-.landing-reel-pan {
-  width: 100%;
-  height: 100%;
+.preloader-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(130px, 15vw, 250px);
+  aspect-ratio: 5 / 6;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
+  clip-path: polygon(20% 20%, 80% 20%, 80% 80%, 20% 80%);
+  border-radius: 4px;
   overflow: hidden;
+  box-shadow: 0 16px 32px rgba(20, 20, 20, 0.18);
+  will-change: transform, clip-path;
 }
 
-.landing-reel-pan picture,
-.landing-reel-pan img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
-}
-
-/* Scene 2: Airwaves — laptop + phone up top, video strip below */
-
-.landing-reel-airwaves {
-  width: 100%;
-  height: 100%;
-  padding: 6%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 3%;
-}
-
-.landing-reel-airwaves-item {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0a0a0a;
-  min-height: 0;
-  min-width: 0;
-}
-
-.landing-reel-airwaves-item picture,
-.landing-reel-airwaves-item img,
-.landing-reel-airwaves-item video {
+.preloader-img picture,
+.preloader-img img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.landing-reel-airwaves-item--video {
-  grid-column: 1 / 3;
-}
-
-/* Scene 3: Synth — 9-tile mosaic, staggered build-in */
-
-.landing-reel-synth {
-  width: 100%;
-  height: 100%;
-  padding: 5%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 2.5%;
-}
-
-.landing-reel-synth-item {
-  border-radius: 10px;
-  overflow: hidden;
-  background: #0a0a0a;
-  min-height: 0;
-  min-width: 0;
-}
-
-.landing-reel-synth-item picture,
-.landing-reel-synth-item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Scene 5: Jersey iPad triptych — fast pop-in, 3 across */
-
-.landing-reel-triptych {
-  width: 100%;
-  height: 100%;
-  padding: 6%;
-  display: flex;
-  gap: 3%;
-}
-
-.landing-reel-triptych-item {
-  flex: 1;
-  min-width: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0a0a0a;
-}
-
-.landing-reel-triptych-item video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Scene 6: Jersey bento — bridge + box stacked left, portrait tall right */
-
-.landing-reel-jersey {
-  width: 100%;
-  height: 100%;
-  padding: 6%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 3%;
-}
-
-.landing-reel-jersey-item {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0a0a0a;
-  min-height: 0;
-  min-width: 0;
-}
-
-.landing-reel-jersey-item picture,
-.landing-reel-jersey-item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.landing-reel-jersey-item--bridge {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.landing-reel-jersey-item--box {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.landing-reel-jersey-item--portrait {
-  grid-column: 2;
-  grid-row: 1 / 3;
-}
-
-.landing-name {
-  flex-shrink: 0;
+.preloader-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.preloader-name {
   text-transform: none;
   font-family: "ivypresto-display", serif;
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  /* The global h1 rule sets line-height: 1, which left no room for this
-     italic serif's descenders (the tail on "p") — they were being
-     clipped by .split-word's overflow: hidden (used to mask the
-     slide-up entrance animation). Extra line-height gives the glyph
-     room without affecting the mask. */
+  font-size: clamp(2.5rem, 9vw, 9rem);
   line-height: 1.3;
 }
 
-/* Sits above .spotlight in normal document flow (not inside the pinned
-   section), so it scrolls past normally instead of staying stuck on
-   screen for the whole pinned gallery sequence. */
-.work-intro {
-  padding: 8rem 2rem 4rem;
+.preloader-counter {
+  position: absolute;
+  top: -1.25rem;
+  left: calc(100% + 1rem);
+  overflow: hidden;
+}
+
+.preloader-counter p {
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  color: rgba(20, 20, 20, 0.6);
+  line-height: 1;
+}
+
+/* .char / .word are SplitText's generated per-unit classes (see the
+   splitText() helper in script.js) — start hidden below their own
+   masking wrapper, which SplitText creates automatically via its
+   `mask` option, and slide up to reveal on the intro timeline. */
+.char,
+.word,
+.preloader-counter p {
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-header {
   display: flex;
   justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-name {
+  text-transform: none;
+  text-align: center;
+  font-family: "ivypresto-display", serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(3rem, 12vw, 11rem);
+  line-height: 1.3;
+}
+
+.hero-bio {
+  margin: 0;
 }
 
 .spotlight {
@@ -745,7 +638,7 @@ section {
   font-style: italic;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   /* Bumped from the default h1 line-height: 1 for the same reason as
-     .landing-name — this italic serif's descenders need room inside
+     .hero-name — this italic serif's descenders need room inside
      the .split-word reveal mask (see script.js splitWords). */
   line-height: 1.3;
   color: rgba(255, 255, 255, 0.92);
@@ -1065,6 +958,38 @@ section {
   position: relative;
 }
 
+/* --- Airwaves: wordmark teaser + visualizer video ------------------- */
+
+/* The wordmark-fill clip is a ~4:1 letterbox strip, not the standard
+   16:9 .project-hero video — overrides the aspect ratio rather than
+   letting object-fit: cover crop it down to a sliver of the wordmark. */
+.project-video-wide {
+  padding: 3rem 2rem 0;
+}
+
+.project-video-wide video {
+  aspect-ratio: 2970 / 744;
+}
+
+.project-video-feature {
+  padding: 3rem 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.project-video-feature .project-hero {
+  padding: 0;
+}
+
+.project-video-feature-caption {
+  max-width: 640px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 .video-mute-toggle {
   position: absolute;
   right: calc(2rem + 16px);
@@ -1141,6 +1066,227 @@ section {
   font-weight: 400;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Airwaves: shader prototype demo -------------------------------
+   The actual WebGL proof of concept from the project, reimplemented
+   natively in-page (same shader code, restyled controls) rather than
+   embedded as a foreign tool, so it reads as part of the site. Only
+   runs where a [data-shader-demo] node exists (see script.js). */
+
+.project-shader-demo {
+  padding: 5rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.shader-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.shader-demo-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.shader-demo-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Falls back to the default texture, cover-fit, until WebGL paints
+     over it — avoids a blank box before JS runs or if it fails. */
+  background: center / cover no-repeat url("/airwaves/shader-textures/texture-01.jpg");
+}
+
+.shader-demo-thumbs {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.shader-demo-thumb {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  opacity: 0.55;
+  transition: opacity 0.18s var(--ease-out), border-color 0.18s var(--ease-out), transform 0.15s var(--ease-out);
+}
+
+.shader-demo-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shader-demo-thumb:hover {
+    opacity: 0.85;
+  }
+}
+
+.shader-demo-thumb:active {
+  transform: scale(0.94);
+}
+
+.shader-demo-thumb.is-active {
+  opacity: 1;
+  border-color: #fff;
+}
+
+.shader-demo-thumb:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.shader-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shader-demo-modes {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.shader-demo-mode {
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.18s var(--ease-out), border-color 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shader-demo-mode:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.shader-demo-mode.is-active {
+  background: #fff;
+  border-color: #fff;
+  color: #141414;
+}
+
+.shader-demo-mode:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.shader-demo-sliders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  flex: 1;
+  min-width: 220px;
+}
+
+.shader-demo-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 140px;
+  flex: 1;
+}
+
+.shader-demo-slider b {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.shader-demo-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.shader-demo-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-out);
+}
+
+.shader-demo-slider input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.shader-demo-slider input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.shader-demo-slider input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.shader-demo-caption {
+  max-width: 640px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .project-shader-demo {
+    padding: 3rem 1.5rem;
+  }
+
+  .shader-demo-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
 }
 
 .project-feature-grid {
@@ -1283,7 +1429,7 @@ section {
    stops growing on very wide displays. Mobile keeps its own tighter
    padding, set separately below. */
 @media (min-width: 769px) {
-  .landing,
+  .hero,
   .project-meta,
   .project-hero,
   .bento-gallery,
@@ -1313,43 +1459,56 @@ section {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.footer-heading {
-  text-transform: none;
-  font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3.75rem);
-  line-height: 1.05;
+/* The CTA is the heading itself — a large italic-serif statement with
+   a trailing arrow, the same "text + nudging icon" language as
+   .about-award — rather than a filled button, which was the only
+   solid-fill control anywhere on the site and read like a stock
+   template CTA next to the nav pill's ghost treatment and the rest of
+   the site's plain text links. */
+.footer-contact {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
 
-.footer-contact {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.1rem 2.5rem;
-  border-radius: 999px;
-  background: #fff;
-  color: #141414;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  transition: transform 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
+.footer-heading {
+  text-transform: none;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.92);
+  transition: color 0.2s var(--ease-out);
+}
+
+.footer-contact-icon {
+  display: inline-block;
+  width: clamp(1.5rem, 3vw, 2.5rem);
+  height: clamp(1.5rem, 3vw, 2.5rem);
+  margin-left: 0.5rem;
+  vertical-align: -0.12em;
+  transition: transform 0.18s var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .footer-contact:hover {
-    background: rgba(255, 255, 255, 0.85);
-    transform: translateY(-2px);
+  .footer-contact:hover .footer-heading {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .footer-contact:hover .footer-contact-icon {
+    transform: translate(4px, -4px);
   }
 }
 
-.footer-contact:active {
-  transform: scale(0.96);
+.footer-contact:active .footer-heading {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .footer-contact:focus-visible {
   outline: 2px solid #fff;
-  outline-offset: 4px;
+  outline-offset: 8px;
+  border-radius: 4px;
 }
 
 .footer-bottom {
@@ -1775,22 +1934,12 @@ section {
     display: flex;
   }
 
-  .landing {
-    height: auto;
-    min-height: 100svh;
-    padding-top: 5.5rem;
-    padding-bottom: 2.5rem;
-    gap: 1.5rem;
+  .preloader-img {
+    width: clamp(96px, 26vw, 150px);
   }
 
-  .landing-video-placeholder {
-    flex: none;
-    aspect-ratio: 9 / 16;
-    border-radius: 20px;
-  }
-
-  .work-intro {
-    display: none;
+  .hero-bio {
+    max-width: min(90vw, 480px);
   }
 
   .spotlight {
