@@ -81,8 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // reads as one choreographed cut rather than the preloader just
   // disappearing.
   const preloader = document.querySelector(".preloader");
+  // Set by the "Work" nav link (see below) right before it navigates here
+  // from another page, so landing on #work reads as a jump-to-section
+  // rather than replaying the full preloader. A genuine reload/refresh
+  // never sets this, so the intro still plays then.
+  const skipIntro = sessionStorage.getItem("skipIntro") === "1";
+  if (skipIntro) sessionStorage.removeItem("skipIntro");
   if (preloader) {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || skipIntro) {
       preloader.style.display = "none";
     } else {
       document.body.style.overflow = "hidden";
@@ -116,13 +122,20 @@ document.addEventListener("DOMContentLoaded", () => {
         stagger: 0.2,
       });
 
+      // Each char slides up out of its own overflow-clip mask, so a
+      // letter with a detached top stroke (the tittle on "i", the
+      // upper curve of "e") visibly separates from the rest of the
+      // glyph while its tween is still in flight — the top crosses
+      // into view before the bottom does. A full 1s tween made that
+      // window long enough to read as a clipped/broken letter instead
+      // of a quick reveal, so this is kept short.
       tl.to(
         ".preloader-header h1 .char",
         {
           y: "0%",
-          duration: 1,
+          duration: 0.5,
           ease: "hop2",
-          stagger: { each: 0.125, from: "random" },
+          stagger: { each: 0.05, from: "random" },
         },
         "0.35",
       );
@@ -262,6 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (target) {
         e.preventDefault();
         lenis.scrollTo(target);
+      } else {
+        // Navigating to the homepage's #work section from another page:
+        // let the browser follow the link normally, but flag it so the
+        // preloader intro is skipped on arrival (see above).
+        sessionStorage.setItem("skipIntro", "1");
       }
     });
   });

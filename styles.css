@@ -1686,7 +1686,6 @@ section {
    stops growing on very wide displays. Mobile keeps its own tighter
    padding, set separately below. */
 @media (min-width: 769px) {
-  .hero,
   .project-meta,
   .project-hero,
   .bento-gallery,
