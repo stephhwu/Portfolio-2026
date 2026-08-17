@@ -582,7 +582,11 @@ document.addEventListener("DOMContentLoaded", () => {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       };
-      img.src = src;
+      // data-src attributes are plain strings Vite never rewrites (unlike
+      // real src/href attributes), so they stay root-relative even when
+      // the site is deployed under a subpath — resolve against the
+      // actual configured base here instead of using src as-is.
+      img.src = import.meta.env.BASE_URL + src.replace(/^\//, "");
     };
 
     const render = (timestamp) => {
