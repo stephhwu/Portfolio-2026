@@ -460,6 +460,17 @@ section {
   will-change: transform;
 }
 
+/* SplitText's per-char mask wrapper (`.char-mask`) sizes itself to the
+   char's logical advance width, same as .split-word above — but
+   .preloader-name is italic (ivypresto-display), so slanted strokes on
+   chars like "i" and "e" render past that width and were getting
+   clipped. Same fix: pad the trailing edge and pull it back with a
+   matching negative margin so spacing between chars stays unchanged. */
+.preloader-name .char-mask {
+  padding-right: 0.15em;
+  margin-right: -0.15em;
+}
+
 /* Compact intro strip, not a full-viewport moment — the name is
    already introduced by the preloader animation and lives in the nav,
    so repeating it here just added a scroll with nothing to do. This is
