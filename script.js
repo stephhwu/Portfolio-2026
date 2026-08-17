@@ -8,6 +8,16 @@ gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
 CustomEase.create("hop", "0.8, 0, 0.2, 1");
 CustomEase.create("hop2", "0.9, 0, 0.1, 1");
 
+// Browsers restore the previous scroll position on a hard refresh by
+// default — so refreshing partway down the page replayed the preloader
+// intro while still sitting at that old scroll position instead of back
+// at the top. Opting out here stops that auto-restore; the explicit
+// scrollTo(0, 0) below (which still runs on every load regardless of
+// this setting) is what actually moves the page back to the top.
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 // Splits an element into chars/words via GSAP SplitText, optionally
 // wrapping each unit in its own overflow-hidden mask (SplitText's
 // `mask` option) so it can slide up from nothing without ever
@@ -42,6 +52,24 @@ function splitWords(el) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Skipped when a hash is present (e.g. arriving at #work from another
+  // page via the "Work" nav link below), which intentionally wants to
+  // land on that section rather than the top. A single scrollTo isn't
+  // enough on its own — on a hard refresh, the browser re-asserts its
+  // own remembered scroll position a frame or two after this script
+  // runs (this happens even with scrollRestoration set to "manual",
+  // which governs back/forward navigation, not reloads), overriding a
+  // one-off reset. Re-forcing it every frame for a short window past
+  // that outweighs the risk of it winning the race.
+  if (!location.hash) {
+    window.scrollTo(0, 0);
+    const stopBy = performance.now() + 600;
+    (function forceScrollTop() {
+      if (window.scrollY !== 0) window.scrollTo(0, 0);
+      if (performance.now() < stopBy) requestAnimationFrame(forceScrollTop);
+    })();
+  }
+
   const lenis = new Lenis();
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add((time) => {
