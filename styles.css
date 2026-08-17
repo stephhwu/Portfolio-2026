@@ -1340,6 +1340,9 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .shader-demo-stage {
