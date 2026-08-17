@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  base: "/Portfolio-2026/",
   build: {
     rollupOptions: {
       input: {
@@ -14,6 +15,10 @@ export default defineConfig({
         adobeCos: resolve(__dirname, "adobe-cos.html"),
         dogsWithJobs: resolve(__dirname, "dogs-with-jobs.html"),
         coralBleaching: resolve(__dirname, "coral-bleaching.html"),
+        beneathTheSurface: resolve(__dirname, "beneath-the-surface.html"),
+        posterIndex: resolve(__dirname, "poster-index.html"),
+        breathscape: resolve(__dirname, "breathscape.html"),
+        coralChronicles: resolve(__dirname, "coral-chronicles.html"),
       },
     },
   },
