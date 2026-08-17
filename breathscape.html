@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breathscape | stephanie wu</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/" class="nav-logo">stephanie wu</a>
+      <div class="nav-links">
+        <a href="/#work" class="nav-link work-link">Work</a>
+        <a href="/play.html" class="nav-link">Play</a>
+        <a href="/about.html" class="nav-link">About</a>
+      </div>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" inert>
+      <a href="/#work" class="mobile-menu-link work-link">Work</a>
+      <a href="/play.html" class="mobile-menu-link">Play</a>
+      <a href="/about.html" class="mobile-menu-link">About</a>
+    </div>
+
+    <main class="project">
+      <div class="project-hero">
+        <img src="/breathscape/breathscape-hero-mockup.webp" alt="Breathscape app on iPhone, showing Sleep Insights and HRV trend" />
+      </div>
+
+      <section class="project-meta">
+        <h1 class="project-title">Breathscape</h1>
+
+        <div class="project-meta-row project-meta-row--top">
+          <div class="project-meta-col">
+            <p class="eyebrow">Industry</p>
+            <ul class="project-meta-list">
+            <li>Product Design</li>
+            </ul>
+          </div>
+          <div class="project-meta-col">
+            <p class="eyebrow">Year</p>
+            <p class="project-meta-value">2026</p>
+          </div>
+          <p class="project-tagline">A smartwatch-paired breathing app, with a physical origami kit that turns HRV data into a ritual.</p>
+        </div>
+
+        <div class="project-meta-row project-meta-row--bottom">
+          <div class="project-meta-col">
+            <p class="eyebrow">Services</p>
+            <ul class="project-meta-list">
+            <li>Figma</li>
+            <li>Photoshop</li>
+            <li>D3.js</li>
+            <li>Physical Prototyping</li>
+            </ul>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Brief</p>
+            <p>Breathscape started as a self-quantification assignment in a course called Data as Material, turning an everyday curiosity into a data story. I wanted to see whether breathing exercises could improve my own low heart rate variability (HRV) — a marker of how well the nervous system adapts to stress — so I logged resonance breathing sessions morning and evening, pulled the data from a Garmin smartwatch, and visualized the results in D3.js.</p>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Finding</p>
+            <p>How might we create a physical model that visually represents breathing, using a soft material that embodies the lightness of breath? Inspired by artists like Rafael Lozano-Hemmer and Karolina Maszkiewicz, paper and origami became the answer — a sculpture prototype that evolved into a fun, at-home kit paired with the app.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="bento-gallery">
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/breathscape/breathing-animation-optimized-poster.jpg" aria-label="HRV breathing exercise data animation"><source src="/breathscape/breathing-animation-optimized.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><img src="/breathscape/breathscape-spotify.webp" alt="Breathscape Spotify playlist mockup" loading="lazy" /></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/breathscape/choose-breathing-exercise-poster.jpg" aria-label="Choosing a breathing exercise in the app"><source src="/breathscape/choose-breathing-exercise.mp4" type="video/mp4" /></video></div>
+      </div>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">About the Data</p>
+          <h2 class="project-section-title">Visualizing HRV, one breath at a time.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>Ten minutes of resonance breathing in the morning, twenty in the evening — aggregated from a Garmin smartwatch and charted in D3.js to see whether the practice was actually moving the needle on heart rate variability over time.</p>
+        </div>
+      </section>
+
+      <div class="project-gallery">
+        <div class="project-gallery-item"><img src="/breathscape/hrv-chart-1.webp" alt="HRV data chart, view 1" loading="lazy" /></div>
+        <div class="project-gallery-item"><img src="/breathscape/hrv-chart-2.webp" alt="HRV data chart, view 2" loading="lazy" /></div>
+        <div class="project-gallery-item"><img src="/breathscape/hrv-chart-3.webp" alt="HRV data chart, view 3" loading="lazy" /></div>
+      </div>
+
+      <div class="project-feature-grid" style="--feature-cols: 3;">
+        <article class="project-feature">
+          <div class="project-feature-image"><img src="/breathscape/breathscape-front-mockup.webp" alt="Breathscape app home screen mockup" loading="lazy" /></div>
+          <h3>Breathscape App</h3>
+          <p>The app pairs with your smartwatch to suggest breathing exercises based on your sleep quality, heart rate variability, and pulse ox from the night before.</p>
+        </article>
+        <article class="project-feature">
+          <div class="project-feature-image"><video autoplay muted loop playsinline poster="/breathscape/breathscape-origami-poster.jpg"><source src="/breathscape/breathscape-origami.mp4" type="video/mp4" /></video></div>
+          <h3>Breathscape Origami Kit</h3>
+          <p>An optional product pairing that teaches you to fold an origami breathing sculpture, visualizing six popular breathing exercises. Each envelope ships with a petal box to hang the finished piece, folding instructions, and origami paper grouped by exercise.</p>
+        </article>
+        <article class="project-feature">
+          <div class="project-feature-image"><img src="/breathscape/breathscape-ig-mockup.webp" alt="Breathscape Instagram mockup" loading="lazy" /></div>
+          <h3>Social Media &amp; Branding</h3>
+          <p>Instagram carried tutorials, breathing exercises, and user-generated content, paired with three reels — a kit unboxing, an origami tutorial, and the final folded sculpture. The back of each envelope hides a QR code to a relaxing Spotify playlist for folding along to.</p>
+        </article>
+      </div>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">Detail</p>
+          <h2 class="project-section-title">What's inside the envelope.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>Strings, a petal box to hang the finished structure, origami folding instructions, and origami paper grouped by breathing exercise.</p>
+        </div>
+      </section>
+
+      <div class="bento-gallery">
+        <div class="bento-item"><img src="/breathscape/breathscape-envelope.webp" alt="Breathscape envelope, front" loading="lazy" /></div>
+        <div class="bento-item"><img src="/breathscape/breathscape-envelope-back.webp" alt="Breathscape envelope back, with Spotify QR code" loading="lazy" /></div>
+        <div class="bento-item"><img src="/breathscape/breathscape-kit-detail-1.webp" alt="Breathscape kit detail" loading="lazy" /></div>
+        <div class="bento-item"><img src="/breathscape/breathscape-kit-detail-2.webp" alt="Breathscape kit detail" loading="lazy" /></div>
+        <div class="bento-item"><img src="/breathscape/breathscape-paper.webp" alt="Origami paper grouped by breathing exercise" loading="lazy" /></div>
+      </div>
+
+
+      <a class="project-next" href="/beneath-the-surface.html">
+        <span class="eyebrow">Next Project</span>
+        <span class="project-next-title">Beneath the Surface</span>
+      </a>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a href="/" class="footer-wordmark">stephanie wu</a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Menu</p>
+            <a href="/#work" class="footer-nav-link work-link">Work</a>
+            <a href="/play.html" class="footer-nav-link">Play</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Case Studies</p>
+            <a href="/sixth-street-rebrand.html" class="footer-nav-link">Sixth Street Rebrand</a>
+            <a href="/airwaves.html" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+            <a href="/adobe-cis.html" class="footer-nav-link">Adobe Creative Intelligence System</a>
+            <a href="/adobe-cos.html" class="footer-nav-link">Adobe Content Operating System</a>
+            <a href="/dogs-with-jobs.html" class="footer-nav-link">Dogs with Jobs</a>
+            <a href="/coral-bleaching.html" class="footer-nav-link">Coral Bleaching Map</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Experiments</p>
+            <a href="/coral-chronicles.html" class="footer-nav-link">Coral Chronicles</a>
+            <a href="/poster-index.html" class="footer-nav-link">Poster Index</a>
+            <a href="/breathscape.html" class="footer-nav-link">Breathscape</a>
+            <a href="/beneath-the-surface.html" class="footer-nav-link">Beneath the Surface</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Connect</p>
+            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
+            <!-- TODO: swap in your real LinkedIn profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 stephanie wu</p>
+      </div>
+    </footer>
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

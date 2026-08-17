@@ -74,6 +74,125 @@ section {
   text-align: center;
 }
 
+/* --- Play page ------------------------------------------------------ */
+
+.play-page {
+  min-height: 100svh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2rem, 5vh, 3.5rem);
+  padding: 8rem var(--content-inset) 4rem;
+  overflow: visible;
+}
+
+.play-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.play-title {
+  text-transform: none;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.play-blurb {
+  max-width: 520px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.play-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.play-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.play-card-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1c1c1c;
+}
+
+.play-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .play-card:hover .play-card-media img {
+    transform: scale(1.04);
+  }
+}
+
+.play-card:active .play-card-media img {
+  transition: transform 120ms var(--ease-out);
+  transform: scale(0.98);
+}
+
+.play-card:focus-visible .play-card-media {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.play-card-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.play-card-index {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.play-card-name {
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(1.15rem, 1.4vw, 1.6rem);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .play-page {
+    padding: 7rem 1.5rem 3rem;
+  }
+
+  .play-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .play-card-media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 .site-nav {
   position: fixed;
   top: 1.5rem;
@@ -309,6 +428,14 @@ section {
   line-height: 1.3;
 }
 
+/* "stephanie wu" runs off the edge of narrow viewports at this type
+   scale — hidden here so desktop keeps the single-line wordmark, then
+   restored at the mobile breakpoint below to drop "wu" to its own
+   centered line instead of letting it clip. */
+.preloader-name-break {
+  display: none;
+}
+
 .preloader-counter {
   position: absolute;
   top: -1.25rem;
@@ -333,33 +460,36 @@ section {
   will-change: transform;
 }
 
+/* Compact intro strip, not a full-viewport moment — the name is
+   already introduced by the preloader animation and lives in the nav,
+   so repeating it here just added a scroll with nothing to do. This is
+   a quick left-aligned line the reader passes through, not a
+   destination.
+
+   On desktop it's lifted out of normal flow entirely and overlaid on
+   top of #work instead of stacking above it — .spotlight's pinned
+   gallery already reserves ~40svh of empty runway before its own
+   content settles (see .project-images's padding-top comment; that
+   runway is load-bearing for the scroll-jacked reveal and isn't
+   available to trim), so floating the bio inside that existing space
+   removes the *extra* gap this section used to add on top of it,
+   rather than leaving two stacked empty regions. Mobile has no pin
+   mechanic and .hero is already compact there, so it stays in normal
+   flow. */
 .hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
+  height: auto;
+  padding: 8rem var(--content-inset) 3rem;
 }
 
-.hero-header {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  overflow: hidden;
-}
-
-.hero-name {
-  text-transform: none;
-  text-align: center;
-  font-family: "ivypresto-display", serif;
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(3rem, 12vw, 11rem);
-  line-height: 1.3;
-}
-
-.hero-bio {
-  margin: 0;
+@media (min-width: 769px) {
+  .hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding-bottom: 0;
+  }
 }
 
 .spotlight {
@@ -435,6 +565,13 @@ section {
   font-size: clamp(1.5rem, 1.8vw + 0.9rem, 2.25rem);
   line-height: 1.3;
   color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-bio {
+  margin: 0;
+  max-width: 520px;
+  text-align: left;
+  font-size: clamp(1.3rem, 0.8vw + 1rem, 1.6rem);
 }
 
 .project-images {
@@ -636,13 +773,63 @@ section {
   font-family: "ivypresto-display", serif;
   font-weight: 100;
   font-style: italic;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  /* Bumped from the default h1 line-height: 1 for the same reason as
-     .hero-name — this italic serif's descenders need room inside
-     the .split-word reveal mask (see script.js splitWords). */
+  /* Flattened from clamp(2.5rem, 6vw, 4.5rem) — the title no longer
+     towers over its own meta row, closer to the restrained, near-flat
+     scale of an editorial index page than a hero headline. */
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  /* Bumped from the default h1 line-height: 1 — this italic serif's
+     descenders need room inside the .split-word reveal mask
+     (see script.js splitWords). */
   line-height: 1.3;
   color: rgba(255, 255, 255, 0.92);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.project-unlaunched-note {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: -1.25rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(247, 91, 53, 0.35);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.project-unlaunched-note::before {
+  content: "";
+  flex-shrink: 0;
+  margin-top: 0.45em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f75b35;
+}
+
+.project-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.project-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-link:hover {
+    color: #fff;
+  }
 }
 
 .project-meta-row {
@@ -673,27 +860,27 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
 }
 
 .project-meta-value {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
 }
 
 .project-tagline {
-  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
   font-weight: 400;
-  line-height: 1.3;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .project-meta-col p:not(.eyebrow) {
   max-width: 520px;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
@@ -900,6 +1087,48 @@ section {
   background: #1c1c1c;
 }
 
+/* --- Sixth Street: logo construction --------------------------------
+   Two full-bleed bands (dark, then light) showing the mark's triangle
+   construction and its clearspace/proportion spec — real exports from
+   the brand guidelines, not a recreation. */
+.project-construction {
+  display: flex;
+}
+
+.construction-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+}
+
+.construction-panel--dark {
+  background: #0d2929;
+}
+
+.construction-panel--light {
+  background: #f2f6f6;
+}
+
+.construction-image {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .project-construction {
+    flex-direction: column;
+  }
+
+  .construction-panel {
+    padding: 3rem 1.5rem;
+  }
+}
+
 .project-video-triptych-item video {
   display: block;
   width: 100%;
@@ -1036,6 +1265,31 @@ section {
   display: block;
 }
 
+@media (max-width: 768px) {
+  /* The generic mobile .project-hero rules (padding for clearing the
+     fixed nav, 4:5 portrait aspect-ratio) are tuned for the page's
+     top-of-page hero — this wordmark clip reuses .project-hero only
+     for its rounded-card treatment, so it needs its own padding and
+     its wide letterbox ratio preserved instead of being cropped down
+     to a portrait sliver. */
+  .project-hero.project-video-wide {
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .project-hero.project-video-wide video {
+    aspect-ratio: 2970 / 744;
+  }
+
+  /* The visualizer recording has a browser chrome strip baked into
+     the top and a thin black margin at the bottom — crop both out on
+     mobile rather than letting the generic 4:5 portrait ratio show
+     full height (chrome and all) while cropping the sides instead. */
+  .project-video-feature .project-hero video {
+    aspect-ratio: 1.9;
+    object-position: center 78%;
+  }
+}
+
 .project-section {
   height: auto;
   overflow: visible;
@@ -1056,13 +1310,13 @@ section {
 .project-section-title {
   text-transform: none;
   font-weight: 800;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  line-height: 1.15;
+  font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+  line-height: 1.2;
 }
 
 .project-section-body p {
   max-width: 560px;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
@@ -1450,74 +1704,92 @@ section {
   position: relative;
   width: 100%;
   height: auto;
-  padding: 7rem 2rem 2.5rem;
+  padding: 6rem var(--content-inset) 2.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 2.5rem;
+  gap: 4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* The CTA is the heading itself — a large italic-serif statement with
-   a trailing arrow, the same "text + nudging icon" language as
-   .about-award — rather than a filled button, which was the only
-   solid-fill control anywhere on the site and read like a stock
-   template CTA next to the nav pill's ghost treatment and the rest of
-   the site's plain text links. */
-.footer-contact {
-  display: inline-block;
-  text-decoration: none;
-  color: inherit;
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem 4rem;
+  flex-wrap: wrap;
 }
 
-.footer-heading {
-  text-transform: none;
+/* A large italic-serif signature standing in for a CTA — quieter and
+   more editorial than a button, in the same register as the nav
+   wordmark, just at a scale that anchors the whole footer. */
+.footer-wordmark {
   font-family: "ivypresto-display", serif;
   font-weight: 100;
   font-style: italic;
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
-  line-height: 1.25;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
   color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
   transition: color 0.2s var(--ease-out);
 }
 
-.footer-contact-icon {
-  display: inline-block;
-  width: clamp(1.5rem, 3vw, 2.5rem);
-  height: clamp(1.5rem, 3vw, 2.5rem);
-  margin-left: 0.5rem;
-  vertical-align: -0.12em;
-  transition: transform 0.18s var(--ease-out);
-}
-
 @media (hover: hover) and (pointer: fine) {
-  .footer-contact:hover .footer-heading {
+  .footer-wordmark:hover {
     color: rgba(255, 255, 255, 0.55);
   }
-
-  .footer-contact:hover .footer-contact-icon {
-    transform: translate(4px, -4px);
-  }
 }
 
-.footer-contact:active .footer-heading {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.footer-contact:focus-visible {
+.footer-wordmark:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 8px;
   border-radius: 4px;
 }
 
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  gap: 2.5rem 3rem;
+  max-width: 780px;
+}
+
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.footer-nav-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.15rem;
+}
+
+.footer-nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-nav-link:hover {
+    color: #fff;
+  }
+}
+
+.footer-nav-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
 .footer-bottom {
   width: 100%;
-  max-width: 640px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -1528,19 +1800,15 @@ section {
   color: rgba(255, 255, 255, 0.45);
 }
 
-.footer-link {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  transition: color 0.2s var(--ease-out);
-}
+@media (max-width: 768px) {
+  .footer-main {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 
-@media (hover: hover) and (pointer: fine) {
-  .footer-link:hover {
-    color: #fff;
+  .footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: none;
   }
 }
 
@@ -1724,11 +1992,6 @@ section {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.footer-link:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 4px;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1739,6 +2002,117 @@ section {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* --- Password gate ---------------------------------------------------
+   A soft client-side deterrent, not real access control (this is a
+   static site with no backend) — meant to keep an unlaunched client
+   project out of casual browsing and search indexing, shared only with
+   people who are handed the password directly. */
+html.gate-locked,
+html.gate-locked body {
+  overflow: hidden;
+}
+
+.password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #141414;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.password-gate.is-unlocked {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.password-gate-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.password-gate-title {
+  text-transform: none;
+  font-family: "ivypresto-display", serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.password-gate-copy {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.password-gate-field {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.password-gate-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 0 0.85rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.password-gate-field input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.password-gate-field input:focus {
+  outline: none;
+}
+
+.password-gate-field button {
+  padding: 0 1.5rem;
+  border: none;
+  background: #fff;
+  color: #141414;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .password-gate-field button:hover {
+    opacity: 0.85;
+  }
+}
+
+.password-gate-field button:focus-visible {
+  outline: 2px solid #141414;
+  outline-offset: -4px;
+}
+
+.password-gate-error {
+  font-size: 0.85rem;
+  color: #f75b35;
 }
 
 /* --- Dogs with Jobs: brand bento ------------------------------------ */
@@ -1938,8 +2312,14 @@ section {
     width: clamp(96px, 26vw, 150px);
   }
 
+  .preloader-name-break {
+    display: inline;
+  }
+
   .hero-bio {
     max-width: min(90vw, 480px);
+    text-align: center;
+    margin: 0 auto;
   }
 
   .spotlight {
@@ -1950,7 +2330,7 @@ section {
     display: block;
     height: auto;
     min-height: 100svh;
-    padding-top: 6rem;
+    padding-top: 1.5rem;
     padding-bottom: 3rem;
   }
 
@@ -1979,6 +2359,14 @@ section {
   .project-hero img,
   .project-hero video {
     aspect-ratio: 4 / 5;
+  }
+
+  /* The poster-wall hero photo is wide enough that the default centered
+     crop lands on the "62%" stat panel instead of the "investor-first
+     mentality" text + portrait — nudged right so the portrait panel
+     reads fully instead of getting clipped to a sliver. */
+  .project-hero--sixth-street img {
+    object-position: 60% 50%;
   }
 
   .project-meta-row {
@@ -2036,6 +2424,75 @@ section {
 
   .project-bento-item--fill {
     aspect-ratio: 3024 / 4772;
+  }
+
+  /* Shared by any project bento with nine-ish images — left as a single
+     flex column it's one long scroll of full-width tiles. Unwrapping the
+     desktop column/row wrappers with display: contents flattens every
+     item into direct children of a single 2-col grid, so `order` can
+     freely resequence them into pairs picked for how closely their
+     aspect ratios match (so a row doesn't leave one side visibly taller
+     than the other), with one image spanning full width to close it out
+     — same assets as desktop, no separate mobile-only exports needed. */
+  .mobile-bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mobile-bento .project-bento-col,
+  .mobile-bento .project-bento-row {
+    display: contents;
+  }
+
+  .mobile-bento .mobile-order-1 {
+    order: 1;
+  }
+
+  .mobile-bento .mobile-order-2 {
+    order: 2;
+  }
+
+  .mobile-bento .mobile-order-3 {
+    order: 3;
+  }
+
+  .mobile-bento .mobile-order-4 {
+    order: 4;
+  }
+
+  .mobile-bento .mobile-order-5 {
+    order: 5;
+  }
+
+  .mobile-bento .mobile-order-6 {
+    order: 6;
+  }
+
+  .mobile-bento .mobile-order-7 {
+    order: 7;
+  }
+
+  .mobile-bento .mobile-order-8 {
+    order: 8;
+  }
+
+  .mobile-bento .mobile-order-9 {
+    order: 9;
+  }
+
+  .mobile-bento .mobile-full {
+    grid-column: 1 / -1;
+  }
+
+  /* The --fill variant normally stretches to match its flex row
+     siblings' height instead of using its own ratio — meaningless once
+     it's a standalone grid cell, so it needs its real image ratio back. */
+  .project-bento--sixth-street .project-bento-item--fill {
+    aspect-ratio: 1141 / 1800;
+  }
+
+  .project-bento--adobe-cis .project-bento-item--fill {
+    aspect-ratio: 1600 / 1219;
   }
 
   .project-video-triptych {

@@ -34,46 +34,96 @@
       <a href="/about.html" class="mobile-menu-link">About</a>
     </div>
 
-    <section class="placeholder-page">
-      <p>Play — coming soon</p>
-    </section>
+    <main class="play-page">
+      <div class="play-intro">
+        <h1 class="play-title">Play</h1>
+        <p class="play-blurb">Selected experiments and side projects — data visualization, physical computing, and other things made just to make them.</p>
+      </div>
+
+      <div class="play-grid">
+        <a class="play-card" href="/coral-chronicles.html">
+          <div class="play-card-media">
+            <img src="/previews/coral-chronicles.jpg" alt="" />
+          </div>
+          <div class="play-card-meta">
+            <span class="play-card-index">01</span>
+            <p class="play-card-name">Coral Chronicles</p>
+          </div>
+        </a>
+
+        <a class="play-card" href="/poster-index.html">
+          <div class="play-card-media">
+            <img src="/previews/poster-index.jpg" alt="" />
+          </div>
+          <div class="play-card-meta">
+            <span class="play-card-index">02</span>
+            <p class="play-card-name">Poster Index</p>
+          </div>
+        </a>
+
+        <a class="play-card" href="/breathscape.html">
+          <div class="play-card-media">
+            <img src="/previews/breathscape.jpg" alt="" />
+          </div>
+          <div class="play-card-meta">
+            <span class="play-card-index">03</span>
+            <p class="play-card-name">Breathscape</p>
+          </div>
+        </a>
+
+        <a class="play-card" href="/beneath-the-surface.html">
+          <div class="play-card-media">
+            <img src="/previews/beneath-the-surface.jpg" alt="" />
+          </div>
+          <div class="play-card-meta">
+            <span class="play-card-index">04</span>
+            <p class="play-card-name">Beneath the Surface</p>
+          </div>
+        </a>
+      </div>
+    </main>
 
     <footer class="site-footer">
-      <a
-        href="mailto:wu.h.stephanie@gmail.com"
-        class="footer-contact"
-        aria-label="Email stephanie wu"
-      >
-        <h2 class="footer-heading">
-          Let's create<br />
-          something great
-          <svg
-            class="footer-contact-icon"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 12L12 4M12 4H5.33333M12 4V10.6667"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </h2>
-      </a>
+      <div class="footer-main">
+        <a href="/" class="footer-wordmark">stephanie wu</a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Menu</p>
+            <a href="/#work" class="footer-nav-link work-link">Work</a>
+            <a href="/play.html" class="footer-nav-link">Play</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Case Studies</p>
+            <a href="/sixth-street-rebrand.html" class="footer-nav-link">Sixth Street Rebrand</a>
+            <a href="/airwaves.html" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+            <a href="/adobe-cis.html" class="footer-nav-link">Adobe Creative Intelligence System</a>
+            <a href="/adobe-cos.html" class="footer-nav-link">Adobe Content Operating System</a>
+            <a href="/dogs-with-jobs.html" class="footer-nav-link">Dogs with Jobs</a>
+            <a href="/coral-bleaching.html" class="footer-nav-link">Coral Bleaching Map</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Experiments</p>
+            <a href="/coral-chronicles.html" class="footer-nav-link">Coral Chronicles</a>
+            <a href="/poster-index.html" class="footer-nav-link">Poster Index</a>
+            <a href="/breathscape.html" class="footer-nav-link">Breathscape</a>
+            <a href="/beneath-the-surface.html" class="footer-nav-link">Beneath the Surface</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Connect</p>
+            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
+            <!-- TODO: swap in your real LinkedIn profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
 
       <div class="footer-bottom">
         <p class="footer-copy">© 2026 stephanie wu</p>
-        <!-- TODO: swap in your real LinkedIn profile URL -->
-        <a
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer-link"
-          >LinkedIn</a
-        >
       </div>
     </footer>
     <script type="module" src="/script.js"></script>

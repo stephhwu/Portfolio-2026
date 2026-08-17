@@ -3,11 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>Sixth Street Rebrand | stephanie wu</title>
     <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <div class="password-gate" id="password-gate">
+      <form class="password-gate-form" id="password-gate-form">
+        <p class="eyebrow">Private Preview</p>
+        <h1 class="password-gate-title">Sixth Street Rebrand</h1>
+        <p class="password-gate-copy">This rebrand hasn't launched publicly yet. Enter the password you were given to view it.</p>
+        <div class="password-gate-field">
+          <input
+            type="password"
+            id="password-gate-input"
+            name="password"
+            placeholder="Password"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            required
+          />
+          <button type="submit">View</button>
+        </div>
+        <p class="password-gate-error" id="password-gate-error" hidden>Incorrect password — try again.</p>
+      </form>
+    </div>
+
     <nav class="site-nav">
       <a href="/" class="nav-logo">stephanie wu</a>
       <div class="nav-links">
@@ -35,7 +58,7 @@
     </div>
 
     <main class="project">
-      <div class="project-hero">
+      <div class="project-hero project-hero--sixth-street">
         <picture>
           <source srcset="/previews/sixth-street.avif" type="image/avif" />
           <img src="/previews/sixth-street.jpg" alt="Sixth Street Rebrand" />
@@ -44,6 +67,8 @@
 
       <section class="project-meta">
         <h1 class="project-title">Sixth Street Rebrand</h1>
+
+        <p class="project-unlaunched-note">This rebrand is unreleased — Sixth Street has not launched it publicly yet. Shared here in confidence.</p>
 
         <div class="project-meta-row project-meta-row--top">
           <div class="project-meta-col">
@@ -91,8 +116,8 @@
         </div>
         <div class="project-video-row-text">
           <p class="eyebrow">Overview</p>
-          <h3>The mark behind "Prismatic Thinking."</h3>
-          <p>Sixth Street's new hero headline, "Prismatic Thinking," needed a logo that lived up to it. The mark is built entirely from triangles of the same size and shape, arranged into a six with a diamond at its center — sharp angles on the outside, softened just enough to feel confident rather than aggressive.</p>
+          <h3>One motif, carried through the whole site.</h3>
+          <p>Once the mark was rebuilt from equal triangles, the diamond at its center stopped being just a logo detail and became the redesign's throughline. It shows up as a hover state on the investment carousel, a section divider in the brand guidelines, a loading cue tied to "One prism, multiple perspectives" — the same geometric logic scaling down into UI and up into full-bleed photography without ever feeling bolted on.</p>
         </div>
       </div>
 
@@ -111,70 +136,12 @@
         </div>
       </div>
 
-      <div class="project-bento">
-        <div class="project-bento-col">
-          <div class="project-bento-item" style="--bento-ar: 3468 / 2940">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-01.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-01.jpg" alt="Sixth Street logo mark" loading="lazy" />
-            </picture>
-          </div>
-          <div class="project-bento-item" style="--bento-ar: 3468 / 5400">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-06.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-06.jpg" alt="Golden Gate Bridge in fog" loading="lazy" />
-            </picture>
-          </div>
+      <div class="project-construction">
+        <div class="construction-panel construction-panel--dark">
+          <img src="/sixth-street-construction/logos.webp" alt="Sixth Street mark construction — triangle grid building into the faceted diamond mark" class="construction-image" />
         </div>
-
-        <div class="project-bento-col">
-          <div class="project-bento-item" style="--bento-ar: 3480 / 2132">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-02.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-02.jpg" alt="Sixth Street typography specimen" loading="lazy" />
-            </picture>
-          </div>
-          <div class="project-bento-item" style="--bento-ar: 3480 / 2940">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-07.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-07.jpg" alt="Photo of a Sixth Street team member in conversation" loading="lazy" />
-            </picture>
-          </div>
-          <div class="project-bento-item" style="--bento-ar: 3480 / 3138">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-08.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-08.jpg" alt="Sixth Street brand — agility is our edge" loading="lazy" />
-            </picture>
-          </div>
-        </div>
-
-        <div class="project-bento-col project-bento-col--wide">
-          <div class="project-bento-row">
-            <div class="project-bento-item" style="--bento-ar: 3361 / 4756">
-              <picture>
-                <source srcset="/sixth-street-bento/bento-03.avif" type="image/avif" />
-                <img src="/sixth-street-bento/bento-03.jpg" alt="Sixth Street brand — an investor-first mentality" loading="lazy" />
-              </picture>
-            </div>
-            <div class="project-bento-item" style="--bento-ar: 3361 / 4756">
-              <picture>
-                <source srcset="/sixth-street-bento/bento-04.avif" type="image/avif" />
-                <img src="/sixth-street-bento/bento-04.jpg" alt="Sixth Street brand — 98% of employees stat" loading="lazy" />
-              </picture>
-            </div>
-            <div class="project-bento-item project-bento-item--fill">
-              <picture>
-                <source srcset="/sixth-street-bento/bento-05.avif" type="image/avif" />
-                <img src="/sixth-street-bento/bento-05.jpg" alt="Aerial photo of a surfer and wave with the Sixth Street logo" loading="lazy" />
-              </picture>
-            </div>
-          </div>
-          <div class="project-bento-item" style="--bento-ar: 10236 / 3686">
-            <picture>
-              <source srcset="/sixth-street-bento/bento-09.avif" type="image/avif" />
-              <img src="/sixth-street-bento/bento-09.jpg" alt="Sixth Street primary brand color palette" loading="lazy" />
-            </picture>
-          </div>
+        <div class="construction-panel construction-panel--light">
+          <img src="/sixth-street-construction/full-logo.webp" alt="Sixth Street logo construction spec — clearspace and proportion grid for the mark and wordmark" class="construction-image" />
         </div>
       </div>
 
@@ -185,6 +152,83 @@
         </div>
         <div class="project-section-body">
           <p>The existing logo had real balance problems — the geometry didn't sit right at any size. I rebuilt it from scratch: a six made entirely of equal triangles, with a diamond at the center where they meet. That same triangle logic — sharp angles, softened edges — carried through the rest of the identity, and the diamond became a recurring component across the site. I supported the brand guidelines alongside the broader design system update, documenting how the new mark and its motifs should scale across every touchpoint — down to a single motion cue built around "One prism, multiple perspectives."</p>
+        </div>
+      </section>
+
+      <div class="project-bento project-bento--sixth-street mobile-bento">
+        <div class="project-bento-col" style="flex: 1">
+          <div class="project-bento-item mobile-order-1" style="--bento-ar: 3468 / 2940">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-01.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-01.jpg" alt="Sixth Street logo mark" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item mobile-order-8" style="--bento-ar: 3468 / 5400">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-06.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-06.jpg" alt="Golden Gate Bridge in fog" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+        <div class="project-bento-col" style="flex: 1.02">
+          <div class="project-bento-item mobile-order-3" style="--bento-ar: 3480 / 2132">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-02.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-02.jpg" alt="Sixth Street typography specimen" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item mobile-order-2" style="--bento-ar: 3480 / 2940">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-07.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-07.jpg" alt="Photo of a Sixth Street team member in conversation" loading="lazy" />
+            </picture>
+          </div>
+          <div class="project-bento-item mobile-order-4" style="--bento-ar: 3480 / 3138">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-08.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-08.jpg" alt="Sixth Street brand — agility is our edge" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+        <div class="project-bento-col" style="flex: 2.89">
+          <div class="project-bento-row">
+            <div class="project-bento-item mobile-order-5" style="--bento-ar: 3361 / 4756">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-03.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-03.jpg" alt="Sixth Street brand — an investor-first mentality" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item mobile-order-6" style="--bento-ar: 3361 / 4756">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-04.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-04.jpg" alt="Sixth Street brand — 98% of employees stat" loading="lazy" />
+              </picture>
+            </div>
+            <div class="project-bento-item project-bento-item--fill mobile-order-7">
+              <picture>
+                <source srcset="/sixth-street-bento/bento-05.avif" type="image/avif" />
+                <img src="/sixth-street-bento/bento-05.jpg" alt="Aerial photo of a surfer and wave with the Sixth Street logo" loading="lazy" />
+              </picture>
+            </div>
+          </div>
+          <div class="project-bento-item mobile-order-9 mobile-full" style="--bento-ar: 10236 / 3686">
+            <picture>
+              <source srcset="/sixth-street-bento/bento-09.avif" type="image/avif" />
+              <img src="/sixth-street-bento/bento-09.jpg" alt="Sixth Street primary brand color palette" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">Color System</p>
+          <h2 class="project-section-title">A palette rooted in place.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>Drawing from San Francisco's distinctive landscape — where Sixth Street was founded — we built a comprehensive color system rooted in place. Every hue references this source: the International Orange of the Golden Gate Bridge, the deep Pine of Marin at dusk, the saturated Ocean of the bay itself.</p>
         </div>
       </section>
 
@@ -265,20 +309,6 @@
         </div>
       </div>
 
-      <dl class="project-credits">
-        <div class="project-credit">
-          <dt class="mono">Logo Design</dt>
-          <dd>Steph Wu</dd>
-        </div>
-        <div class="project-credit">
-          <dt class="mono">Visual Identity</dt>
-          <dd>Steph Wu</dd>
-        </div>
-        <div class="project-credit">
-          <dt class="mono">Design Systems</dt>
-          <dd>Steph Wu</dd>
-        </div>
-      </dl>
 
       <a class="project-next" href="/airwaves.html">
         <span class="eyebrow">Next Project</span>
@@ -287,43 +317,101 @@
     </main>
 
     <footer class="site-footer">
-      <a
-        href="mailto:wu.h.stephanie@gmail.com"
-        class="footer-contact"
-        aria-label="Email stephanie wu"
-      >
-        <h2 class="footer-heading">
-          Let's create<br />
-          something great
-          <svg
-            class="footer-contact-icon"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 12L12 4M12 4H5.33333M12 4V10.6667"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </h2>
-      </a>
+      <div class="footer-main">
+        <a href="/" class="footer-wordmark">stephanie wu</a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Menu</p>
+            <a href="/#work" class="footer-nav-link work-link">Work</a>
+            <a href="/play.html" class="footer-nav-link">Play</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Case Studies</p>
+            <a href="/sixth-street-rebrand.html" class="footer-nav-link">Sixth Street Rebrand</a>
+            <a href="/airwaves.html" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+            <a href="/adobe-cis.html" class="footer-nav-link">Adobe Creative Intelligence System</a>
+            <a href="/adobe-cos.html" class="footer-nav-link">Adobe Content Operating System</a>
+            <a href="/dogs-with-jobs.html" class="footer-nav-link">Dogs with Jobs</a>
+            <a href="/coral-bleaching.html" class="footer-nav-link">Coral Bleaching Map</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Experiments</p>
+            <a href="/coral-chronicles.html" class="footer-nav-link">Coral Chronicles</a>
+            <a href="/poster-index.html" class="footer-nav-link">Poster Index</a>
+            <a href="/breathscape.html" class="footer-nav-link">Breathscape</a>
+            <a href="/beneath-the-surface.html" class="footer-nav-link">Beneath the Surface</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Connect</p>
+            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
+            <!-- TODO: swap in your real LinkedIn profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
 
       <div class="footer-bottom">
         <p class="footer-copy">© 2026 stephanie wu</p>
-        <!-- TODO: swap in your real LinkedIn profile URL -->
-        <a
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer-link"
-          >LinkedIn</a
-        >
       </div>
     </footer>
     <script type="module" src="/script.js"></script>
+    <script>
+      (function () {
+        var CORRECT_HASH =
+          "7c98eedb10ed9dac63eb3224e7d6cdbc6788c93ccb9b725e829d790b5bad2519";
+        var STORAGE_KEY = "sixth-street-unlocked";
+        var gate = document.getElementById("password-gate");
+        var form = document.getElementById("password-gate-form");
+        var input = document.getElementById("password-gate-input");
+        var error = document.getElementById("password-gate-error");
+
+        function unlock() {
+          gate.classList.add("is-unlocked");
+          document.documentElement.classList.remove("gate-locked");
+          setTimeout(function () {
+            gate.remove();
+          }, 400);
+        }
+
+        if (sessionStorage.getItem(STORAGE_KEY) === "1") {
+          gate.remove();
+        } else {
+          document.documentElement.classList.add("gate-locked");
+          setTimeout(function () {
+            input.focus();
+          }, 50);
+        }
+
+        function sha256(text) {
+          var bytes = new TextEncoder().encode(text);
+          return crypto.subtle.digest("SHA-256", bytes).then(function (buf) {
+            return Array.from(new Uint8Array(buf))
+              .map(function (b) {
+                return b.toString(16).padStart(2, "0");
+              })
+              .join("");
+          });
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          sha256(input.value.trim()).then(function (hash) {
+            if (hash === CORRECT_HASH) {
+              sessionStorage.setItem(STORAGE_KEY, "1");
+              unlock();
+            } else {
+              error.hidden = false;
+              input.value = "";
+              input.focus();
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

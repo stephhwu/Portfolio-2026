@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beneath the Surface | stephanie wu</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/" class="nav-logo">stephanie wu</a>
+      <div class="nav-links">
+        <a href="/#work" class="nav-link work-link">Work</a>
+        <a href="/play.html" class="nav-link">Play</a>
+        <a href="/about.html" class="nav-link">About</a>
+      </div>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" inert>
+      <a href="/#work" class="mobile-menu-link work-link">Work</a>
+      <a href="/play.html" class="mobile-menu-link">Play</a>
+      <a href="/about.html" class="mobile-menu-link">About</a>
+    </div>
+
+    <main class="project">
+      <div class="project-hero">
+        <video autoplay muted loop playsinline poster="/beneath-the-surface/bts-hero-hover-poster.jpg">
+          <source src="/beneath-the-surface/bts-hero-hover.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <section class="project-meta">
+        <h1 class="project-title">Beneath the Surface</h1>
+
+        <div class="project-links">
+          <a href="https://stephhwu.github.io/beneath-the-surface/" target="_blank" rel="noopener noreferrer" class="project-link">View Live Site ↗</a>
+          <a href="https://github.com/stephhwu/beneath-the-surface" target="_blank" rel="noopener noreferrer" class="project-link">View Code ↗</a>
+        </div>
+
+        <div class="project-meta-row project-meta-row--top">
+          <div class="project-meta-col">
+            <p class="eyebrow">Industry</p>
+            <ul class="project-meta-list">
+            <li>Data Visualization</li>
+            </ul>
+          </div>
+          <div class="project-meta-col">
+            <p class="eyebrow">Year</p>
+            <p class="project-meta-value">2026</p>
+          </div>
+          <p class="project-tagline">Mapping invertebrate diversity in the Smithsonian collection, by ocean depth.</p>
+        </div>
+
+        <div class="project-meta-row project-meta-row--bottom">
+          <div class="project-meta-col">
+            <p class="eyebrow">Services</p>
+            <ul class="project-meta-list">
+            <li>D3.js</li>
+            <li>HTML / CSS</li>
+            <li>Python</li>
+            <li>Figma</li>
+            </ul>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Brief</p>
+            <p>The goal was to find interesting metadata within the Smithsonian Collection and clean it into an engaging, quantitative story. Depth records were binned into three oceanic zones — epipelagic, mesopelagic, and bathypelagic — so each specimen could be grouped by how deep it was collected, with images pulled live through the Smithsonian's own API.</p>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Finding</p>
+            <p>The color palette was pulled straight from the bioluminescent invertebrates themselves, and the vertical bubble chart is built to evoke the feeling of descending through the water column as the user scrolls. Early testing showed people lost their place mid-scroll, so a floating modal was added as a legend that stays anchored to whichever zone is active.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="bento-gallery">
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/beneath-the-surface/image-depth-explanation-poster.jpg" aria-label="Explanation of how depth zones are visualized"><source src="/beneath-the-surface/image-depth-explanation.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/beneath-the-surface/bts-zones-poster.jpg" aria-label="Scrolling through the ocean depth zones"><source src="/beneath-the-surface/bts-zones.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/beneath-the-surface/bts-modal-poster.jpg" aria-label="Floating depth-zone legend modal"><source src="/beneath-the-surface/bts-modal.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/beneath-the-surface/bts-pop-up-poster.jpg" aria-label="Specimen detail pop-up interaction"><source src="/beneath-the-surface/bts-pop-up.mp4" type="video/mp4" /></video></div>
+      </div>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">Detail</p>
+          <h2 class="project-section-title">A floating legend for wayfinding underwater.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>During early prototyping, feedback surfaced that users lost their visual anchor while scrolling — they'd forget which depth they were looking at as the page moved. The fix was a floating modal that acts as a legend, staying with the user as they descend through each zone, color-keyed to the same bioluminescent palette as the specimens themselves.</p>
+        </div>
+      </section>
+
+      <div class="project-feature-grid" style="--feature-cols: 3;">
+        <article class="project-feature">
+          <div class="project-feature-image"><img src="/beneath-the-surface/epipelagic-modal.webp" alt="Epipelagic zone specimen card, Gastropoda" loading="lazy" /></div>
+          <h3>Epipelagic Zone</h3>
+          <p>The sunlight zone, 0–200 meters. The widest range of visible invertebrate life in the collection — including this Gastropoda specimen.</p>
+        </article>
+        <article class="project-feature">
+          <div class="project-feature-image"><img src="/beneath-the-surface/mesopelagic-modal.webp" alt="Mesopelagic zone specimen card, Hyalocylis striata" loading="lazy" /></div>
+          <h3>Mesopelagic Zone</h3>
+          <p>The twilight zone, 200–1,000 meters. Light fades fast here — Hyalocylis striata is one of the collection's finds at this depth.</p>
+        </article>
+        <article class="project-feature">
+          <div class="project-feature-image"><img src="/beneath-the-surface/bathypelagic-modal.webp" alt="Bathypelagic zone specimen card, Atolla jellyfish" loading="lazy" /></div>
+          <h3>Bathypelagic Zone</h3>
+          <p>The midnight zone, 1,000–4,000 meters. Total darkness — home to bioluminescent life like the Atolla jellyfish.</p>
+        </article>
+      </div>
+
+
+      <a class="project-next" href="/coral-chronicles.html">
+        <span class="eyebrow">Next Project</span>
+        <span class="project-next-title">Coral Chronicles</span>
+      </a>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a href="/" class="footer-wordmark">stephanie wu</a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Menu</p>
+            <a href="/#work" class="footer-nav-link work-link">Work</a>
+            <a href="/play.html" class="footer-nav-link">Play</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Case Studies</p>
+            <a href="/sixth-street-rebrand.html" class="footer-nav-link">Sixth Street Rebrand</a>
+            <a href="/airwaves.html" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+            <a href="/adobe-cis.html" class="footer-nav-link">Adobe Creative Intelligence System</a>
+            <a href="/adobe-cos.html" class="footer-nav-link">Adobe Content Operating System</a>
+            <a href="/dogs-with-jobs.html" class="footer-nav-link">Dogs with Jobs</a>
+            <a href="/coral-bleaching.html" class="footer-nav-link">Coral Bleaching Map</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Experiments</p>
+            <a href="/coral-chronicles.html" class="footer-nav-link">Coral Chronicles</a>
+            <a href="/poster-index.html" class="footer-nav-link">Poster Index</a>
+            <a href="/breathscape.html" class="footer-nav-link">Breathscape</a>
+            <a href="/beneath-the-surface.html" class="footer-nav-link">Beneath the Surface</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Connect</p>
+            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
+            <!-- TODO: swap in your real LinkedIn profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 stephanie wu</p>
+      </div>
+    </footer>
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

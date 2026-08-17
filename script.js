@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // clip-path to reveal the hero beneath. Scroll is locked for the
   // duration so the page can't be scrolled out from under the still-
   // animating overlay; the nav stays hidden until the wipe reaches it
-  // and reveals in the same beat as the hero name, so the whole thing
+  // and reveals in the same beat as the hero bio, so the whole thing
   // reads as one choreographed cut rather than the preloader just
   // disappearing.
   const preloader = document.querySelector(".preloader");
@@ -90,13 +90,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       splitText(".preloader-header h1", "chars", "char");
       splitText(".site-nav a", "words", "word");
-      splitText(".hero-header h1", "chars", "char", false);
 
       const preloaderImgInitRotations = [7.5, -2.5, -10, 12.5, -5, 5];
       gsap.set(".preloader-img", {
         rotate: (i) => preloaderImgInitRotations[i],
       });
-      gsap.set(".hero-bio", { opacity: 0, y: 20 });
+
+      const heroBio = document.querySelector(".hero-bio");
+      const heroBioWords = heroBio ? splitWords(heroBio) : [];
+      gsap.set(heroBioWords, { yPercent: 110, opacity: 0 });
 
       const tl = gsap.timeline({
         delay: 0.5,
@@ -186,21 +188,18 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       tl.to(
-        ".hero-header h1 .char",
-        { y: "0%", duration: 1, ease: "hop", stagger: { each: 0.075, from: "random" } },
-        4.65,
-      );
-
-      tl.to(
         ".site-nav a .word",
         { y: "0%", duration: 1, ease: "hop", stagger: 0.075 },
         4.65,
       );
 
+      // Held back until the nav/wordmark wipe has settled, so the bio
+      // reads as its own follow-up beat instead of just more motion
+      // happening in the same instant.
       tl.to(
-        ".hero-bio",
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        4.85,
+        heroBioWords,
+        { yPercent: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.06 },
+        5.1,
       );
     }
   }

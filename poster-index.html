@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poster Index | stephanie wu</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/" class="nav-logo">stephanie wu</a>
+      <div class="nav-links">
+        <a href="/#work" class="nav-link work-link">Work</a>
+        <a href="/play.html" class="nav-link">Play</a>
+        <a href="/about.html" class="nav-link">About</a>
+      </div>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" inert>
+      <a href="/#work" class="mobile-menu-link work-link">Work</a>
+      <a href="/play.html" class="mobile-menu-link">Play</a>
+      <a href="/about.html" class="mobile-menu-link">About</a>
+    </div>
+
+    <main class="project">
+      <div class="project-hero">
+        <video autoplay muted loop playsinline poster="/poster-index/poster-landing-poster.jpg">
+          <source src="/poster-index/poster-landing.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <section class="project-meta">
+        <h1 class="project-title">Poster Index</h1>
+
+        <div class="project-meta-row project-meta-row--top">
+          <div class="project-meta-col">
+            <p class="eyebrow">Industry</p>
+            <ul class="project-meta-list">
+            <li>Data Visualization</li>
+            </ul>
+          </div>
+          <div class="project-meta-col">
+            <p class="eyebrow">Year</p>
+            <p class="project-meta-value">2026</p>
+          </div>
+          <p class="project-tagline">An interactive 3D visualization of posters from the Victoria and Albert Museum's open API. (Work in progress)</p>
+        </div>
+
+        <div class="project-meta-row project-meta-row--bottom">
+          <div class="project-meta-col">
+            <p class="eyebrow">Services</p>
+            <ul class="project-meta-list">
+            <li>D3.js</li>
+            <li>p5.js / ml5.js</li>
+            <li>Three.js</li>
+            <li>Figma</li>
+            </ul>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Brief</p>
+            <p>Users can explore over 16,000 artworks by artist, place of origin, category, and dominant color. The project was originally built with p5.js and the ml5.js machine learning library to classify poster images from the V&A's open access API, then brought into an interactive 3D space with Three.js, where posters cluster by classification at adjustable confidence levels.</p>
+          </div>
+          <div class="project-meta-col project-meta-col--wide">
+            <p class="eyebrow">Finding</p>
+            <p>A dark theme lets the posters take visual priority, and an introductory animation grounds users in the collection's metadata before they navigate the 3D space. The clustering got stronger once it responded to user-driven filters rather than fixed categories — that shift is what's currently being refined, along with integrating Vibrant.js to extract each poster's dominant color.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="bento-gallery">
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/poster-index/poster-3d-1-poster.jpg" aria-label="Initial 3D poster cluster space"><source src="/poster-index/poster-3d-1.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/poster-index/timeline-scroll-poster.jpg" aria-label="Scrolling the poster timeline"><source src="/poster-index/timeline-scroll.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/poster-index/poster-3d-2-poster.jpg" aria-label="Navigating the 3D poster space"><source src="/poster-index/poster-3d-2.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/poster-index/poster-menu-poster.jpg" aria-label="Filter menu interface"><source src="/poster-index/poster-menu.mp4" type="video/mp4" /></video></div>
+        <div class="bento-item"><video autoplay muted loop playsinline poster="/poster-index/poster-click-poster.jpg" aria-label="Selecting an individual poster"><source src="/poster-index/poster-click.mp4" type="video/mp4" /></video></div>
+      </div>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">Work in Progress</p>
+          <h2 class="project-section-title">Still refining the clustering — and that's the point.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>The project is an ongoing exploration: the 3D clustering is being reworked around categorical metadata rather than fixed groupings, and color extraction via Vibrant.js is still being integrated. The metadata shown in the intro animation is currently placeholder and doesn't reflect the final dataset yet.</p>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="project-section-head">
+          <p class="eyebrow">Full Project Walkthrough</p>
+          <h2 class="project-section-title">Clicking into an individual poster.</h2>
+        </div>
+        <div class="project-section-body">
+          <p>Selecting a poster from the 3D space pulls its V&amp;A record forward — title, origin, and category metadata alongside the dominant colors driving its placement in the cluster.</p>
+        </div>
+      </section>
+
+      <div class="project-walkthrough">
+        <video controls poster="/poster-index/vam-poster-walkthrough-poster.jpg">
+          <source src="/poster-index/vam-poster-walkthrough.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+
+      <a class="project-next" href="/breathscape.html">
+        <span class="eyebrow">Next Project</span>
+        <span class="project-next-title">Breathscape</span>
+      </a>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a href="/" class="footer-wordmark">stephanie wu</a>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Menu</p>
+            <a href="/#work" class="footer-nav-link work-link">Work</a>
+            <a href="/play.html" class="footer-nav-link">Play</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Case Studies</p>
+            <a href="/sixth-street-rebrand.html" class="footer-nav-link">Sixth Street Rebrand</a>
+            <a href="/airwaves.html" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+            <a href="/adobe-cis.html" class="footer-nav-link">Adobe Creative Intelligence System</a>
+            <a href="/adobe-cos.html" class="footer-nav-link">Adobe Content Operating System</a>
+            <a href="/dogs-with-jobs.html" class="footer-nav-link">Dogs with Jobs</a>
+            <a href="/coral-bleaching.html" class="footer-nav-link">Coral Bleaching Map</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Experiments</p>
+            <a href="/coral-chronicles.html" class="footer-nav-link">Coral Chronicles</a>
+            <a href="/poster-index.html" class="footer-nav-link">Poster Index</a>
+            <a href="/breathscape.html" class="footer-nav-link">Breathscape</a>
+            <a href="/beneath-the-surface.html" class="footer-nav-link">Beneath the Surface</a>
+          </div>
+
+          <div class="footer-nav-col">
+            <p class="footer-nav-label mono">Connect</p>
+            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
+            <!-- TODO: swap in your real LinkedIn profile URL -->
+            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 stephanie wu</p>
+      </div>
+    </footer>
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
