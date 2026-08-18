@@ -193,16 +193,26 @@ section {
   }
 }
 
+/* Was a flat 1.5rem inset on all sides — fine at mobile widths, but on
+   wide desktop viewports it stretched into a near-full-bleed pill while
+   the hero copy and gallery beneath it sit at var(--content-inset)
+   (clamp(2rem, 5vw, 6rem)), so the nav's edges drifted away from the
+   content grid it floats above. Reusing that same token keeps the pill's
+   left/right edges locked to the content column at every width. `top`
+   gets a light vh-based clamp so it eases off tall/short viewports
+   instead of sitting a fixed distance down; padding, type, and gap scale
+   on the same small-vw formula as the rest of the site's fluid type. */
 .site-nav {
   position: fixed;
-  top: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  top: clamp(1rem, 2vh, 1.75rem);
+  left: var(--content-inset);
+  right: var(--content-inset);
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.85rem 1.75rem;
+  padding: clamp(0.7rem, 0.35vw + 0.6rem, 1rem)
+    clamp(1.25rem, 0.9vw + 1rem, 2rem);
   border-radius: 999px;
   background: rgba(20, 20, 20, 0.7);
   backdrop-filter: blur(12px);
@@ -214,7 +224,7 @@ section {
   font-family: "ivypresto-display", serif;
   font-weight: 300;
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 0.3vw + 0.95rem, 1.25rem);
   letter-spacing: 0.02em;
   color: #fff;
   text-decoration: none;
@@ -222,11 +232,11 @@ section {
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1.5rem, 1.5vw + 1rem, 2.75rem);
 }
 
 .nav-link {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 0.15vw + 0.78rem, 0.9rem);
   font-weight: 400;
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.7);
