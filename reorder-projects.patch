@@ -1,0 +1,388 @@
+diff --git a/about/index.html b/about/index.html
+index 809b562..593829d 100644
+--- a/about/index.html
++++ b/about/index.html
+@@ -162,10 +162,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/adobe-cis/index.html b/adobe-cis/index.html
+index 87d3919..83dbb73 100644
+--- a/adobe-cis/index.html
++++ b/adobe-cis/index.html
+@@ -309,10 +309,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/adobe-cos/index.html b/adobe-cos/index.html
+index 6db01f9..93b023f 100644
+--- a/adobe-cos/index.html
++++ b/adobe-cos/index.html
+@@ -254,9 +254,9 @@
+       </div>
+ 
+ 
+-      <a class="project-next" href="/dogs-with-jobs/">
++      <a class="project-next" href="/sixth-street-rebrand/">
+         <span class="eyebrow">Next Project</span>
+-        <span class="project-next-title">Dogs with Jobs</span>
++        <span class="project-next-title">Sixth Street Rebrand</span>
+       </a>
+     </main>
+ 
+@@ -274,10 +274,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/airwaves/index.html b/airwaves/index.html
+index 906785b..5cd1282 100644
+--- a/airwaves/index.html
++++ b/airwaves/index.html
+@@ -295,10 +295,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/beneath-the-surface/index.html b/beneath-the-surface/index.html
+index 28c0eee..df13a31 100644
+--- a/beneath-the-surface/index.html
++++ b/beneath-the-surface/index.html
+@@ -143,10 +143,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/breathscape/index.html b/breathscape/index.html
+index d734c4e..877ed9d 100644
+--- a/breathscape/index.html
++++ b/breathscape/index.html
+@@ -159,10 +159,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/coral-bleaching/index.html b/coral-bleaching/index.html
+index d0fe1f2..d11645d 100644
+--- a/coral-bleaching/index.html
++++ b/coral-bleaching/index.html
+@@ -143,9 +143,9 @@
+       </div>
+ 
+ 
+-      <a class="project-next" href="/sixth-street-rebrand/">
++      <a class="project-next" href="/airwaves/">
+         <span class="eyebrow">Next Project</span>
+-        <span class="project-next-title">Sixth Street Rebrand</span>
++        <span class="project-next-title">ai.rwaves Cannes Radio</span>
+       </a>
+     </main>
+ 
+@@ -163,10 +163,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/coral-chronicles/index.html b/coral-chronicles/index.html
+index 62e1333..cf01814 100644
+--- a/coral-chronicles/index.html
++++ b/coral-chronicles/index.html
+@@ -125,10 +125,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/dogs-with-jobs/index.html b/dogs-with-jobs/index.html
+index b094de0..3866295 100644
+--- a/dogs-with-jobs/index.html
++++ b/dogs-with-jobs/index.html
+@@ -217,10 +217,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/index.html b/index.html
+index 10305fd..18350b0 100644
+--- a/index.html
++++ b/index.html
+@@ -110,18 +110,6 @@
+         </div>
+ 
+         <div class="project-images">
+-          <a
+-            class="project-img"
+-            href="/sixth-street-rebrand/"
+-            target="_blank"
+-            rel="noopener noreferrer"
+-            aria-label="View Sixth Street Rebrand project"
+-            ><picture
+-              ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
+-                src="/previews/sixth-street.jpg"
+-                alt=""
+-            /></picture
+-          ></a>
+           <a
+             class="project-img"
+             href="/airwaves/"
+@@ -164,6 +152,18 @@
+               preload="none"
+             ></video
+           ></a>
++          <a
++            class="project-img"
++            href="/sixth-street-rebrand/"
++            target="_blank"
++            rel="noopener noreferrer"
++            aria-label="View Sixth Street Rebrand project"
++            ><picture
++              ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
++                src="/previews/sixth-street.jpg"
++                alt=""
++            /></picture
++          ></a>
+           <a
+             class="project-img"
+             href="/dogs-with-jobs/"
+@@ -195,10 +195,10 @@
+ 
+         <div class="project-names">
+           <div class="project-names-reel">
+-            <p>Sixth Street Rebrand</p>
+             <p>ai.rwaves Cannes Radio</p>
+             <p>Adobe Creative<br />Intelligence System</p>
+             <p>Adobe Content<br />Operating System</p>
++            <p>Sixth Street Rebrand</p>
+             <p>Dogs with Jobs</p>
+             <p>Coral Bleaching Map</p>
+           </div>
+@@ -210,73 +210,73 @@
+           <article class="mobile-project">
+             <a
+               class="mobile-project-media"
+-              href="/sixth-street-rebrand/"
++              href="/airwaves/"
+               target="_blank"
+               rel="noopener noreferrer"
+-              aria-label="View Sixth Street Rebrand project"
++              aria-label="View ai.rwaves Cannes Radio project"
+               ><picture
+-                ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
+-                  src="/previews/sixth-street.jpg"
++                ><source srcset="/previews/airwaves.avif" type="image/avif" /><img
++                  src="/previews/airwaves.jpg"
+                   alt=""
+               /></picture
+             ></a>
+             <div class="mobile-project-meta">
+               <span class="mobile-project-index">01</span>
+-              <p class="mobile-project-name">Sixth Street Rebrand</p>
++              <p class="mobile-project-name">ai.rwaves Cannes Radio</p>
+             </div>
+           </article>
+           <article class="mobile-project">
+             <a
+               class="mobile-project-media"
+-              href="/airwaves/"
++              href="/adobe-cis/"
+               target="_blank"
+               rel="noopener noreferrer"
+-              aria-label="View ai.rwaves Cannes Radio project"
++              aria-label="View Adobe Creative Intelligence System project"
+               ><picture
+-                ><source srcset="/previews/airwaves.avif" type="image/avif" /><img
+-                  src="/previews/airwaves.jpg"
++                ><source srcset="/previews/adobe-cis-poster.avif" type="image/avif" /><img
++                  src="/previews/adobe-cis-poster.jpg"
+                   alt=""
+               /></picture
+             ></a>
+             <div class="mobile-project-meta">
+               <span class="mobile-project-index">02</span>
+-              <p class="mobile-project-name">ai.rwaves Cannes Radio</p>
++              <p class="mobile-project-name">Adobe Creative Intelligence System</p>
+             </div>
+           </article>
+           <article class="mobile-project">
+             <a
+               class="mobile-project-media"
+-              href="/adobe-cis/"
++              href="/adobe-cos/"
+               target="_blank"
+               rel="noopener noreferrer"
+-              aria-label="View Adobe Creative Intelligence System project"
++              aria-label="View Adobe Content Operating System project"
+               ><picture
+-                ><source srcset="/previews/adobe-cis-poster.avif" type="image/avif" /><img
+-                  src="/previews/adobe-cis-poster.jpg"
++                ><source srcset="/previews/adobe-cos-poster.avif" type="image/avif" /><img
++                  src="/previews/adobe-cos-poster.jpg"
+                   alt=""
+               /></picture
+             ></a>
+             <div class="mobile-project-meta">
+               <span class="mobile-project-index">03</span>
+-              <p class="mobile-project-name">Adobe Creative Intelligence System</p>
++              <p class="mobile-project-name">Adobe Content Operating System</p>
+             </div>
+           </article>
+           <article class="mobile-project">
+             <a
+               class="mobile-project-media"
+-              href="/adobe-cos/"
++              href="/sixth-street-rebrand/"
+               target="_blank"
+               rel="noopener noreferrer"
+-              aria-label="View Adobe Content Operating System project"
++              aria-label="View Sixth Street Rebrand project"
+               ><picture
+-                ><source srcset="/previews/adobe-cos-poster.avif" type="image/avif" /><img
+-                  src="/previews/adobe-cos-poster.jpg"
++                ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
++                  src="/previews/sixth-street.jpg"
+                   alt=""
+               /></picture
+             ></a>
+             <div class="mobile-project-meta">
+               <span class="mobile-project-index">04</span>
+-              <p class="mobile-project-name">Adobe Content Operating System</p>
++              <p class="mobile-project-name">Sixth Street Rebrand</p>
+             </div>
+           </article>
+           <article class="mobile-project">
+@@ -333,10 +333,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/play/index.html b/play/index.html
+index bc94e8d..3702b6b 100644
+--- a/play/index.html
++++ b/play/index.html
+@@ -100,10 +100,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/poster-index/index.html b/poster-index/index.html
+index 6bb60a2..d3c47cb 100644
+--- a/poster-index/index.html
++++ b/poster-index/index.html
+@@ -137,10 +137,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
+diff --git a/sixth-street-rebrand/index.html b/sixth-street-rebrand/index.html
+index 6dce361..8963a60 100644
+--- a/sixth-street-rebrand/index.html
++++ b/sixth-street-rebrand/index.html
+@@ -323,9 +323,9 @@
+       </div>
+ 
+ 
+-      <a class="project-next" href="/airwaves/">
++      <a class="project-next" href="/dogs-with-jobs/">
+         <span class="eyebrow">Next Project</span>
+-        <span class="project-next-title">ai.rwaves Cannes Radio</span>
++        <span class="project-next-title">Dogs with Jobs</span>
+       </a>
+     </main>
+ 
+@@ -343,10 +343,10 @@
+ 
+           <div class="footer-nav-col">
+             <p class="footer-nav-label mono">Case Studies</p>
+-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
+             <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
+             <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
++            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
+             <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
+             <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
+           </div>
