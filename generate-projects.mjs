@@ -207,7 +207,7 @@ function withDefaults(p) {
 }
 
 const nav = `    <nav class="site-nav">
-      <a href="/" class="nav-logo">stephanie wu</a>
+      <a href="/" class="nav-logo">Steph Wu</a>
       <div class="nav-links">
         <a href="/#work" class="nav-link work-link">Work</a>
         <a href="/play.html" class="nav-link">Play</a>
@@ -240,7 +240,7 @@ const footer = `    <footer class="site-footer">
       >
 
       <div class="footer-bottom">
-        <p class="footer-copy">© ${YEAR} stephanie wu</p>
+        <p class="footer-copy">© ${YEAR} Steph Wu</p>
         <!-- TODO: swap in your real LinkedIn profile URL -->
         <a
           href="#"
@@ -402,7 +402,7 @@ function renderProject(rawProject, index, all) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${project.name} | stephanie wu</title>
+    <title>${project.name} | Steph Wu</title>
     <link rel="stylesheet" href="https://use.typekit.net/rjn0cck.css" />
     <link rel="stylesheet" href="/styles.css" />
   </head>

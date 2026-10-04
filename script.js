@@ -24,6 +24,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- Sidebar clock ----------------------------------------------------
+  // Current date and time in New York, e.g. "Sunday, October 4" /
+  // "New York, 13:05:55". Always formatted in America/New_York so it
+  // reads the same for every visitor regardless of their own timezone.
+  const clock = document.querySelector("[data-clock]");
+  if (clock) {
+    const dateEl = clock.querySelector("[data-clock-date]");
+    const timeEl = clock.querySelector("[data-clock-time]");
+    const dateFmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
+    const timeFmt = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "America/New_York",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hourCycle: "h23",
+    });
+    const tick = () => {
+      const now = new Date();
+      dateEl.textContent = dateFmt.format(now);
+      timeEl.textContent = timeFmt.format(now);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
   // --- Dogs with Jobs: brand bento type marquee ------------------------
   // The marquee is paused and hidden by default in CSS; start it right
   // away rather than gating it behind a scroll-triggered intro.
