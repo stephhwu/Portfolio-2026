@@ -21,7 +21,6 @@ export default defineConfig({
   breathscape: resolve(__dirname, "breathscape/index.html"),
   coralChronicles: resolve(__dirname, "coral-chronicles/index.html"),
   kingston: resolve(__dirname, "kingston/index.html"),
-  blueprint: resolve(__dirname, "blueprint/index.html"),
 },
     },
   },

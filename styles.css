@@ -9,16 +9,29 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --content-inset: clamp(2rem, 4vw, 4rem);
   --sidebar-width: 18.5rem;
-  --accent: #f75b35;
   /* One corner radius for every image, video and card, matched to
      Porto Rocha's project cards (a flat 8px at every size). */
   --radius: 8px;
+
+  /* Type: one family, three sizes, three weights. Inter's optical-size
+     axis gives text-cut forms at 14-16px and display-cut forms at
+     headline sizes. */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Arial, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.5rem;
+  --text-xl: clamp(1.75rem, 2.4vw, 2.25rem);
+  --muted: rgba(255, 255, 255, 0.55);
 }
 
 body {
-  font-family: "aktiv-grotesk", sans-serif;
   background-color: #141414;
   color: #fff;
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img {
@@ -28,16 +41,17 @@ img {
 }
 
 h1 {
-  text-transform: uppercase;
-  font-size: clamp(3rem, 5vw, 7rem);
-  font-weight: 400;
-  line-height: 1;
+  text-transform: none;
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 p {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 section {
@@ -62,9 +76,9 @@ section {
    markup and styled below. On narrow screens it collapses into a top
    bar with a menu toggle.
 
-   Type scale: 12px uppercase labels / 14px links on a 20px line, with
-   spacing on a 4px rhythm. Wide enough that the longest project name
-   sits on one line. */
+   Everything is 14px on a 20px line; hierarchy comes from color and
+   weight (white labels, softer links, white current page). Wide enough
+   that the longest project name sits on one line. */
 
 body {
   padding-left: var(--sidebar-width);
@@ -93,12 +107,9 @@ body {
 }
 
 .side-nav-logo {
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  font-size: 1.75rem;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.25rem;
   color: #fff;
   text-decoration: none;
 }
@@ -117,23 +128,21 @@ body {
 }
 
 .side-nav-label {
-  margin-bottom: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.25rem;
   color: #fff;
+  margin-bottom: 0;
 }
 
 .side-nav-link {
   position: relative;
-  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.25rem;
-  color: rgba(255, 255, 255, 0.78);
   text-decoration: none;
   transition: color 0.15s var(--ease-out);
+  color: var(--muted);
+  font-size: var(--text-sm);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -142,23 +151,10 @@ body {
   }
 }
 
-/* Current page: full white, bolder, with an accent dot hanging in the
-   gutter so the text itself stays aligned with its neighbours. */
+/* Current page: full white against the softer links around it. */
 .side-nav-link[aria-current="page"] {
   color: #fff;
-  font-weight: 600;
-}
-
-.side-nav-link[aria-current="page"]::before {
-  content: "";
-  position: absolute;
-  left: -0.75rem;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  margin-top: -2.5px;
-  border-radius: 50%;
-  background: var(--accent);
+  font-weight: 500;
 }
 
 .side-nav-link:focus-visible,
@@ -172,7 +168,7 @@ body {
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--muted);
 }
 
 .nav-toggle {
@@ -217,9 +213,6 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .side-nav-logo {
-    font-size: 1.5rem;
-  }
 
   .nav-toggle {
     display: flex;
@@ -339,11 +332,9 @@ body {
 }
 
 .eyebrow {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--muted);
 }
 
 .project-meta {
@@ -353,18 +344,11 @@ body {
 }
 
 .project-title {
-  text-transform: none;
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  /* Flattened from clamp(2.5rem, 6vw, 4.5rem) — the title no longer
-     towers over its own meta row, closer to the restrained, near-flat
-     scale of an editorial index page than a hero headline. */
-  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
-  /* Bumped from the default h1 line-height: 1 so this italic serif's
-     descenders aren't cramped. */
-  line-height: 1.3;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
   margin-bottom: 2rem;
 }
 
@@ -377,10 +361,10 @@ body {
   padding: 0.5rem 1rem;
   border: 1px solid rgba(247, 91, 53, 0.35);
   border-radius: 999px;
-  font-size: 0.8rem;
   font-weight: 500;
   line-height: 1.3;
   color: rgba(255, 255, 255, 0.75);
+  font-size: var(--text-sm);
 }
 
 .project-unlaunched-note::before {
@@ -400,13 +384,12 @@ body {
 }
 
 .project-link {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s var(--ease-out);
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -456,30 +439,32 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  font-size: 0.95rem;
-  font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .project-meta-value {
-  font-size: 0.95rem;
-  font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-sm);
+  font-weight: 400;
 }
 
 .project-tagline {
-  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
-  font-weight: 400;
-  line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 
 .project-meta-col p:not(.eyebrow) {
   max-width: 520px;
-  font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 .project-hero {
@@ -581,15 +566,15 @@ body {
 
 .project-video-row-text h3 {
   text-transform: none;
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-size: var(--text-base);
+  font-weight: 500;
 }
 
 .project-video-row-text p:not(.eyebrow) {
-  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-sm);
 }
 
 .project-bento {
@@ -899,10 +884,10 @@ body {
 
 .project-video-feature-caption {
   max-width: 640px;
-  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
   color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 .video-mute-toggle {
@@ -995,17 +980,18 @@ body {
 
 .project-section-title {
   text-transform: none;
-  font-weight: 800;
-  font-size: clamp(1.3rem, 1.8vw, 1.75rem);
-  line-height: 1.2;
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 .project-section-body p {
   max-width: 560px;
-  font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 /* For a section with no right-column body copy (e.g. a heading plus a
@@ -1018,10 +1004,10 @@ body {
 
 .project-section-subtext {
   max-width: 560px;
-  font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 /* --- Airwaves: shader prototype demo -------------------------------
@@ -1230,10 +1216,10 @@ body {
 
 .shader-demo-caption {
   max-width: 640px;
-  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
   color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 @media (max-width: 768px) {
@@ -1314,15 +1300,15 @@ body {
 
 .project-feature h3 {
   text-transform: none;
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-size: var(--text-base);
+  font-weight: 500;
 }
 
 .project-feature p {
-  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-sm);
 }
 
 .project-credits {
@@ -1340,16 +1326,14 @@ body {
 }
 
 .project-credit dt {
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-sm);
+  color: var(--muted);
 }
 
 .project-credit dd {
-  font-size: 1rem;
-  font-weight: 600;
   color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .project-next {
@@ -1378,9 +1362,10 @@ body {
 
 .project-next-title {
   text-transform: none;
-  font-weight: 800;
-  font-size: clamp(1.75rem, 5vw, 3.25rem);
   color: #fff;
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 /* Matches the side padding/max-width used on the Squarespace site
@@ -1430,13 +1415,12 @@ body {
 
 .about-hero-title {
   text-transform: none;
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  font-size: clamp(1.75rem, 3.4vw, 3.25rem);
-  line-height: 1.2;
   max-width: 800px;
   color: rgba(255, 255, 255, 0.92);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .about-grid {
@@ -1454,10 +1438,10 @@ body {
 }
 
 .about-bio p {
-  font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.55;
   color: rgba(255, 255, 255, 0.7);
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 .about-roles {
@@ -1484,15 +1468,15 @@ body {
 }
 
 .about-role-title {
-  font-size: 0.95rem;
-  font-weight: 700;
   color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .about-role-company {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--muted);
 }
 
 .about-side {
@@ -1519,10 +1503,10 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.95rem;
-  font-weight: 700;
   color: #fff;
   transition: color 0.18s var(--ease-out);
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .about-award-icon {
@@ -1541,11 +1525,11 @@ body {
 }
 
 .about-award-desc {
-  font-size: 0.82rem;
   font-weight: 400;
   line-height: 1.5;
   max-width: 320px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-sm);
+  color: var(--muted);
 }
 
 .about-clients-list {
@@ -1570,17 +1554,15 @@ body {
 }
 
 .about-clients-name {
-  font-size: 0.95rem;
-  font-weight: 600;
   color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .about-clients-note {
-  font-size: 0.65rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--muted);
 }
 
 .sr-only {
@@ -1634,11 +1616,10 @@ html.gate-locked body {
 
 .password-gate-title {
   text-transform: none;
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
   color: rgba(255, 255, 255, 0.92);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 .password-gate-copy {
@@ -1682,12 +1663,10 @@ html.gate-locked body {
   border: none;
   background: #fff;
   color: #141414;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.2s var(--ease-out);
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 @media (hover: hover) and (pointer: fine) {
