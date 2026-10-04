@@ -293,10 +293,14 @@ body {
 }
 
 .work-card {
+  position: relative;
   display: block;
+  text-decoration: none;
+  container-type: inline-size;
 }
 
 .work-card-media {
+  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -322,11 +326,58 @@ body {
   transition: transform 0.5s var(--ease-out);
 }
 
+/* Hover: a 50% black scrim with the project name bottom-left. Dark
+   enough to hold white text on the lightest thumbnails, light enough
+   that the work still reads through. The name stays in the DOM (just
+   transparent) so it's also the link's accessible label. */
+.work-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out);
+}
+
+.work-card-title {
+  position: absolute;
+  left: clamp(0.875rem, 5cqi, 1.25rem);
+  right: clamp(0.875rem, 5cqi, 1.25rem);
+  bottom: clamp(0.75rem, 4.5cqi, 1.125rem);
+  /* Scales with the tile: 16px on small tiles up to 24px. */
+  font-size: clamp(1rem, 6.5cqi, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+  pointer-events: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .work-card:hover .work-card-media img,
   .work-card:hover .work-card-media video {
     transform: scale(1.04);
   }
+
+  .work-card:hover .work-card-media::after {
+    opacity: 1;
+  }
+
+  .work-card:hover .work-card-title {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.work-card:focus-visible .work-card-media::after,
+.work-card:focus-visible .work-card-title {
+  opacity: 1;
+  transform: none;
 }
 
 .work-card:active .work-card-media img,
