@@ -11,359 +11,186 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="preloader">
-      <div class="preloader-images">
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/sixth-street.avif" type="image/avif" />
-            <img src="/previews/sixth-street.jpg" alt="" />
-          </picture>
-        </div>
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/airwaves.avif" type="image/avif" />
-            <img src="/previews/airwaves.jpg" alt="" />
-          </picture>
-        </div>
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/adobe-cis-poster.avif" type="image/avif" />
-            <img src="/previews/adobe-cis-poster.jpg" alt="" />
-          </picture>
-        </div>
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/adobe-cos-poster.avif" type="image/avif" />
-            <img src="/previews/adobe-cos-poster.jpg" alt="" />
-          </picture>
-        </div>
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/dogs-with-jobs.avif" type="image/avif" />
-            <img src="/previews/dogs-with-jobs.jpg" alt="" />
-          </picture>
-        </div>
-        <div class="preloader-img">
-          <picture>
-            <source srcset="/previews/coral-bleaching-frame24.avif" type="image/avif" />
-            <img src="/previews/coral-bleaching.jpg" alt="" />
-          </picture>
-        </div>
+    <aside class="side-nav">
+      <div class="side-nav-top">
+        <a href="/" class="side-nav-logo">stephanie wu</a>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="side-nav-menu"
+          aria-label="Open menu"
+        >
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
       </div>
 
-      <div class="preloader-header">
-        <h1 class="preloader-name">stephanie<br class="preloader-name-break" /> wu</h1>
-        <div class="preloader-counter">
-          <p class="mono">000</p>
+      <nav class="side-nav-menu" id="side-nav-menu" aria-label="Main">
+        <div class="side-nav-group">
+          <a href="/" class="side-nav-link" aria-current="page">All Work</a>
+          <a href="/about/" class="side-nav-link">About</a>
         </div>
-      </div>
-    </div>
 
-    <nav class="site-nav">
-      <a href="/" class="nav-logo">stephanie wu</a>
-      <div class="nav-links">
-        <a href="/#work" class="nav-link work-link">Featured Work</a>
-        <a href="/play/" class="nav-link">All Work</a>
-        <a href="/about/" class="nav-link">About</a>
-      </div>
-      <button
-        type="button"
-        class="nav-toggle"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open menu"
-      >
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-    </nav>
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Selected Work</p>
+          <a href="/airwaves/" class="side-nav-link">ai.rwaves Cannes Radio</a>
+          <a href="/adobe-cis/" class="side-nav-link">Adobe Creative Intelligence System</a>
+          <a href="/adobe-cos/" class="side-nav-link">Adobe Content Operating System</a>
+          <a href="/sixth-street-rebrand/" class="side-nav-link">Sixth Street Rebrand</a>
+          <a href="/dogs-with-jobs/" class="side-nav-link">Dogs with Jobs</a>
+          <a href="/coral-bleaching/" class="side-nav-link">Coral Bleaching Map</a>
+        </div>
 
-    <div class="mobile-menu" id="mobile-menu" inert>
-      <a href="/#work" class="mobile-menu-link work-link">Featured Work</a>
-      <a href="/play/" class="mobile-menu-link">All Work</a>
-      <a href="/about/" class="mobile-menu-link">About</a>
-    </div>
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">More Work</p>
+          <a href="/kingston/" class="side-nav-link">Kingston FURY Beast RAM</a>
+          <a href="/blueprint/" class="side-nav-link">Blueprint by Bryan Johnson</a>
+        </div>
 
-    <section class="hero">
-      <p class="project-blurb hero-bio">
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Experiments</p>
+          <a href="/coral-chronicles/" class="side-nav-link">Coral Chronicles</a>
+          <a href="/poster-index/" class="side-nav-link">Poster Index</a>
+          <a href="/breathscape/" class="side-nav-link">Breathscape</a>
+          <a href="/beneath-the-surface/" class="side-nav-link">Beneath the Surface</a>
+        </div>
+
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Connect</p>
+          <a href="mailto:wu.h.stephanie@gmail.com" class="side-nav-link">Email</a>
+          <!-- TODO: swap in your real LinkedIn profile URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="side-nav-link">LinkedIn</a>
+        </div>
+      </nav>
+
+      <p class="side-nav-copy">© 2026 stephanie wu</p>
+    </aside>
+
+    <main class="work-page">
+      <p class="work-intro">
         Steph is an interdisciplinary designer based in New York City,
         working across digital, product, and information design.
       </p>
-    </section>
 
-    <div id="work">
-      <section class="spotlight">
-        <div class="project-index">
-          <h1>
-            <span class="project-index-current"
-              ><span class="digit-static">0</span
-              ><span class="digit-reel-window"
-                ><span class="digit-reel"
-                  ><span>0</span><span>1</span><span>2</span><span>3</span
-                  ><span>4</span><span>5</span><span>6</span><span>7</span
-                  ><span>8</span><span>9</span></span
-                ></span
-              ></span
-            ><span class="project-index-total">/06</span>
-          </h1>
-        </div>
-
-        <div class="project-images">
-          <a
-            class="project-img"
-            href="/airwaves/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View ai.rwaves Cannes Radio project"
-            ><picture
+      <div class="work-grid">
+        <a class="work-card" href="/airwaves/">
+          <div class="work-card-media">
+            <picture
               ><source srcset="/previews/airwaves.avif" type="image/avif" /><img
                 src="/previews/airwaves.jpg"
                 alt=""
-            /></picture
-          ></a>
-          <a
-            class="project-img"
-            href="/adobe-cis/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Adobe Creative Intelligence System project"
-            ><video
-              src="/previews/adobe-cis-loop.mp4"
-              poster="/previews/adobe-cis-poster.avif"
-              muted
-              loop
-              playsinline
-              preload="none"
-            ></video
-          ></a>
-          <a
-            class="project-img"
-            href="/adobe-cos/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Adobe Content Operating System project"
-            ><video
-              src="/previews/adobe-cos-loop.mp4"
-              poster="/previews/adobe-cos-poster.avif"
-              muted
-              loop
-              playsinline
-              preload="none"
-            ></video
-          ></a>
-          <a
-            class="project-img"
-            href="/sixth-street-rebrand/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Sixth Street Rebrand project"
-            ><picture
+                loading="lazy"
+            /></picture>
+          </div>
+          <p class="work-card-title">ai.rwaves Cannes Radio</p>
+        </a>
+
+        <a class="work-card" href="/adobe-cis/">
+          <div class="work-card-media">
+            <picture
+              ><source srcset="/previews/adobe-cis-poster.avif" type="image/avif" /><img
+                src="/previews/adobe-cis-poster.jpg"
+                alt=""
+                loading="lazy"
+            /></picture>
+          </div>
+          <p class="work-card-title">Adobe Creative Intelligence System</p>
+        </a>
+
+        <a class="work-card" href="/adobe-cos/">
+          <div class="work-card-media">
+            <picture
+              ><source srcset="/previews/adobe-cos-poster.avif" type="image/avif" /><img
+                src="/previews/adobe-cos-poster.jpg"
+                alt=""
+                loading="lazy"
+            /></picture>
+          </div>
+          <p class="work-card-title">Adobe Content Operating System</p>
+        </a>
+
+        <a class="work-card" href="/sixth-street-rebrand/">
+          <div class="work-card-media">
+            <picture
               ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
                 src="/previews/sixth-street.jpg"
                 alt=""
-            /></picture
-          ></a>
-          <a
-            class="project-img"
-            href="/dogs-with-jobs/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Dogs with Jobs project"
-            ><picture
+                loading="lazy"
+            /></picture>
+          </div>
+          <p class="work-card-title">Sixth Street Rebrand</p>
+        </a>
+
+        <a class="work-card" href="/dogs-with-jobs/">
+          <div class="work-card-media">
+            <picture
               ><source srcset="/previews/dogs-with-jobs.avif" type="image/avif" /><img
                 src="/previews/dogs-with-jobs.jpg"
                 alt=""
-            /></picture
-          ></a>
-          <a
-            class="project-img"
-            href="/coral-bleaching/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Coral Bleaching Map project"
-            ><video
-              src="/previews/coral-bleaching-loop.mp4"
-              poster="/previews/coral-bleaching-frame24.avif"
-              muted
-              loop
-              playsinline
-              preload="none"
-            ></video
-          ></a>
-        </div>
-
-        <div class="project-names">
-          <div class="project-names-reel">
-            <p>ai.rwaves Cannes Radio</p>
-            <p>Adobe Creative<br />Intelligence System</p>
-            <p>Adobe Content<br />Operating System</p>
-            <p>Sixth Street Rebrand</p>
-            <p>Dogs with Jobs</p>
-            <p>Coral Bleaching Map</p>
+                loading="lazy"
+            /></picture>
           </div>
-        </div>
-      </section>
+          <p class="work-card-title">Dogs with Jobs</p>
+        </a>
 
-      <section class="spotlight-mobile">
-        <div class="mobile-project-list">
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/airwaves/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View ai.rwaves Cannes Radio project"
-              ><picture
-                ><source srcset="/previews/airwaves.avif" type="image/avif" /><img
-                  src="/previews/airwaves.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">01</span>
-              <p class="mobile-project-name">ai.rwaves Cannes Radio</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/adobe-cis/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Adobe Creative Intelligence System project"
-              ><picture
-                ><source srcset="/previews/adobe-cis-poster.avif" type="image/avif" /><img
-                  src="/previews/adobe-cis-poster.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">02</span>
-              <p class="mobile-project-name">Adobe Creative Intelligence System</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/adobe-cos/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Adobe Content Operating System project"
-              ><picture
-                ><source srcset="/previews/adobe-cos-poster.avif" type="image/avif" /><img
-                  src="/previews/adobe-cos-poster.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">03</span>
-              <p class="mobile-project-name">Adobe Content Operating System</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/sixth-street-rebrand/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Sixth Street Rebrand project"
-              ><picture
-                ><source srcset="/previews/sixth-street.avif" type="image/avif" /><img
-                  src="/previews/sixth-street.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">04</span>
-              <p class="mobile-project-name">Sixth Street Rebrand</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/dogs-with-jobs/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Dogs with Jobs project"
-              ><picture
-                ><source srcset="/previews/dogs-with-jobs.avif" type="image/avif" /><img
-                  src="/previews/dogs-with-jobs.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">05</span>
-              <p class="mobile-project-name">Dogs with Jobs</p>
-            </div>
-          </article>
-          <article class="mobile-project">
-            <a
-              class="mobile-project-media"
-              href="/coral-bleaching/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Coral Bleaching Map project"
-              ><picture
-                ><source srcset="/coral-bleaching/coral-title-poster.avif" type="image/avif" /><img
-                  src="/coral-bleaching/coral-title-poster.jpg"
-                  alt=""
-              /></picture
-            ></a>
-            <div class="mobile-project-meta">
-              <span class="mobile-project-index">06</span>
-              <p class="mobile-project-name">Coral Bleaching Map</p>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
-
-    <footer class="site-footer">
-      <div class="footer-main">
-        <a href="/" class="footer-wordmark">stephanie wu</a>
-
-        <nav class="footer-nav" aria-label="Footer">
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Menu</p>
-            <a href="/#work" class="footer-nav-link work-link">Featured Work</a>
-            <a href="/play/" class="footer-nav-link">All Work</a>
-            <a href="/about/" class="footer-nav-link">About</a>
+        <a class="work-card" href="/coral-bleaching/">
+          <div class="work-card-media">
+            <picture
+              ><source srcset="/previews/coral-bleaching-frame24.avif" type="image/avif" /><img
+                src="/previews/coral-bleaching.jpg"
+                alt=""
+                loading="lazy"
+            /></picture>
           </div>
+          <p class="work-card-title">Coral Bleaching Map</p>
+        </a>
 
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Case Studies</p>
-            <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
-            <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
-            <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
-            <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
-            <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
-            <a href="/kingston/" class="footer-nav-link">Kingston FURY Beast RAM</a>
-            <a href="/blueprint/" class="footer-nav-link">Blueprint by Bryan Johnson</a>
+        <a class="work-card" href="/kingston/">
+          <div class="work-card-media">
+            <img src="/kingston/hero.jpg" alt="" loading="lazy" />
           </div>
+          <p class="work-card-title">Kingston FURY Beast RAM</p>
+        </a>
 
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Experiments</p>
-            <a href="/coral-chronicles/" class="footer-nav-link">Coral Chronicles</a>
-            <a href="/poster-index/" class="footer-nav-link">Poster Index</a>
-            <a href="/breathscape/" class="footer-nav-link">Breathscape</a>
-            <a href="/beneath-the-surface/" class="footer-nav-link">Beneath the Surface</a>
+        <a class="work-card" href="/blueprint/">
+          <div class="work-card-media">
+            <img src="/blueprint/hero-placeholder.jpg" alt="" loading="lazy" />
           </div>
+          <p class="work-card-title">Blueprint by Bryan Johnson</p>
+        </a>
 
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Connect</p>
-            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
-            <!-- TODO: swap in your real LinkedIn profile URL -->
-            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+        <a class="work-card" href="/coral-chronicles/">
+          <div class="work-card-media">
+            <img src="/previews/coral-chronicles.jpg" alt="" loading="lazy" />
           </div>
-        </nav>
+          <p class="work-card-title">Coral Chronicles</p>
+        </a>
+
+        <a class="work-card" href="/poster-index/">
+          <div class="work-card-media">
+            <img src="/previews/poster-index.jpg" alt="" loading="lazy" />
+          </div>
+          <p class="work-card-title">Poster Index</p>
+        </a>
+
+        <a class="work-card" href="/breathscape/">
+          <div class="work-card-media">
+            <img src="/previews/breathscape.jpg" alt="" loading="lazy" />
+          </div>
+          <p class="work-card-title">Breathscape</p>
+        </a>
+
+        <a class="work-card" href="/beneath-the-surface/">
+          <div class="work-card-media">
+            <img src="/previews/beneath-the-surface.jpg" alt="" loading="lazy" />
+          </div>
+          <p class="work-card-title">Beneath the Surface</p>
+        </a>
       </div>
+    </main>
 
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2026 stephanie wu</p>
-      </div>
-    </footer>
     <script type="module" src="/script.js"></script>
   </body>
 </html>

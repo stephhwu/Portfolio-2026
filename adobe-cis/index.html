@@ -11,31 +11,62 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <nav class="site-nav">
-      <a href="/" class="nav-logo">stephanie wu</a>
-      <div class="nav-links">
-        <a href="/#work" class="nav-link work-link">Featured Work</a>
-        <a href="/play/" class="nav-link">All Work</a>
-        <a href="/about/" class="nav-link">About</a>
+    <aside class="side-nav">
+      <div class="side-nav-top">
+        <a href="/" class="side-nav-logo">stephanie wu</a>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="side-nav-menu"
+          aria-label="Open menu"
+        >
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
       </div>
-      <button
-        type="button"
-        class="nav-toggle"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open menu"
-      >
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-    </nav>
 
-    <div class="mobile-menu" id="mobile-menu" inert>
-      <a href="/#work" class="mobile-menu-link work-link">Featured Work</a>
-      <a href="/play/" class="mobile-menu-link">All Work</a>
-      <a href="/about/" class="mobile-menu-link">About</a>
-    </div>
+      <nav class="side-nav-menu" id="side-nav-menu" aria-label="Main">
+        <div class="side-nav-group">
+          <a href="/" class="side-nav-link">All Work</a>
+          <a href="/about/" class="side-nav-link">About</a>
+        </div>
+
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Selected Work</p>
+          <a href="/airwaves/" class="side-nav-link">ai.rwaves Cannes Radio</a>
+          <a href="/adobe-cis/" class="side-nav-link" aria-current="page">Adobe Creative Intelligence System</a>
+          <a href="/adobe-cos/" class="side-nav-link">Adobe Content Operating System</a>
+          <a href="/sixth-street-rebrand/" class="side-nav-link">Sixth Street Rebrand</a>
+          <a href="/dogs-with-jobs/" class="side-nav-link">Dogs with Jobs</a>
+          <a href="/coral-bleaching/" class="side-nav-link">Coral Bleaching Map</a>
+        </div>
+
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">More Work</p>
+          <a href="/kingston/" class="side-nav-link">Kingston FURY Beast RAM</a>
+          <a href="/blueprint/" class="side-nav-link">Blueprint by Bryan Johnson</a>
+        </div>
+
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Experiments</p>
+          <a href="/coral-chronicles/" class="side-nav-link">Coral Chronicles</a>
+          <a href="/poster-index/" class="side-nav-link">Poster Index</a>
+          <a href="/breathscape/" class="side-nav-link">Breathscape</a>
+          <a href="/beneath-the-surface/" class="side-nav-link">Beneath the Surface</a>
+        </div>
+
+        <div class="side-nav-group">
+          <p class="side-nav-label mono">Connect</p>
+          <a href="mailto:wu.h.stephanie@gmail.com" class="side-nav-link">Email</a>
+          <!-- TODO: swap in your real LinkedIn profile URL -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="side-nav-link">LinkedIn</a>
+        </div>
+      </nav>
+
+      <p class="side-nav-copy">© 2026 stephanie wu</p>
+    </aside>
 
     <main class="project">
       <div class="project-hero">
@@ -294,52 +325,6 @@
         <span class="project-next-title">Adobe Content Operating System</span>
       </a>
     </main>
-
-    <footer class="site-footer">
-      <div class="footer-main">
-        <a href="/" class="footer-wordmark">stephanie wu</a>
-
-        <nav class="footer-nav" aria-label="Footer">
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Menu</p>
-            <a href="/#work" class="footer-nav-link work-link">Featured Work</a>
-            <a href="/play/" class="footer-nav-link">All Work</a>
-            <a href="/about/" class="footer-nav-link">About</a>
-          </div>
-
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Case Studies</p>
-            <a href="/airwaves/" class="footer-nav-link">ai.rwaves Cannes Radio</a>
-            <a href="/adobe-cis/" class="footer-nav-link">Adobe Creative Intelligence System</a>
-            <a href="/adobe-cos/" class="footer-nav-link">Adobe Content Operating System</a>
-            <a href="/sixth-street-rebrand/" class="footer-nav-link">Sixth Street Rebrand</a>
-            <a href="/dogs-with-jobs/" class="footer-nav-link">Dogs with Jobs</a>
-            <a href="/coral-bleaching/" class="footer-nav-link">Coral Bleaching Map</a>
-            <a href="/kingston/" class="footer-nav-link">Kingston FURY Beast RAM</a>
-            <a href="/blueprint/" class="footer-nav-link">Blueprint by Bryan Johnson</a>
-          </div>
-
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Experiments</p>
-            <a href="/coral-chronicles/" class="footer-nav-link">Coral Chronicles</a>
-            <a href="/poster-index/" class="footer-nav-link">Poster Index</a>
-            <a href="/breathscape/" class="footer-nav-link">Breathscape</a>
-            <a href="/beneath-the-surface/" class="footer-nav-link">Beneath the Surface</a>
-          </div>
-
-          <div class="footer-nav-col">
-            <p class="footer-nav-label mono">Connect</p>
-            <a href="mailto:wu.h.stephanie@gmail.com" class="footer-nav-link">Email</a>
-            <!-- TODO: swap in your real LinkedIn profile URL -->
-            <a href="#" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
-          </div>
-        </nav>
-      </div>
-
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2026 stephanie wu</p>
-      </div>
-    </footer>
     <script type="module" src="/script.js"></script>
   </body>
 </html>
