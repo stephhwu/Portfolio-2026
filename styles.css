@@ -326,7 +326,7 @@ body {
   transition: transform 0.5s var(--ease-out);
 }
 
-/* Hover: a 50% black scrim with the project name bottom-left. Dark
+/* Hover: a 60% black scrim with the project name centered. Dark
    enough to hold white text on the lightest thumbnails, light enough
    that the work still reads through. The name stays in the DOM (just
    transparent) so it's also the link's accessible label. */
@@ -334,16 +334,20 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   opacity: 0;
   transition: opacity 0.25s var(--ease-out);
 }
 
 .work-card-title {
   position: absolute;
-  left: clamp(0.875rem, 5cqi, 1.25rem);
-  right: clamp(0.875rem, 5cqi, 1.25rem);
-  bottom: clamp(0.75rem, 4.5cqi, 1.125rem);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.875rem, 8cqi, 2rem);
+  text-align: center;
+  text-wrap: balance;
   /* Scales with the tile: 16px on small tiles up to 24px. */
   font-size: clamp(1rem, 6.5cqi, 1.5rem);
   font-weight: 500;
