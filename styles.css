@@ -8,8 +8,11 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --content-inset: clamp(2rem, 4vw, 4rem);
-  --sidebar-width: 17.5rem;
+  --sidebar-width: 18.5rem;
   --accent: #f75b35;
+  /* One corner radius for every image, video and card, matched to
+     Porto Rocha's project cards (a flat 8px at every size). */
+  --radius: 8px;
 }
 
 body {
@@ -269,6 +272,9 @@ body {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-radius: var(--radius);
+  /* Keeps the rounded clip intact in Safari while the media zooms. */
+  isolation: isolate;
   background: #1c1c1c;
 }
 
@@ -298,6 +304,10 @@ body {
 .work-card:active .work-card-media video {
   transition-duration: 0.12s;
   transform: scale(0.98);
+}
+
+.work-card {
+  border-radius: var(--radius);
 }
 
 .work-card:focus-visible {
@@ -483,7 +493,7 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -491,7 +501,7 @@ body {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 20px;
+  border-radius: var(--radius);
   border: 0;
 }
 
@@ -504,7 +514,7 @@ body {
   display: block;
   break-inside: avoid;
   margin-bottom: 6px;
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
   background: #efebe8;
 }
@@ -536,7 +546,7 @@ body {
 .project-gallery-video-item {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: #1c1c1c;
 }
 
@@ -623,7 +633,7 @@ body {
 
 .project-bento-item {
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: #1c1c1c;
   width: 100%;
   /* Ratio is the source asset's exact intrinsic dimensions (set inline via
@@ -677,7 +687,7 @@ body {
   min-width: 0;
   aspect-ratio: 1292 / 1724;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: #1c1c1c;
 }
 
@@ -742,7 +752,7 @@ body {
   min-width: 0;
   aspect-ratio: var(--triptych-ar, 0.48);
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: #1c1c1c;
 }
 
@@ -794,7 +804,7 @@ body {
   flex: 0 0 clamp(220px, 30vw, 360px);
   scroll-snap-align: start;
   aspect-ratio: 1 / 1;
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
   background: #1c1c1c;
 }
@@ -1041,7 +1051,7 @@ body {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 16px;
+  border-radius: var(--radius);
   overflow: hidden;
   background: #0a0a0a;
 }
@@ -1067,7 +1077,7 @@ body {
   width: 56px;
   height: 56px;
   padding: 0;
-  border-radius: 8px;
+  border-radius: var(--radius);
   border: 2px solid transparent;
   overflow: hidden;
   cursor: pointer;
@@ -1278,7 +1288,7 @@ body {
 .project-guideline-item {
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: #000;
 }
 
@@ -1298,7 +1308,7 @@ body {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 20px;
+  border-radius: var(--radius);
   background: #1c1c1c;
 }
 
@@ -1715,7 +1725,7 @@ html.gate-locked body {
 }
 
 .dwj-bento-card {
-  border-radius: 20px;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
