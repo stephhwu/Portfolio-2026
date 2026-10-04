@@ -76,55 +76,22 @@ section {
 
 /* --- Play page ------------------------------------------------------ */
 
-.play-page {
-  min-height: 100svh;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(2rem, 5vh, 3.5rem);
-  padding: 8rem var(--content-inset) 4rem;
-  overflow: visible;
+.work-page {
+  padding: 8rem var(--content-inset) 5rem;
 }
 
-.play-intro {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.play-title {
-  text-transform: none;
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  font-size: clamp(1.75rem, 3.4vw, 3.25rem);
-  line-height: 1.2;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.play-blurb {
-  max-width: 520px;
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.play-grid {
+.work-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.5rem, 1vw, 1rem);
 }
 
-.play-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+.work-card {
+  display: block;
   text-decoration: none;
 }
 
-.play-card-media {
+.work-card-media {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -132,7 +99,7 @@ section {
   background: #1c1c1c;
 }
 
-.play-card-media img {
+.work-card-media img {
   display: block;
   width: 100%;
   height: 100%;
@@ -141,54 +108,32 @@ section {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .play-card:hover .play-card-media img {
+  .work-card:hover .work-card-media img {
     transform: scale(1.04);
   }
 }
 
-.play-card:active .play-card-media img {
+.work-card:active .work-card-media img {
   transition: transform 120ms var(--ease-out);
   transform: scale(0.98);
 }
 
-.play-card:focus-visible .play-card-media {
+.work-card:focus-visible .work-card-media {
   outline: 2px solid #fff;
   outline-offset: 4px;
 }
 
-.play-card-meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.play-card-index {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.play-card-name {
-  font-family: "ivypresto-display", serif;
-  font-weight: 100;
-  font-style: italic;
-  font-size: clamp(1.15rem, 1.4vw, 1.6rem);
-  color: #fff;
-}
-
 @media (max-width: 768px) {
-  .play-page {
+  .work-page {
     padding: 7rem 1.5rem 3rem;
   }
 
-  .play-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .work-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
   }
 
-  .play-card-media {
+  .work-card-media {
     aspect-ratio: 4 / 3;
   }
 }
@@ -894,6 +839,13 @@ section {
   align-items: start;
 }
 
+/* Kingston's bottom row carries Services plus three short write-ups
+   (Brief, Market Research, Design Thinking) instead of the standard
+   Services/Brief/Finding trio, so it needs a fourth even track. */
+.project-meta-row--bottom-4col {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .project-meta-col {
   display: flex;
   flex-direction: column;
@@ -944,6 +896,14 @@ section {
   object-fit: cover;
   border-radius: 20px;
   overflow: hidden;
+}
+
+.project-hero iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  border: 0;
 }
 
 .bento-gallery {
@@ -1218,6 +1178,88 @@ section {
   object-fit: cover;
 }
 
+/* A scrollable, snap-aligned filmstrip with prev/next arrows — used in
+   place of .project-gallery when a project's source material (Kingston's
+   final web/social assets) was itself presented as a carousel, so this
+   keeps that browsing gesture instead of flattening it into a static
+   grid. Items are sized to peek the next one at wide viewports, same as
+   the reference; one-at-a-time on mobile (see below). */
+.project-carousel {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.project-carousel-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.project-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.project-carousel-item {
+  flex: 0 0 clamp(220px, 30vw, 360px);
+  scroll-snap-align: start;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1c1c1c;
+}
+
+.project-carousel-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out);
+  z-index: 2;
+}
+
+.project-carousel-arrow:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.project-carousel-arrow--prev {
+  left: 0.75rem;
+}
+
+.project-carousel-arrow--next {
+  right: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .project-carousel {
+    padding: 0 1.5rem;
+  }
+
+  .project-carousel-item {
+    flex-basis: 82vw;
+  }
+}
+
 /* Replaces .project-gallery entirely when a project sets galleryVideo.
    Reuses .project-hero's card treatment (rounded, padded) rather than
    the plain edge-to-edge grid the placeholder items use — the 8rem top
@@ -1360,6 +1402,22 @@ section {
 }
 
 .project-section-body p {
+  max-width: 560px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* For a section with no right-column body copy (e.g. a heading plus a
+   one-line subtext, like Kingston's "Exploratory Sketches") — collapses
+   the standard two-column grid to one so the head doesn't sit stranded
+   in a half-width column with dead space beside it. */
+.project-section--intro {
+  grid-template-columns: 1fr;
+}
+
+.project-section-subtext {
   max-width: 560px;
   font-size: 0.95rem;
   font-weight: 400;
@@ -1739,8 +1797,7 @@ section {
   .project-walkthrough,
   .project-feature-grid,
   .project-credits,
-  .project-next,
-  .about {
+  .project-next {
     max-width: 1800px;
     margin-inline: auto;
     padding-inline: 3vw;
@@ -1875,7 +1932,7 @@ section {
   flex-direction: column;
   justify-content: center;
   gap: clamp(1.5rem, 4vh, 3rem);
-  padding: 8rem 2rem 3rem;
+  padding: 8rem var(--content-inset) 3rem;
 }
 
 .about-intro {
@@ -2414,6 +2471,15 @@ html.gate-locked body {
      reads fully instead of getting clipped to a sliver. */
   .project-hero--sixth-street img {
     object-position: 60% 50%;
+  }
+
+  /* Kingston's hero is an ultra-wide product banner (~3.2:1) — the
+     generic 4:5 portrait crop above left almost nothing of the module
+     visible. Widened back toward its native ratio, same as the old
+     portfolio's mobile layout, which shows it near full-width instead
+     of cropping in tight. */
+  .project-hero--kingston img {
+    aspect-ratio: 16 / 9;
   }
 
   .project-meta-row {

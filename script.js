@@ -99,6 +99,83 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Project carousels ------------------------------------------------
+  // Loops infinitely in both directions: the real items are flanked by a
+  // cloned copy on each side, so there's always another slide to scroll
+  // to no matter which arrow gets clicked. Once a smooth scroll settles
+  // on a clone, it's silently swapped (no animation) for the matching
+  // real slide, so the loop point is invisible. Navigating by exact
+  // element position (scrollTo an item's offsetLeft) rather than a
+  // guessed distance is also what fixed an earlier bug where scrollBy's
+  // computed distance didn't quite match the CSS scroll-snap point,
+  // causing a visible snap-back "bounce" after every click.
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector("[data-carousel-track]");
+    const prevButton = carousel.querySelector("[data-carousel-prev]");
+    const nextButton = carousel.querySelector("[data-carousel-next]");
+    const realItems = track ? Array.from(track.children) : [];
+    if (!track || !prevButton || !nextButton || realItems.length === 0) return;
+
+    const count = realItems.length;
+    const makeClone = (original) => {
+      const clone = original.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+      return clone;
+    };
+    // Built as one fragment and inserted in a single call — inserting
+    // each clone individually via insertBefore(clone, track.firstChild)
+    // would reverse their order, since every new clone bumps the
+    // previous one further right instead of taking its place in line.
+    const prependFrag = document.createDocumentFragment();
+    realItems.forEach((original) => prependFrag.appendChild(makeClone(original)));
+    track.insertBefore(prependFrag, track.firstChild);
+    realItems.forEach((original) => track.appendChild(makeClone(original)));
+
+    const allItems = Array.from(track.children);
+    let index = count; // first real item, past the prepended clones
+    const goTo = (i, smooth) => {
+      track.scrollTo({ left: allItems[i].offsetLeft, behavior: smooth ? "smooth" : "auto" });
+    };
+    goTo(index, false);
+
+    // Recomputed from actual scroll position rather than trusting the
+    // tracked `index` — a finger swipe moves the scroll position without
+    // going through goTo, so `index` alone would go stale the moment
+    // someone drags the carousel instead of using the arrows, and the
+    // next arrow click would jump from the wrong slide.
+    const nearestIndex = () => {
+      let closest = 0;
+      let minDist = Infinity;
+      allItems.forEach((item, i) => {
+        const dist = Math.abs(item.offsetLeft - track.scrollLeft);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = i;
+        }
+      });
+      return closest;
+    };
+
+    let settleTimer;
+    track.addEventListener("scroll", () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        index = nearestIndex();
+        if (index < count) {
+          index += count;
+          goTo(index, false);
+        } else if (index >= count * 2) {
+          index -= count;
+          goTo(index, false);
+        }
+      }, 120);
+    });
+
+    prevButton.addEventListener("click", () => goTo(--index, true));
+    nextButton.addEventListener("click", () => goTo(++index, true));
+  });
+
   // --- Landing entrance: preloader + hero reveal ------------------------
   // A fixed full-screen preloader (fanned project thumbnails, wordmark,
   // and a counter) plays once on the homepage, then wipes away via
@@ -249,14 +326,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.querySelector(".nav-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  const closeMobileMenu = () => {
+  // `instant` skips the 0.3s close transition — used when a menu link is
+  // tapped, since that click is also navigating away. Letting the panel
+  // animate closed while the browser is simultaneously tearing the page
+  // down for navigation raced the two, showing as a visible flash/stutter
+  // on real mobile browsers right as the new page took over.
+  const closeMobileMenu = ({ instant = false } = {}) => {
     if (!navToggle || !mobileMenu) return;
+    if (instant) mobileMenu.style.transition = "none";
     mobileMenu.classList.remove("is-open");
     mobileMenu.setAttribute("inert", "");
     navToggle.setAttribute("aria-expanded", "false");
     navToggle.setAttribute("aria-label", "Open menu");
     document.documentElement.style.overflow = "";
     lenis.start();
+    if (instant) {
+      void mobileMenu.offsetHeight; // force the transition-less change to commit
+      mobileMenu.style.transition = "";
+    }
   };
 
   const openMobileMenu = () => {
@@ -282,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     mobileMenu.querySelectorAll(".mobile-menu-link").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
+      link.addEventListener("click", () => closeMobileMenu({ instant: true }));
     });
 
     document.addEventListener("keydown", (e) => {
