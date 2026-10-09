@@ -1343,6 +1343,7 @@ body {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-radius: var(--radius);
   background: #1c1c1c;
 }
 
@@ -2212,3 +2213,24 @@ html.gate-locked body {
     font-size: clamp(1.5rem, 8vw, 2.5rem);
   }
 }
+
+/* --- Natural-aspect media -------------------------------------------
+   For screen recordings of an interface (e.g. Coral Bleaching), where
+   any crop cuts off UI. The media keeps its own proportions at every
+   breakpoint instead of being forced into 16:9 / 4:3 / 4:5 frames.
+   Doubled class selectors so these beat the mobile hero override. */
+.project-hero.project-hero--natural img,
+.project-hero.project-hero--natural video,
+.project-walkthrough.project-walkthrough--natural video {
+  aspect-ratio: auto;
+  height: auto;
+}
+
+.project-feature-grid--natural .project-feature-image {
+  aspect-ratio: auto;
+}
+
+.project-feature-grid--natural .project-feature-image video {
+  height: auto;
+}
+
