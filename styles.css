@@ -2284,3 +2284,34 @@ p,
 .project-meta-col p:not(.eyebrow) {
   max-width: 68ch;
 }
+
+/* Mono caps: small structural text (wordmark, section and field
+   labels, links, clock) is set in caps, a step smaller and lightly
+   tracked so it sits level with 13px lowercase. Anything meant to be
+   read (project names, titles, body) stays in sentence case. */
+.side-nav-logo,
+.side-nav-label,
+.side-nav-clock,
+.side-nav-copy,
+.eyebrow,
+.project-link,
+.project-credit dt,
+.about-clients-note {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.side-nav-label,
+.side-nav-clock,
+.side-nav-copy,
+.eyebrow,
+.project-link,
+.project-credit dt,
+.about-clients-note {
+  font-size: 0.75rem;
+}
+
+.side-nav-logo {
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
