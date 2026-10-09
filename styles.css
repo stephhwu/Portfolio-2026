@@ -2234,3 +2234,53 @@ html.gate-locked body {
   height: auto;
 }
 
+
+/* --- Theme: monospace -----------------------------------------------
+   Geist Mono throughout. Mono glyphs run ~20% wider than Inter, so the
+   scale steps down one notch to keep the same visual weight, body
+   copy gets a looser line-height (long mono passages need more air),
+   and larger sizes get tighter tracking so titles don't read gappy.
+   Delete this block (and swap the font link back) to return to Inter. */
+:root {
+  --font-sans: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas,
+    monospace;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 2vw, 1.875rem);
+  --sidebar-width: 20rem;
+}
+
+h1,
+.project-title,
+.about-hero-title,
+.project-next-title {
+  letter-spacing: -0.04em;
+}
+
+.project-section-title,
+.project-tagline,
+.work-card-title {
+  letter-spacing: -0.03em;
+}
+
+.side-nav-logo {
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+p,
+.project-meta-col p:not(.eyebrow),
+.project-section-body p,
+.project-section-subtext,
+.project-video-feature-caption,
+.shader-demo-caption,
+.about-bio p {
+  line-height: 1.7;
+}
+
+/* Keep long mono paragraphs to a readable measure. */
+.project-section-body p,
+.project-meta-col p:not(.eyebrow) {
+  max-width: 68ch;
+}
